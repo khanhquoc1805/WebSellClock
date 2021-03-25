@@ -1,0 +1,122 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+a {
+    font-size: 18px;
+    color:blueviolet;
+    padding: 10px;
+}
+.dsdongho {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(4, 350px);
+    grid-gap: 20px;
+    border: none;
+    text-align: center;
+}
+div {
+    border: 1px solid black;
+    padding: 12px;
+}
+img {
+    width: 100%;
+}
+#donghonam {
+    text-align: center;
+}
+.tieude {
+    text-decoration : none ;
+    
+}
+
+#tieude {
+    text-align: center;
+    height: 870px;
+    background-image : url('hinhnen.jpg');
+    background-repeat: no-repeat;
+}
+
+h2 {
+    text-align: center;
+    padding: 0 auto;
+}
+#donghonam{
+    background-color: red;
+    width: 400px;
+    height: 70px;
+    border-radius: 30px;
+    margin: 30px auto;
+    color: white;
+    
+}
+#donghonu{
+    background-color: blue;
+    width: 400px;
+    height: 70px;
+    border-radius: 30px;
+    margin: 30px auto;
+    color: white;
+    
+}
+.gia {
+    color: red;
+    font-size: 25px;
+    text-align: center;
+}
+
+.tendongho {
+    text-decoration: none;
+}
+
+.btn-danger{
+    margin: auto;
+}
+h3 {
+    height: 62px;
+    width: 324px;
+}
+.khungsanpham {
+    height: 392px;
+    width: 324px;
+}
+
+.khunghinh {
+    background-color: white;
+    padding: 20px;
+}
+footer{
+    display: grid;
+    grid-template-columns:30% 23% 23% 24%;
+    margin-top: 40px;
+    background-color: black;
+
+}
+#foot1 {
+    display: grid;
+    justify-content: center;
+    grid-gap: 30px;
+}
+.foot11 {
+    background-color: red;
+    color: white;
+    border-radius: 10px;
+    width: 210px;
+    text-align: center;
+
+}
+.foot11:hover {
+    color: black;
+    cursor: pointer;
+}
+
+.foot21{
+    background-color:darkgreen ;
+    color: white;
+    text-align: center;
+    padding: 20px 20px;
+}
+.foot2 {
+    margin: auto;
+}

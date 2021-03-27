@@ -3,12 +3,53 @@
 namespace App\Controllers;
 
 use App\Models\HangHoaModel;
+use App\Models\QuanTriModel;
 
 class Admin extends BaseController
 {
-	public function index()
+	public function home()
 	{
-		echo view('Admin/admin');
+		// kiem tra da dang nhap
+		if (isset($_COOKIE['dadangnhap'])) {
+			if ($_COOKIE['dadangnhap'] == true) {
+				echo view('Admin/admin');
+				return;
+			}
+		}
+		echo view("Admin/dangnhap");
+	}
+
+	public function dangnhap(){
+		if (!isset($_POST['taikhoan']) || !isset($_POST['matkhau'])) {
+			if (isset($_COOKIE['dadangnhap'])) {
+				echo view("Admin/admin");
+				return;
+			}
+			echo view('Admin/dangnhap');
+			return;
+		}
+		// POST request handle
+		$username = $_POST['taikhoan'];
+		$password = $_POST['matkhau'];
+
+		$model = new QuanTriModel();
+		$dsadmin = $model->getAdmin();
+		foreach ($dsadmin as $row) {
+			$taikhoan = $row["taikhoan"];
+			$matkhaubam = $row["matkhau"];
+			if ($username == $taikhoan) {
+				// check password
+				if (password_verify($password, $matkhaubam)) {
+					$cookie_name = 'dadangnhap';
+					$cookie_value = true;
+					setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+					echo view("Admin/admin.php");
+					return;
+				};
+			}
+		}
+
+		
 	}
 
 	public function add_product() {
@@ -45,6 +86,13 @@ class Admin extends BaseController
 			$data['madongho'] = $ma;
 			echo view("Admin/delete_single_item", $data);
 		}
+	}
+
+	public function logout() {
+		$cookie_name = "dadangnhap";
+		$cookie_value = false;
+		setcookie($cookie_name, $cookie_value, time() + 1, "/");
+		echo "<script>document.location.href = '/admin/dangnhap';</script>";
 	}
 
 }

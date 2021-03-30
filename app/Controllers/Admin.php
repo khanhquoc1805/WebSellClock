@@ -4,17 +4,24 @@ namespace App\Controllers;
 
 use App\Models\HangHoaModel;
 use App\Models\QuanTriModel;
+use \Firebase\JWT\JWT;
 
 class Admin extends BaseController
 {
+
+	private string $key = 'vovankhanhquoc';
+
 	public function home()
 	{
 		// kiem tra da dang nhap
 		if (isset($_COOKIE['dadangnhap'])) {
-			if ($_COOKIE['dadangnhap'] == true) {
-				echo view('Admin/admin');
-				return;
-			}
+			$key = $this->key;
+			$jwt = $_COOKIE['dadangnhap'];
+			$decoded = JWT::decode($jwt, $key, array('HS256'));
+			$decoded_array = (array) $decoded;
+			$data['username'] = $decoded_array['usr'];
+			echo view('Admin/admin', $data);
+			return;
 		}
 		echo view("Admin/dangnhap");
 	}
@@ -22,7 +29,7 @@ class Admin extends BaseController
 	public function dangnhap(){
 		if (!isset($_POST['taikhoan']) || !isset($_POST['matkhau'])) {
 			if (isset($_COOKIE['dadangnhap'])) {
-				echo view("Admin/admin");
+				echo "<script>document.location.href = '/admin/home';</script>";
 				return;
 			}
 			echo view('Admin/dangnhap');
@@ -42,12 +49,20 @@ class Admin extends BaseController
 				if (password_verify($password, $matkhaubam)) {
 					$cookie_name = 'dadangnhap';
 					$cookie_value = true;
-					setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
-					echo view("Admin/admin.php");
+					$key = $this->key;
+					$payload = array(
+						'usr' => $taikhoan
+					);
+					$jwt = JWT::encode($payload, $key);
+
+					setcookie($cookie_name, $jwt, time() + (86400 * 30), "/"); // 86400 = 1 day
+					echo "<script>document.location.href = '/admin/home';</script>";
 					return;
 				};
 			}
 		}
+		// fail login
+		echo view('/admin/dangnhap');
 
 		
 	}

@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\HangHoaModel;
 use App\Models\KhachHangModel;
+use App\Models\GioHangModel;
 use \Firebase\JWT\JWT;
 
 class KhachHang extends BaseController
@@ -24,6 +25,10 @@ class KhachHang extends BaseController
             $diachi = $_POST['diachi'];
             $model = new KhachHangModel();
             $model->themTaiKhoan($taikhoan, $matkhau, $hokh, $tenkh, $gioitinh, $sdt, $diachi);
+
+			// tạo mới giỏ hàng cho người dùng
+			$gh = new GioHangModel();
+			$gh->createGioHang($taikhoan);
 
             echo "<script>
             alert('Bạn đã đăng kí thành công!');
@@ -79,6 +84,21 @@ class KhachHang extends BaseController
 		setcookie($cookie_name, '', time(), "/");
 		echo "<script>document.location.href = '/';</script>";
 	}
+
+
+	public function giohang(){
+		if (!isset($_COOKIE['dadangnhap'])) {
+			echo "<script>document.location.href = '/khachhang/dangnhap';</script>";
+			return;
+		}
+		
+		// co cookie
+		if (isset($_POST['idhanghoa'])){
+			return $_POST['idhanghoa'];
+		}
+	}
 }
+
+	
 
 ?>

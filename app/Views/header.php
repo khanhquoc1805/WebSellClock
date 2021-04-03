@@ -1,7 +1,7 @@
 <html>
     <head>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Welcome to Sample Store  - Sample Slogan</title>
+<title>KQ Watch</title>
 <link rel="canonical" href="https://techsave-preview-com.3dcartstores.com/">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 
@@ -26,7 +26,7 @@
 <ul id="menulinks" class="nav navbar-nav">
 <li id="sticky-toggle"><a href="https://techsave-preview-com.3dcartstores.com/#caTnaV" role="button" data-toggle="collapse" class="collapsed"><span class="icon-menu"></span></a></li>
 
-<li><a href="main.php" class="menu" target="_self">Home</a></li>
+<li><a href="/" class="menu" target="_self">Home</a></li>
 <li><a href="" class="menu" target="_self">đòng hồ nam</a></li>
 <li><a href="" class="menu" target="_self">Gift Registry</a></li>
 <li><a href="" class="menu" target="_self">Contact Us</a></li>
@@ -36,7 +36,7 @@
 </ul></nav>
 </div>
 <div class="col-md-6 col-xs-12 animated fadeInRight">
-<a href="" class="top_links pull-right hidden-sm">
+<a href="/khachhang/giohang" class="top_links pull-right hidden-sm">
 Cart <span class="icon-basket"></span>
 <span class="sr-only">Shopping Cart</span>
 </a>
@@ -127,7 +127,7 @@ Cart <span class="icon-basket"></span>
 
 <ul id="categories" class="nav navbar-nav">
 <li class="">
-<a href="">Home</a>
+<a href="/">Home</a>
 
 </li>
 <li class="">

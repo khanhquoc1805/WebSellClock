@@ -1,14 +1,6 @@
 @font-face {
   font-family: flexslider-icon;
-  src: url(/assets/templates/common-core/lib/flexslider/fonts/flexslider-icon.eot);
-  src: url(/assets/templates/common-core/lib/flexslider/fonts/flexslider-icon.eot?#iefix)
-      format("embedded-opentype"),
-    url(/assets/templates/common-core/lib/flexslider/fonts/flexslider-icon.woff)
-      format("woff"),
-    url(/assets/templates/common-core/lib/flexslider/fonts/flexslider-icon.ttf)
-      format("truetype"),
-    url(/assets/templates/common-core/lib/flexslider/fonts/flexslider-icon.svg#flexslider-icon)
-      format("svg");
+
   font-weight: 400;
   font-style: normal;
 }

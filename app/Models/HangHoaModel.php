@@ -6,9 +6,9 @@ use CodeIgniter\Model;
 class HangHoaModel extends Model
 {
     protected $table = 'hanghoa';
-    protected $primaryKey = 'madongho';
+    protected $primaryKey = 'idhanghoa';
     protected $allowedFields = [
-        'madongho', 'tendongho', 'gia', 'image'
+        'idhanghoa', 'tenhanghoa', 'gia', 'phai','soluong', 'image'
     ];// nhung truong cho phep
     protected $useSoftDeletes = false;
 
@@ -25,15 +25,15 @@ class HangHoaModel extends Model
     }
 
     public function getHangHoaTheoMa($ma) {
-        return $this->where('madongho', $ma)->first();
+        return $this->where('idhanghoa', $ma)->first();
     }
 
     public function themHangHoa($ma, $ten, $gia, $hinh){
         $data = [
-            'madongho' => $ma,
-            'tendongho' => $ten,
+            'idhanghoa' => $ma,
+            'tenhanghoa' => $ten,
             'gia' => (float)$gia,
-            'image' => $hinh
+            'hinhanh' => $hinh
         ];
         $this->insert($data);
     }

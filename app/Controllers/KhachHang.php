@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\HangHoaModel;
 use App\Models\KhachHangModel;
 use App\Models\GioHangModel;
+use App\Models\ChiTietGioHangModel;
 use \Firebase\JWT\JWT;
 
 class KhachHang extends BaseController
@@ -92,10 +93,59 @@ class KhachHang extends BaseController
 			return;
 		}
 		
-		// co cookie
+		/* POST */
 		if (isset($_POST['idhanghoa'])){
-			return $_POST['idhanghoa'];
+			header('Content-Type: application/json'); 
+			$decoded = JWT::decode($_COOKIE['dadangnhap'], $this->key, array('HS256'));
+			$decoded_array = (array) $decoded;
+
+			$taikhoan = $decoded_array['usr'];
+			$idhanghoa = $_POST['idhanghoa'];
+
+			// tim gio hang cua tai khoan
+			$giohangModel = new GioHangModel();
+			$idgiohang = $giohangModel->findGioHang($taikhoan)['id'];
+
+			$hanghoa = new HangHoaModel();
+			$gia = $hanghoa->getHangHoaTheoMa($idhanghoa)['gia'];
+
+			$chitietgiohang = new ChiTietGioHangModel();
+			$chitietgiohang->createChiTietGioHang($idgiohang,$idhanghoa,1,$gia);
+
+			$json_array = [
+				"status" => "success"
+			];
+			echo json_encode($json_array);
+			return;
 		}
+
+		/* GET */
+		$decoded = JWT::decode($_COOKIE['dadangnhap'], $this->key, array('HS256'));
+		$decoded_array = (array) $decoded;
+		$taikhoan = $decoded_array['usr'];
+		$giohangModel = new GioHangModel();
+		$idgiohang = $giohangModel->findGioHang($taikhoan)['id'];
+		$chitietgiohangModel = new ChiTietGioHangModel();
+		$dschitiet = $chitietgiohangModel->getChitietGiohang($idgiohang);
+
+		$hanghoaModel = new HangHoaModel;
+
+		$data["dschitiet"] = [];
+
+		foreach ($dschitiet as &$row) {
+			$hanghoa = $hanghoaModel->getHangHoaTheoMa($row['idhanghoa']);
+			$array_chitiet = [
+				"idgiohang" => $row['idgiohang'],
+				"idhanghoa" => $row['idhanghoa'],
+				"tenhanghoa" => $hanghoa['tenhanghoa'],
+				"image" => $hanghoa['image'],
+				"gia" => $hanghoa['gia'],
+				"soluong" => $row['soluong'],
+				"thanhtien" => $row['soluong'] * $hanghoa['gia']
+			];
+			$data["dschitiet"][] = $array_chitiet;
+		}
+		return view("UserPage/giohang", $data);
 	}
 }
 

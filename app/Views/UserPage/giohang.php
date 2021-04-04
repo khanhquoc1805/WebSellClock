@@ -59,7 +59,7 @@
                                     </thead>
                                     <tbody>
                                         <!--  Product list -->
-
+                                    <?php for ($i = 0; $i < count($dschitiet); $i++): ?>
                                         <tr>
                                             <td
                                                 class="center-column"
@@ -74,8 +74,7 @@
                                                 <a
                                                     href=""
                                                 >
-                                                    Đồng hồ Orient SK
-                                                    RA-AA0B02R19B
+                                                <?php echo $dschitiet[$i]['tenhanghoa'] ?>
                                                 </a>
                                                 <br />
                                                 <a
@@ -84,7 +83,7 @@
                                                     <img
                                                         width="80"
                                                         height="100"
-                                                        src=""
+                                                        src="../<?php echo $dschitiet[$i]['image'] ?>"
                                                         alt=""
                                                     />
                                                 </a>
@@ -93,7 +92,7 @@
                                                 <input
                                                     class="numbers-pro"
                                                     type="text"
-                                                    value="1"
+                                                    value="<?php echo $dschitiet[$i]['soluong'] ?>"
                                                     name="quantity_956694"
                                                     size="8px"
                                                 />
@@ -101,12 +100,13 @@
                                             <td
                                                 class="price-product don_gia_hide"
                                                 align="center"
-                                            ></td>
+                                                
+                                            ><?php echo $dschitiet[$i]['gia'] ?></td>
 
                                             <td
                                                 class="total-price"
                                                 align="center"
-                                            ></td>
+                                            ><?php echo $dschitiet[$i]['thanhtien'] ?></td>
 
                                             <td
                                                 class="center-column"
@@ -123,7 +123,7 @@
                                                 </a>
                                             </td>
                                         </tr>
-
+                                    <?php endfor; ?>
                                         
                                     </tbody>
                                 </table>

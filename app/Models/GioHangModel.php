@@ -18,6 +18,12 @@ class GioHangModel extends Model
         ];
         $this->insert($data);
     }
+
+    public function findGioHang($idkhachhang){
+        $giohang = $this->where('idkhachhang', $idkhachhang)
+                   ->first();
+        return $giohang;
+    }
 }
 
 ?>

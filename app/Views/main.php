@@ -231,6 +231,9 @@
     </section>
 
     <div class="newsletter">thêm hình ở đây</div>
+    <div class="alert alert-primary hidden" id="thongbao">
+        
+    </div>
 
     <link rel="stylesheet" href="../main.css/font.css" type="text/css" />
     <link rel="stylesheet" href="../main.css/animation.css" type="text/css" />
@@ -241,17 +244,42 @@
         media="screen"
     />
     <script>
+        const ERROR = "error",
+                            SUCCESS = "success"
+        function notify(msg, msgType, duration, element) {
+            switch (msgType) {
+                case ERROR:
+                element.classList.remove("alert-success");
+                element.classList.add("alert-danger");
+                break;
+                case SUCCESS:
+                element.classList.remove("alert-danger");
+                element.classList.add("alert-success");
+                break;
+            }
+
+            element.innerText = msg;
+            element.classList.remove("hidden");
+            setTimeout(() => {
+                element.classList.add("hidden");
+            }, duration);
+        }
         const addToCarts = document.getElementsByClassName("add-to-cart");
+        const divThongBao = document.getElementById('thongbao');
         for(let i = 0; i < addToCarts.length; ++i) {
             addToCarts[i].onclick = function(e) {
                 e.preventDefault();
                 const idhanghoa = this.getAttribute('data-idhanghoa');
+                const formData = new FormData();
+                formData.append('idhanghoa', idhanghoa);
                 fetch("/khachhang/giohang", {
-                    body: {
-                        idhanghoa
-                    },
+                    body: formData,
                     method: "POST"
-                }).then(r => console.log(r.body));
+                }).then(r => r.json()).then(j => {
+                    if (j.status === "success") {
+                        notify("Thêm vào giỏ hàng thành công", SUCCESS, 3000, divThongBao);
+                    }
+                });
             }
         }
         

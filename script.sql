@@ -44,6 +44,7 @@ select * from hanghoa;
 
 insert into hanghoa values('01','ct01','ĐỒNG HỒ CITIZEN NH8390-71L','Nam',8177000,10);
 insert into hanghoa values('01','ct02','ĐỒNG HỒ CITIZEN NH8390-20H','Nam',7577000,5,'images/hanghoa/dong-ho-citizen-nh8390-20h_1604907824.jpg');
+insert into hanghoa values('01','ct03','ĐỒNG HỒ CITIZEN NH8395-00E','Nam',9977000,5,'images/hanghoa/dong-ho-citizen-nh8395-00e_1605258794.jpg');
 update hanghoa set image = 'images/hanghoa/dong-ho-citizen-nh8390-71l_1604907945.jpg' where idhanghoa = 'ct01';
 
 create table donhang(

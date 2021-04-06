@@ -19,7 +19,7 @@
                 ﻿﻿﻿
                 <div class="product_cart mt20">
                     <h1 class="page_title">
-                        <span>Mua nhanh thanh toán khi nhận hàng</span>
+                        <span>MY CART</span>
                     </h1>
                     <div class="detail_inner">
                         <!--	Product list and price			-->
@@ -53,6 +53,9 @@
                                                 Tổng
                                             </th>
                                             <th class="th-column" width="10%">
+                                                Chọn Mua
+                                            </th>
+                                            <th class="th-column" width="10%">
                                                 Xóa
                                             </th>
                                         </tr>
@@ -65,7 +68,7 @@
                                                 class="center-column"
                                                 align="center"
                                             >
-                                                1
+                                                <?php echo $i + 1 ?>
                                             </td>
                                             <td
                                                 class="name-product"
@@ -107,20 +110,15 @@
                                                 class="total-price"
                                                 align="center"
                                             ><?php echo $dschitiet[$i]['thanhtien'] ?></td>
-
+                                            <td
+                                                class="total-price"
+                                                align="center"
+                                            ><input type="checkbox" class="chonmua" value="<?php echo  $dschitiet[$i]['idhanghoa'] ?>"></td>
                                             <td
                                                 class="center-column"
                                                 align="center"
                                             >
-                                                <a
-                                                    href=""
-                                                    title=""
-                                                >
-                                                    <img
-                                                        src=""
-                                                        alt=""
-                                                    />
-                                                </a>
+                                               <button data-idhanghoa="<?php echo $dschitiet[$i]['idhanghoa'] ?>" class="btn btn-danger btn-xoa">X</button>
                                             </td>
                                         </tr>
                                     <?php endfor; ?>
@@ -162,7 +160,7 @@
                                     align="right"
                                 >
                                     Tổng:
-                                    <span>18.009.500 VNĐ</span>
+                                    <span><?php echo $tongtien ?> VNĐ</span>
                                 </div>
                                 <div class="clearfix"></div>
                                 <input type="hidden" name="Itemid" value="11" />
@@ -187,95 +185,43 @@
                             id="eshopcart_info"
                         >
                             <!--	INFOR sender and recipient			-->
-                            <h2><span>Thông tin đặt hàng</span></h2>
-                            <div class="shopping_buyer_saller">
-                                <!--	CONTENT IN FRAME	-->
-                                <div id="msg_error"></div>
-                                <!--	INFO OF SENDER			-->
+                            
+<script>
+const btnThanhToan = document.getElementById('sub-pro-liquidate');
+    btnThanhToan.onclick = function() {
+    const chonMuaCheckBoxs = document.getElementsByClassName("chonmua");
+    let dsidhanghoa = [];
+    for (let i = 0; i < chonMuaCheckBoxs.length; ++i) {
+        if (chonMuaCheckBoxs[i].checked) {
+            dsidhanghoa.push(chonMuaCheckBoxs[i].value);
+        }
+    }
+    const formData = new FormData();
+    formData.append("dsidhanghoa", dsidhanghoa);
+    fetch("/khachhang/donhang", {
+        body: formData,
+        method: "POST"
+    }).then(r => r.json()).then(j => {
+        if (j.status === "success") {
+            document.location.href = "/KhachHang/donhang"
+        }
+    });
+}
 
-                                <table
-                                    class="info-customer-gh"
-                                    width="100%"
-                                    border="0"
-                                    cellpadding="5"
-                                >
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <input
-                                                    placeholder="Họ tên (*)"
-                                                    type="text"
-                                                    name="sender_name"
-                                                    id="sender_name"
-                                                    value=""
-                                                    class="input_text"
-                                                    size="30"
-                                                />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <input
-                                                    placeholder="Điện thoại (*)"
-                                                    type="text"
-                                                    name="sender_telephone"
-                                                    id="sender_telephone"
-                                                    value=""
-                                                    class="input_text"
-                                                    size="30"
-                                                />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <input
-                                                    placeholder="Địa chỉ (*)"
-                                                    type="text"
-                                                    name="sender_address"
-                                                    id="sender_address"
-                                                    value=""
-                                                    class="input_text"
-                                                    size="30"
-                                                />
-                                            </td>
-                                        </tr>
+const dsBtnXoa = document.getElementsByClassName("btn-xoa");
+for(let i = 0; i < dsBtnXoa.length; ++i) {
+    dsBtnXoa[i].onclick = function(e) {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append("idhanghoa", this.getAttribute("data-idhanghoa"))
+        fetch("/khachhang/deletePhantuGiohang", {
+            body: formData,
+            method: "POST"
+        }).then(r => r.json()).then(j => {
+            console.log(j)
+        });
+    }
+}
 
-                                        <tr>
-                                            <td>
-                                                <input
-                                                    placeholder="Email"
-                                                    type="text"
-                                                    name="sender_email"
-                                                    id="sender_email"
-                                                    value=""
-                                                    class="input_text"
-                                                    size="30"
-                                                />
-                                            </td>
-                                        </tr>
 
-                                        <tr>
-                                            <td>
-                                                <textarea
-                                                    placeholder="Chú thích đơn hàng"
-                                                    name="sender_comments"
-                                                    id="sender_comments"
-                                                ></textarea>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Những có dấu (<font> * </font>)
-                                                là bắt buộc phải nhập
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="test-info-next">
-                                                <a>
-                                                    Thanh toán khi nhận hàng
-                                                    <span>
-                                                        Thanh toán C.O.D
-                                                    </span>
-                                                </a>
-
-                                                
+</script>

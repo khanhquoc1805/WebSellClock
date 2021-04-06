@@ -24,6 +24,7 @@ class GioHangModel extends Model
                    ->first();
         return $giohang;
     }
+
 }
 
 ?>

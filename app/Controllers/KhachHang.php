@@ -12,6 +12,14 @@ class KhachHang extends BaseController
 {
 
 	protected string $key = "this is a secret!!!";
+
+
+	private function redirectDangNhap() {
+		if (!isset($_COOKIE['dadangnhap'])) {
+			echo "<script>document.location.href = '/khachhang/dangnhap';</script>";
+			return;
+		}
+	}
 	 
     public function dangki(){
         if(isset($_POST['taikhoan']) && isset($_POST['matkhau']) && isset($_POST['hokh']) && isset($_POST['tenkh'])
@@ -88,10 +96,7 @@ class KhachHang extends BaseController
 
 
 	public function giohang(){
-		if (!isset($_COOKIE['dadangnhap'])) {
-			echo "<script>document.location.href = '/khachhang/dangnhap';</script>";
-			return;
-		}
+		$this->redirectDangNhap();
 		
 		/* POST */
 		if (isset($_POST['idhanghoa'])){
@@ -132,6 +137,7 @@ class KhachHang extends BaseController
 
 		$data["dschitiet"] = [];
 
+		$tongtien = 0;
 		foreach ($dschitiet as &$row) {
 			$hanghoa = $hanghoaModel->getHangHoaTheoMa($row['idhanghoa']);
 			$array_chitiet = [
@@ -141,11 +147,85 @@ class KhachHang extends BaseController
 				"image" => $hanghoa['image'],
 				"gia" => $hanghoa['gia'],
 				"soluong" => $row['soluong'],
-				"thanhtien" => $row['soluong'] * $hanghoa['gia']
+				"thanhtien" => $row['soluong'] * $hanghoa['gia'],
 			];
+			$tongtien += $row['soluong'] * $hanghoa['gia'];
 			$data["dschitiet"][] = $array_chitiet;
 		}
+		$data["tongtien"] = $tongtien;
 		return view("UserPage/giohang", $data);
+	}
+
+	public function donhang(){
+		$this->redirectDangNhap();
+
+		// POST
+		if (isset($_POST['dsidhanghoa'])) {
+			setcookie("dsidhanghoa", $_POST['dsidhanghoa'], time() + (86400 * 30), "/"); // 86400 = 1 day
+			$json_array = [
+				"status" => "success"
+			];
+			echo json_encode($json_array);
+			return;
+		}
+		// GET
+		if (!isset($_COOKIE['dsidhanghoa'])) {
+			echo "<script>document.location.href = '/KhachHang/giohang';</script>"; 
+		}
+
+		$dsidhanghoa = explode(",", $_COOKIE['dsidhanghoa']);
+
+		$decoded = JWT::decode($_COOKIE['dadangnhap'], $this->key, array('HS256'));
+		$decoded_array = (array) $decoded;
+		$taikhoan = $decoded_array['usr'];
+		$giohangModel = new GioHangModel();
+		$idgiohang = $giohangModel->findGioHang($taikhoan)['id'];
+		$chitietgiohangModel = new ChiTietGioHangModel();
+		$dschitiet = $chitietgiohangModel->getChitietGiohang($idgiohang);
+
+		$hanghoaModel = new HangHoaModel;
+
+		$data["dschitiet"] = [];
+
+		$tongtien = 0;
+		foreach ($dschitiet as &$row) {
+			if (!in_array($row['idhanghoa'], $dsidhanghoa)) {
+				continue;
+			}
+			$hanghoa = $hanghoaModel->getHangHoaTheoMa($row['idhanghoa']);
+			$array_chitiet = [
+				"idgiohang" => $row['idgiohang'],
+				"idhanghoa" => $row['idhanghoa'],
+				"tenhanghoa" => $hanghoa['tenhanghoa'],
+				"image" => $hanghoa['image'],
+				"gia" => $hanghoa['gia'],
+				"soluong" => $row['soluong'],
+				"thanhtien" => $row['soluong'] * $hanghoa['gia'],
+			];
+			$tongtien += $row['soluong'] * $hanghoa['gia'];
+			$data["dschitiet"][] = $array_chitiet;
+		}
+		$data["tongtien"] = $tongtien;
+		return view("UserPage/donhang", $data);
+	}
+
+	public function deletePhantuGiohang(){
+		$this->redirectDangNhap();
+
+		$decoded = JWT::decode($_COOKIE['dadangnhap'], $this->key, array('HS256'));
+		$decoded_array = (array) $decoded;
+		$idkhachhang = $decoded_array['usr'];
+		$giohangModel = new GioHangModel();
+		$idgiohang = $giohangModel->findGioHang($idkhachhang)['id'];
+
+		if(isset($_POST['idhanghoa'])) {
+			$chitietgiohangModel = new ChiTietGioHangModel();
+			$chitietgiohangModel->deleteHanghoa($idgiohang, $_POST['idhanghoa']);
+			$json_array = [
+				"status" => "success",
+			];
+			echo json_encode($json_array);
+		}
 	}
 }
 

@@ -27,13 +27,9 @@ class ChiTietGioHangModel extends Model
         return $this->where('idgiohang', $idgiohang)->findAll();
     }
 
-
-
-
-
-
-
-
+    public function deleteHanghoa($idgiohang, $idhanghoa){
+        $this->delete($idgiohang);
+    }
 
 }
 

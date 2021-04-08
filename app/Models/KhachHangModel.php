@@ -30,17 +30,18 @@ class KhachHangModel extends Model
     }
 
 
-    public function getKhachHang($slug = false)
+    public function getKhachHang($idkhachhang = false)
     {
-        if ($slug === false)
+        if ($idkhachhang === false)
         {
             return $this->findAll();
         }
 
         return $this->asArray()
-                    ->where(['slug' => $slug])
+                    ->where(['taikhoan' => $idkhachhang])
                     ->first();
     }
+
 }
 
     

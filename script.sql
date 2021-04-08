@@ -35,10 +35,9 @@ create table hanghoa(
     phai varchar(5),
     gia double check (gia>0),
     soluong int check (soluong>0),
+    image varchar(100),
     foreign key (idthuonghieu) references thuonghieu(idthuonghieu)
 );
-
-alter table hanghoa add image varchar(100);
 
 select * from hanghoa;
 
@@ -52,8 +51,11 @@ create table donhang(
     taikhoan varchar(50),
     tonggiatri double,
     trangthai varchar(30),
+    chuthich varchar(200),
     foreign key (taikhoan) references khachhang(taikhoan)
 );
+
+alter table donhang add chuthich varchar(200);
 
 drop table chitietdonhang;
 create table chitietdonhang(
@@ -87,3 +89,18 @@ create table chitietgiohang(
 
 select * from giohang; 
 select * from chitietgiohang;
+select * from donhang;
+select * from chitietdonhang;
+
+
+
+delimiter //
+create trigger capNhatTongGiaTriDonHang after insert on chitietdonhang for each row
+begin
+	UPDATE donhang SET tonggiatri = tonggiatri + new.thanhtien where iddonhang = new.iddonhang;
+end//
+delimiter ;
+
+
+
+

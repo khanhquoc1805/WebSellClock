@@ -391,3 +391,7 @@ input {
 th {
     text-align: center;
 }
+#eshopcart_info {
+    margin-top: 33px;
+    padding: 16px;
+}

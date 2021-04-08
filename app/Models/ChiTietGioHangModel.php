@@ -28,7 +28,9 @@ class ChiTietGioHangModel extends Model
     }
 
     public function deleteHanghoa($idgiohang, $idhanghoa){
-        $this->delete($idgiohang);
+        $this->where('idgiohang', $idgiohang);
+        $this->where('idhanghoa', $idhanghoa);
+        $this->delete();
     }
 
 }

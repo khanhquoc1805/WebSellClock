@@ -218,7 +218,9 @@ for(let i = 0; i < dsBtnXoa.length; ++i) {
             body: formData,
             method: "POST"
         }).then(r => r.json()).then(j => {
-            console.log(j)
+            if (j.status === "success") {
+                document.location.href = "/KhachHang/giohang"
+            }   
         });
     }
 }

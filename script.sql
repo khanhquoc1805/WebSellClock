@@ -97,10 +97,10 @@ select * from chitietdonhang;
 delimiter //
 create trigger capNhatTongGiaTriDonHang after insert on chitietdonhang for each row
 begin
-	UPDATE donhang SET tonggiatri = tonggiatri + new.thanhtien where iddonhang = new.iddonhang;
+	UPDATE donhang SET tonggiatri = tonggiatri + new.thanhtien where id = new.iddonhang;
 end//
 delimiter ;
 
 
-
+drop trigger capNhatTongGiaTriDonHang
 

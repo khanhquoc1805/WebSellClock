@@ -279,10 +279,10 @@ class KhachHang extends BaseController
         $chitietdonhangModel = new ChiTietDonHangModel();
         for ($i = 0; $i < count($dsgiasanpham); $i++) {
             $chitietdonhangModel->createChiTietDonHang(
-				(int)$iddonhang,
+				$iddonhang,
 				$dsidhanghoa[$i],
-				(int)$dssoluong[$i],
-				(double) ((double)$dsgiasanpham[$i] * (int)$dssoluong[$i]));
+				$dssoluong[$i],
+				$dsgiasanpham[$i] * $dssoluong[$i]);
         }
 
         $json_array = [

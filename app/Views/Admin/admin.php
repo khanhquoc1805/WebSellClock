@@ -62,13 +62,14 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Components</span>
+                    <span>Quản Lí Đơn Hàng</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
+                        <a class="collapse-item" href="buttons.html">Chờ Duyệt</a>
+                        <a class="collapse-item" href="cards.html">Đã Duyệt</a>
+                        <a class="collapse-item" href="cards.html">Đang Giao</a>
+                        <a class="collapse-item" href="cards.html">Hoàn Thành</a>
                     </div>
                 </div>
             </li>
@@ -355,24 +356,10 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Tất cả Đơn Hàng</h6>
                         </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                        </div>
+                        <?php $data['dsdonhang'] = $dsdonhang ?>
+                        <?php echo view('Admin/quanlidonhang/tatca.php', $data); ?>
                     </div>
 
                 </div>

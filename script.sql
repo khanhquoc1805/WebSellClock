@@ -54,6 +54,7 @@ create table donhang(
     chuthich varchar(200),
     foreign key (taikhoan) references khachhang(taikhoan)
 );
+alter table donhang modify ngaydathang datetime default (current_timestamp());
 
 alter table donhang add chuthich varchar(200);
 
@@ -89,10 +90,10 @@ create table chitietgiohang(
 
 select * from giohang; 
 select * from chitietgiohang;
-select * from donhang;
 select * from chitietdonhang;
+select * from donhang;
 
-
+select * from chitietdonhang;
 
 delimiter //
 create trigger capNhatTongGiaTriDonHang after insert on chitietdonhang for each row
@@ -101,6 +102,5 @@ begin
 end//
 delimiter ;
 
-
-drop trigger capNhatTongGiaTriDonHang
-
+drop trigger capNhatTongGiaTriDonHang;
+drop trigger themNgayDatHang;

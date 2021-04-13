@@ -2,12 +2,12 @@
 
 namespace App\Controllers;
 
+use App\Models\ChiTietDonHangModel;
 use App\Models\ChiTietGioHangModel;
 use App\Models\DonHangModel;
 use App\Models\GioHangModel;
 use App\Models\HangHoaModel;
 use App\Models\KhachHangModel;
-use App\Models\ChiTietDonHangModel;
 use \Firebase\JWT\JWT;
 
 class KhachHang extends BaseController
@@ -74,8 +74,13 @@ class KhachHang extends BaseController
     {
         if (!isset($_POST['taikhoan']) || !isset($_POST['matkhau'])) {
             if (isset($_COOKIE['dadangnhap'])) {
-                echo "<script>document.location.href = '/';</script>";
-                return;
+                $jwt = $_COOKIE['dadangnhap'];
+                $decoded = JWT::decode($jwt, $this->key, array('HS256'));
+                $decoded_array = (array) $decoded;
+                if ($decoded_array['role'] === 'khachhang') {
+                    echo "<script>document.location.href = '/';</script>";
+                    return;
+                }
             }
             echo view('UserPage/dangnhap');
             return;
@@ -95,6 +100,7 @@ class KhachHang extends BaseController
                     $cookie_name = 'dadangnhap';
                     $key = $this->key;
                     $payload = array(
+                        'role' => 'khachhang',
                         'usr' => $taikhoan,
                     );
                     $jwt = JWT::encode($payload, $key);
@@ -279,10 +285,10 @@ class KhachHang extends BaseController
         $chitietdonhangModel = new ChiTietDonHangModel();
         for ($i = 0; $i < count($dsgiasanpham); $i++) {
             $chitietdonhangModel->createChiTietDonHang(
-				$iddonhang,
-				$dsidhanghoa[$i],
-				$dssoluong[$i],
-				$dsgiasanpham[$i] * $dssoluong[$i]);
+                $iddonhang,
+                $dsidhanghoa[$i],
+                $dssoluong[$i],
+                $dsgiasanpham[$i] * $dssoluong[$i]);
         }
 
         $json_array = [
@@ -291,5 +297,4 @@ class KhachHang extends BaseController
         ];
         echo json_encode($json_array);
     }
-
 }

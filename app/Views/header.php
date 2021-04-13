@@ -51,7 +51,7 @@ Cart <span class="icon-basket"></span>
 <span class="icon-user"></span> Log Out
 <span class="sr-only">My Account</span>
 </a>
-<?php endif; ?>
+<?php endif;?>
 <a href="" class="top_links pull-right hidden-sm">
 <span class="icon-user"></span> My Account
 <span class="sr-only">My Account</span>

@@ -8,7 +8,7 @@ class DonHangModel extends Model
     protected $table = 'donhang';
     protected $primaryKey = 'id';
     protected $allowedFields = [
-        'taikhoan', 'tonggiatri', 'trangthai',
+        'taikhoan', 'tonggiatri', 'trangthai','thanhtoan'
     ]; // nhung truong cho phep
     protected $useSoftDeletes = false;
 
@@ -21,5 +21,8 @@ class DonHangModel extends Model
             'chuthich' => $chuthich,
         ];
         return $this->insert($data);
+    }
+    public function getDsDonHang(){
+        return $this->findAll();
     }
 }

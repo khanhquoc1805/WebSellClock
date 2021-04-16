@@ -66,10 +66,10 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="buttons.html">Chờ Duyệt</a>
-                        <a class="collapse-item" href="cards.html">Đã Duyệt</a>
-                        <a class="collapse-item" href="cards.html">Đang Giao</a>
-                        <a class="collapse-item" href="cards.html">Hoàn Thành</a>
+                        <a class="collapse-item" href="?status=choduyet">Chờ Duyệt</a>
+                        <a class="collapse-item" href="?status=daduyet">Đã Duyệt</a>
+                        <a class="collapse-item" href="?status=danggiao">Đang Giao</a>
+                        <a class="collapse-item" href="?status=hoanthanh">Hoàn Thành</a>
                     </div>
                 </div>
             </li>
@@ -355,11 +355,20 @@
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Tất cả Đơn Hàng</h6>
-                        </div>
+                        
                         <?php $data['dsdonhang'] = $dsdonhang ?>
-                        <?php echo view('Admin/quanlidonhang/tatca.php', $data); ?>
+                        <?php
+                            if (isset($_GET['status'])) {
+                                switch($_GET['status']){
+                                    case "choduyet": echo view("Admin/quanlidonhang/choduyet.php", $data); break;
+                                    case "daduyet": echo view("Admin/quanlidonhang/daduyet.php", $data); break;
+                                    case "danggiao": echo view("Admin/quanlidonhang/danggiao.php", $data); break;
+                                    case "hoanthanh": echo view("Admin/quanlidonhang/hoanthanh.php", $data); break;
+                                }
+                            } else {
+                                echo view('Admin/quanlidonhang/tatca.php', $data);
+                            }
+                        ?>
                     </div>
 
                 </div>

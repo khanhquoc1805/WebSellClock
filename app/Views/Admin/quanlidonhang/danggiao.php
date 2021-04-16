@@ -1,5 +1,5 @@
 <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Chờ Duyệt</h6>
+    <h6 class="m-0 font-weight-bold text-primary">Đang Giao</h6>
 </div>
 <div class="card-body">
     <div class="table-responsive">
@@ -18,9 +18,9 @@
                     <th>Tổng Tiền</th>
                     <th>Trạng Thái</th>
                 </tr>
-            </thead>
-            <?php for ($i = 0; $i < count($dsdonhang); $i++): ?>
-            <?php if ($dsdonhang[$i]['trangthai'] === 'Chờ Duyệt') {?>
+            </thead>    
+            <?php for ($i=0; $i<count($dsdonhang); $i++): ?>  
+            <?php if ($dsdonhang[$i]['trangthai'] === 'Đang Giao' ) {?>
             <thead>
                 <tr>
                     <td><?php echo $dsdonhang[$i]['id'] ?></td>
@@ -31,8 +31,8 @@
                     <td><?php echo $dsdonhang[$i]['trangthai'] ?></td>
                 </tr>
             </thead>
-            <?php }?>
-            <?php endfor;?>
+            <?php } ?>
+            <?php endfor; ?>
         </table>
     </div>
 </div>

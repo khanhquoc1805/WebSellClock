@@ -10,8 +10,28 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
-
+    <title>KQ Watch</title>
+    <style>
+    .form-select {
+        display: block;
+        width: 100%;
+        padding: .375rem 2.25rem .375rem .75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        background-color: #fff;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right .75rem center;
+        background-size: 16px 12px;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+    </style>
     <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -66,6 +86,7 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="?status=tatca">Tất Cả</a>
                         <a class="collapse-item" href="?status=choduyet">Chờ Duyệt</a>
                         <a class="collapse-item" href="?status=daduyet">Đã Duyệt</a>
                         <a class="collapse-item" href="?status=danggiao">Đang Giao</a>
@@ -360,6 +381,7 @@
                         <?php
                             if (isset($_GET['status'])) {
                                 switch($_GET['status']){
+                                    case "tatca": echo view("Admin/quanlidonhang/tatca.php", $data); break;
                                     case "choduyet": echo view("Admin/quanlidonhang/choduyet.php", $data); break;
                                     case "daduyet": echo view("Admin/quanlidonhang/daduyet.php", $data); break;
                                     case "danggiao": echo view("Admin/quanlidonhang/danggiao.php", $data); break;

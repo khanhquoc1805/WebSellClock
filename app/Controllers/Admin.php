@@ -139,4 +139,26 @@ class Admin extends BaseController
             return;
         }
     }
+
+    public function capnhattrangthaidonhang() {
+        if (!isset($_COOKIE['dadangnhap'])) {
+            echo view("Admin/dangnhap");
+            return;
+        }
+        
+        if (!isset($_POST['iddonhang']) || !isset($_POST['trangthai'])){
+            return;
+        }
+        $iddonhang = $_POST['iddonhang'];
+        $trangthai = $_POST['trangthai'];
+        
+        $donHangModel = new DonHangModel();
+        $donHangModel->updateTrangThai($iddonhang, $trangthai);
+
+        $json_array = [
+            "status" => "success",
+            "iddonhang" => $iddonhang,
+        ];
+        echo json_encode($json_array);
+    }
 }

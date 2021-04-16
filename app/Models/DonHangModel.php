@@ -25,4 +25,12 @@ class DonHangModel extends Model
     public function getDsDonHang(){
         return $this->findAll();
     }
+
+    public function updateTrangThai($iddonhang,$trangthai){
+        $data = [
+            'trangthai' => $trangthai,
+        ];
+        
+        $this->update($iddonhang, $data);
+    }
 }

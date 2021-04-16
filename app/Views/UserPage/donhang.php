@@ -209,9 +209,10 @@
             body: formData,
             method: "POST"
         }).then(r => r.json()).then(j => {
-            console.log(j);
+            if(j.status==='success'){
+                document.location.href='/KhachHang/giohang'
+            }
         })
     }
-
 
 </script>

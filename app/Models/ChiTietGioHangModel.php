@@ -32,7 +32,6 @@ class ChiTietGioHangModel extends Model
         $this->where('idhanghoa', $idhanghoa);
         $this->delete();
     }
-
 }
 
 ?>

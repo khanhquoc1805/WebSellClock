@@ -291,10 +291,20 @@ class KhachHang extends BaseController
                 $dsgiasanpham[$i] * $dssoluong[$i]);
         }
 
+        setcookie('dsidhanghoa', '', time(), "/");
+        $giohangModel = new GioHangModel();
+        $idgiohang = $giohangModel->findGioHang($taikhoan)['id'];
+
+        for ($i = 0; $i < count($dsidhanghoa); $i++) {
+            $chitietgiohangModel = new ChiTietGioHangModel();
+            $chitietgiohangModel->deleteHanghoa($idgiohang, $dsidhanghoa[$i]);
+        }
+
         $json_array = [
             "status" => "success",
-            "iddonghang" => $dsidhanghoa,
+            "iddonhang" => $iddonhang,
         ];
+        
         echo json_encode($json_array);
     }
 }

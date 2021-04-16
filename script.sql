@@ -55,6 +55,7 @@ create table donhang(
     foreign key (taikhoan) references khachhang(taikhoan)
 );
 alter table donhang modify ngaydathang datetime default (current_timestamp());
+alter table donhang add column thanhtoan varchar(100) default ("Chưa Thanh Toán");
 
 alter table donhang add chuthich varchar(200);
 
@@ -104,3 +105,10 @@ delimiter ;
 
 drop trigger capNhatTongGiaTriDonHang;
 drop trigger themNgayDatHang;
+
+
+select * from chitietdonhang;
+select * from donhang;
+
+delete from chitietdonhang where iddonhang!=1;
+delete from donhang where id!=1;

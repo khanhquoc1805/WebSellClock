@@ -227,4 +227,68 @@ class Admin extends BaseController
             }
         }
     }
+
+
+    public function themsanpham()
+    {
+        // kiem tra da dang nhap
+        if (isset($_COOKIE['dadangnhap'])) {
+            $key = $this->key;
+            $jwt = $_COOKIE['dadangnhap'];
+            $decoded = JWT::decode($jwt, $key, array('HS256'));
+            $decoded_array = (array) $decoded;
+            $data['username'] = $decoded_array['usr'];
+            if ($decoded_array['role'] === 'admin') {
+                if (isset($_POST['idthuonghieu']) && isset($_POST['idsanpham']) && isset($_FILES['image'])
+                && isset($_POST['tensanpham']) && isset($_POST['phai']) &&  isset($_POST['giasanpham']) && isset($_POST['soluongsanpham'])) {
+                    $idthuonghieu = $_POST['idthuonghieu'];
+                    $idsanpham = $_POST['idsanpham'];
+                    $tensanpham = $_POST['tensanpham'];
+                    $phai = $_POST['phai'];
+                    $giasanpham = $_POST['giasanpham'];
+                    $soluong = $_POST['soluongsanpham'];
+
+                    $target_dir = "images/hanghoa/";
+                    $target_file = $target_dir . basename($_FILES["image"]["name"]);
+                    $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+                    $allowtypes = array('jpg', 'png', 'jpeg', 'gif');
+
+                    if (!in_array($imageFileType, $allowtypes)) {
+                        echo "Chỉ được upload các định dạng JPG, PNG, JPEG, GIF";
+                        return;
+                    }
+                    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+                        $themhanghoa = new HangHoaModel();
+                        $themhanghoa->themHangHoa( $idthuonghieu, $idsanpham,$tensanpham,$phai,$giasanpham, $soluong,$target_file);
+                        echo "<script>document.location.href='/Admin/home?status=sanpham'</script>";
+                    }
+                }
+            }
+        }
+    }
+
+    public function xoasanpham()
+    {
+        // kiem tra da dang nhap
+        if (isset($_COOKIE['dadangnhap'])) {
+            $key = $this->key;
+            $jwt = $_COOKIE['dadangnhap'];
+            $decoded = JWT::decode($jwt, $key, array('HS256'));
+            $decoded_array = (array) $decoded;
+            $data['username'] = $decoded_array['usr'];
+            if ($decoded_array['role'] === 'admin') {
+                if (isset($_POST['idsanpham'])){
+                    $idsanpham = $_POST['idsanpham'];
+                    $hanghoaModel = new HangHoaModel();
+                    unlink($hanghoaModel->getHangHoaTheoMa($idsanpham)['image']);
+                    $hanghoaModel->deleteHangHoa($idsanpham);
+                    $json_array = [
+                        "status" => "success",
+                        "idhanghoa" => $idsanpham
+                    ];
+                    echo json_encode($json_array);
+                }
+            }
+        }
+    }
 }

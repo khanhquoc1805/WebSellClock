@@ -8,7 +8,7 @@ class HangHoaModel extends Model
     protected $table = 'hanghoa';
     protected $primaryKey = 'idhanghoa';
     protected $allowedFields = [
-        'idhanghoa', 'tenhanghoa', 'gia', 'phai','soluong', 'image'
+        'idthuonghieu','idhanghoa', 'tenhanghoa', 'gia', 'phai','soluong', 'image'
     ];// nhung truong cho phep
     protected $useSoftDeletes = false;
 
@@ -28,18 +28,22 @@ class HangHoaModel extends Model
         return $this->where('idhanghoa', $ma)->first();
     }
 
-    public function themHangHoa($ma, $ten, $gia, $hinh){
+
+    public function themHangHoa($idthuonghieu, $idsanpham, $tensanpham, $phai, $gia, $soluong, $hinhanh){
         $data = [
-            'idhanghoa' => $ma,
-            'tenhanghoa' => $ten,
+            'idthuonghieu' => $idthuonghieu,
+            'idhanghoa' => $idsanpham,
+            'tenhanghoa' => $tensanpham,
+            'phai' => $phai,
             'gia' => (float)$gia,
-            'hinhanh' => $hinh
+            'soluong' => $soluong,
+            'image' => $hinhanh
         ];
         $this->insert($data);
     }
 
-    public function xoaHangHoa($ma) {
-            $this->delete($ma);
+    public function deleteHangHoa($idsanpham) {
+        $this->delete($idsanpham);
     }
 }
 

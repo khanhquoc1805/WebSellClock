@@ -106,7 +106,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="/Admin/home?status=thuonghieu">Thương Hiệu</a>
-                        <a class="collapse-item" href="utilities-border.html">Sản Phẩm</a>
+                        <a class="collapse-item" href="/Admin/home?status=sanpham">Sản Phẩm</a>
                     </div>
                 </div>
             </li>
@@ -384,6 +384,7 @@
                                     case "danggiao": echo view("Admin/quanlidonhang/danggiao.php", $data); break;
                                     case "hoanthanh": echo view("Admin/quanlidonhang/hoanthanh.php", $data); break;
                                     case "thuonghieu": echo view("Admin/quanlithuonghieu/thuonghieu.php", $data); break;
+                                    case "sanpham": echo view("Admin/quanlisanpham/sanpham.php", $data); break;
                                 }
                             } else {
                                 echo view('Admin/quanlidonhang/tatca.php', $data);

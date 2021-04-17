@@ -27,6 +27,8 @@ class Admin extends BaseController
                 $data["dsdonhang"] = $donhang->getDsDonHang();
                 $thuonghieu = new ThuongHieuModel();
                 $data['dsthuonghieu'] = $thuonghieu->getThuongHieu();
+                $hanghoaModel = new HangHoaModel();
+                $data['dshanghoa'] = $hanghoaModel->getHangHoa();
                 echo view('Admin/admin', $data);
                 return;
             }

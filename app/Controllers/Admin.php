@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\DonHangModel;
 use App\Models\HangHoaModel;
 use App\Models\QuanTriModel;
+use App\Models\ThuongHieuModel;
 use \Firebase\JWT\JWT;
 
 class Admin extends BaseController
@@ -24,6 +25,8 @@ class Admin extends BaseController
             if ($decoded_array['role'] === 'admin') {
                 $donhang = new DonHangModel();
                 $data["dsdonhang"] = $donhang->getDsDonHang();
+                $thuonghieu = new ThuongHieuModel();
+                $data['dsthuonghieu'] = $thuonghieu->getThuongHieu();
                 echo view('Admin/admin', $data);
                 return;
             }
@@ -140,18 +143,19 @@ class Admin extends BaseController
         }
     }
 
-    public function capnhattrangthaidonhang() {
+    public function capnhattrangthaidonhang()
+    {
         if (!isset($_COOKIE['dadangnhap'])) {
             echo view("Admin/dangnhap");
             return;
         }
-        
-        if (!isset($_POST['iddonhang']) || !isset($_POST['trangthai'])){
+
+        if (!isset($_POST['iddonhang']) || !isset($_POST['trangthai'])) {
             return;
         }
         $iddonhang = $_POST['iddonhang'];
         $trangthai = $_POST['trangthai'];
-        
+
         $donHangModel = new DonHangModel();
         $donHangModel->updateTrangThai($iddonhang, $trangthai);
 
@@ -160,5 +164,65 @@ class Admin extends BaseController
             "iddonhang" => $iddonhang,
         ];
         echo json_encode($json_array);
+    }
+
+    public function themthuonghieu()
+    {
+        // kiem tra da dang nhap
+        if (isset($_COOKIE['dadangnhap'])) {
+            $key = $this->key;
+            $jwt = $_COOKIE['dadangnhap'];
+            $decoded = JWT::decode($jwt, $key, array('HS256'));
+            $decoded_array = (array) $decoded;
+            $data['username'] = $decoded_array['usr'];
+            if ($decoded_array['role'] === 'admin') {
+                if (isset($_POST['idthuonghieu']) && isset($_POST['tenthuonghieu']) && isset($_FILES['logo'])) {
+                    $idthuonghieu = $_POST['idthuonghieu'];
+                    $tenthuonghieu = $_POST['tenthuonghieu'];
+                    $target_dir = "images/thuonghieu/";
+                    $target_file = $target_dir . basename($_FILES["logo"]["name"]);
+                    //Lấy phần mở rộng của file (jpg, png, ...)
+                    $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+                    ////Những loại file được phép upload
+                    $allowtypes = array('jpg', 'png', 'jpeg', 'gif');
+                    if (!in_array($imageFileType, $allowtypes)) {
+                        echo "Chỉ được upload các định dạng JPG, PNG, JPEG, GIF";
+                        return;
+                    }
+                    if (move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file)) {
+                        $themthuonghieu = new ThuongHieuModel();
+                        $themthuonghieu->addThuongHieu($idthuonghieu, $tenthuonghieu, $target_file);
+                        echo "<script>document.location.href='/Admin/home?status=thuonghieu'</script>";
+                    }
+                }
+            }
+        }
+
+    }
+
+
+    public function xoathuonghieu()
+    {
+        // kiem tra da dang nhap
+        if (isset($_COOKIE['dadangnhap'])) {
+            $key = $this->key;
+            $jwt = $_COOKIE['dadangnhap'];
+            $decoded = JWT::decode($jwt, $key, array('HS256'));
+            $decoded_array = (array) $decoded;
+            $data['username'] = $decoded_array['usr'];
+            if ($decoded_array['role'] === 'admin') {
+                if (isset($_POST['idthuonghieu'])){
+                    $idthuonghieu = $_POST['idthuonghieu'];
+                    $thuonghieuModel = new ThuongHieuModel();
+                    unlink($thuonghieuModel->getThuongHieu($idthuonghieu)['logo']);
+                    $thuonghieuModel->deleteThuongHieu($idthuonghieu);
+                    $json_array = [
+                        "status" => "success",
+                        "idthuonghieu" => $idthuonghieu,
+                    ];
+                    echo json_encode($json_array);
+                }
+            }
+        }
     }
 }

@@ -20,8 +20,10 @@ class ChiTietDonHangModel extends Model
             'thanhtien' => $thanhtien,
         ];
         $this->insert($data);
+    }
 
-
+    public function getChiTietDonHang($iddonhang){
+        return $this->where('iddonhang', $iddonhang)->findAll();
     }
 
 

@@ -1,3 +1,9 @@
+<style>
+.hidden {
+    display: none;
+}
+</style>
+
 <div class="card-header py-3">
     <h6 class="m-0 font-weight-bold text-primary">Chờ Duyệt</h6>
 </div>
@@ -16,6 +22,7 @@
                     <th>Khách Hàng</th>
                     <th>Thanh Toán</th>
                     <th>Tổng Tiền</th>
+                    <th>Chi Tiết</th>
                     <th>Trạng Thái</th>
                 </tr>
             </thead>
@@ -28,6 +35,7 @@
                     <td><?php echo $dsdonhang[$i]['taikhoan'] ?></td>
                     <td><?php echo $dsdonhang[$i]['thanhtoan'] ?></td>
                     <td><?php echo $dsdonhang[$i]['tonggiatri'] ?></td>
+                    <td><button data-iddonhang="echo $dsdonhang[$i]['id']" class='btn btn-success'>Xem Chi Tiết</button></td>
                     <td>
                         <select data-iddonhang="<?php echo $dsdonhang[$i]['id'] ?>" class="form-select" aria-label="Default select example">
                             <option selected value="Chờ Duyệt"><?php echo $dsdonhang[$i]['trangthai'] ?></option>

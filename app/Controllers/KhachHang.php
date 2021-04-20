@@ -114,6 +114,10 @@ class KhachHang extends BaseController
 
         echo view('UserPage/dangnhap');
     }
+    public function myaccount(){
+        $this->redirectDangNhap();
+        echo view("UserPage/myaccount");
+    }
 
     public function dangxuat()
     {

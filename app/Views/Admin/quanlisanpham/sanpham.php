@@ -122,13 +122,14 @@
 
 
 <script>
-console.log("hello");
     const btnxoasanpham = document.getElementsByClassName('btn-sanpham');
     for (let i =0 ; i< btnxoasanpham.length; i++){
         btnxoasanpham[i].onclick = function() {
             const formData = new FormData();
             formData.append("idsanpham", this.getAttribute('data-idsanpham'));
-            console.log("hello");
+            if(!confirm("Bạn chắc chắn muốn xóa?")){
+                return;
+            }
             fetch("/Admin/xoasanpham", {
                 body: formData,
                 method: "POST"
@@ -138,4 +139,5 @@ console.log("hello");
                 }
             })
         }
+    }
 </script>

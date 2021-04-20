@@ -385,6 +385,7 @@
                                     case "hoanthanh": echo view("Admin/quanlidonhang/hoanthanh.php", $data); break;
                                     case "thuonghieu": echo view("Admin/quanlithuonghieu/thuonghieu.php", $data); break;
                                     case "sanpham": echo view("Admin/quanlisanpham/sanpham.php", $data); break;
+                                    
                                 }
                             } else {
                                 echo view('Admin/quanlidonhang/tatca.php', $data);

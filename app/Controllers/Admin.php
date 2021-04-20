@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\ChiTietDonHangModel;
 use App\Models\DonHangModel;
 use App\Models\HangHoaModel;
 use App\Models\QuanTriModel;
@@ -23,12 +24,19 @@ class Admin extends BaseController
             $decoded_array = (array) $decoded;
             $data['username'] = $decoded_array['usr'];
             if ($decoded_array['role'] === 'admin') {
-                $donhang = new DonHangModel();
-                $data["dsdonhang"] = $donhang->getDsDonHang();
+                $donhangModel = new DonHangModel();
+                $data["dsdonhang"] = $donhangModel->getDsDonHang();
                 $thuonghieu = new ThuongHieuModel();
                 $data['dsthuonghieu'] = $thuonghieu->getThuongHieu();
                 $hanghoaModel = new HangHoaModel();
                 $data['dshanghoa'] = $hanghoaModel->getHangHoa();
+                $chitietdonhangModel = new ChiTietDonHangModel();
+
+                for ($i = 0; $i < count($data['dsdonhang']); $i++) {
+                    $donhang = $data['dsdonhang'][$i];
+                    $data['dschitietdonhang'][] = $chitietdonhangModel->getChiTietDonHang($donhang['id']);
+                }
+
                 echo view('Admin/admin', $data);
                 return;
             }
@@ -202,7 +210,6 @@ class Admin extends BaseController
 
     }
 
-
     public function xoathuonghieu()
     {
         // kiem tra da dang nhap
@@ -213,7 +220,7 @@ class Admin extends BaseController
             $decoded_array = (array) $decoded;
             $data['username'] = $decoded_array['usr'];
             if ($decoded_array['role'] === 'admin') {
-                if (isset($_POST['idthuonghieu'])){
+                if (isset($_POST['idthuonghieu'])) {
                     $idthuonghieu = $_POST['idthuonghieu'];
                     $thuonghieuModel = new ThuongHieuModel();
                     unlink($thuonghieuModel->getThuongHieu($idthuonghieu)['logo']);
@@ -228,7 +235,6 @@ class Admin extends BaseController
         }
     }
 
-
     public function themsanpham()
     {
         // kiem tra da dang nhap
@@ -240,7 +246,7 @@ class Admin extends BaseController
             $data['username'] = $decoded_array['usr'];
             if ($decoded_array['role'] === 'admin') {
                 if (isset($_POST['idthuonghieu']) && isset($_POST['idsanpham']) && isset($_FILES['image'])
-                && isset($_POST['tensanpham']) && isset($_POST['phai']) &&  isset($_POST['giasanpham']) && isset($_POST['soluongsanpham'])) {
+                    && isset($_POST['tensanpham']) && isset($_POST['phai']) && isset($_POST['giasanpham']) && isset($_POST['soluongsanpham'])) {
                     $idthuonghieu = $_POST['idthuonghieu'];
                     $idsanpham = $_POST['idsanpham'];
                     $tensanpham = $_POST['tensanpham'];
@@ -259,7 +265,7 @@ class Admin extends BaseController
                     }
                     if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
                         $themhanghoa = new HangHoaModel();
-                        $themhanghoa->themHangHoa( $idthuonghieu, $idsanpham,$tensanpham,$phai,$giasanpham, $soluong,$target_file);
+                        $themhanghoa->themHangHoa($idthuonghieu, $idsanpham, $tensanpham, $phai, $giasanpham, $soluong, $target_file);
                         echo "<script>document.location.href='/Admin/home?status=sanpham'</script>";
                     }
                 }
@@ -277,18 +283,19 @@ class Admin extends BaseController
             $decoded_array = (array) $decoded;
             $data['username'] = $decoded_array['usr'];
             if ($decoded_array['role'] === 'admin') {
-                if (isset($_POST['idsanpham'])){
+                if (isset($_POST['idsanpham'])) {
                     $idsanpham = $_POST['idsanpham'];
                     $hanghoaModel = new HangHoaModel();
                     unlink($hanghoaModel->getHangHoaTheoMa($idsanpham)['image']);
                     $hanghoaModel->deleteHangHoa($idsanpham);
                     $json_array = [
                         "status" => "success",
-                        "idhanghoa" => $idsanpham
+                        "idhanghoa" => $idsanpham,
                     ];
                     echo json_encode($json_array);
                 }
             }
         }
     }
+
 }

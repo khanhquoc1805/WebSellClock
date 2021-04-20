@@ -55,7 +55,7 @@
                     <th>Mã Thương Hiệu</th>
                     <th>Tên Thương Hiệu</th>
                     <th>Logo</th>
-                    <th>Hành động</th>
+                    <th></th>
                 </tr>
             </thead>
             <?php for ($i=0; $i<count($dsthuonghieu); $i++): ?>
@@ -69,14 +69,8 @@
                         <?php echo $dsthuonghieu[$i]['logo'] ?>
                     </td>
                     <td>
-                        <button class="btn btn-primary btn-suathuonghieu">
-                            Sửa
-                        </button>
                         <button data-idthuonghieu="<?php echo $dsthuonghieu[$i]['idthuonghieu'] ?>" class="btn btn-danger btn-xoathuonghieu">
                             Xóa
-                        </button>
-                        <button class="btn btn-success btn-xacnhan">
-                            Xác nhận
                         </button>
                     </td>
                 </tr>
@@ -108,7 +102,9 @@ btnThemThuongHieu.onclick = function() {
         dsbtnxoa[i].onclick = function() {
             const formData = new FormData();
             formData.append("idthuonghieu", this.getAttribute('data-idthuonghieu'));
-
+            if(!confirm("Bạn Chắc Chắn Muốn Xóa?")){
+                return;
+            }
             fetch("/Admin/xoathuonghieu", {
                 body: formData,
                 method: "POST"

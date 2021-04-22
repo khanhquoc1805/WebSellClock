@@ -50,6 +50,7 @@
             <select class="form-select form-control" name="phai" id="">
                 <option selected value="Nữ">Nữ</option>
                 <option value="Nam">Nam</option>
+                <option value="cd">Cặp Đôi</option>
             </select>
         </div>
         </div>

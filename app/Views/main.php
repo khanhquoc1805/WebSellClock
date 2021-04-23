@@ -130,7 +130,7 @@
             <div class="container">
                 <div class="row">
                     <h2 class="header-specials">
-                        <span>Đồng Hồ Nam</span>
+                        <span style="color: red" >Đồng Hồ Nam</span>
                     </h2>
                 </div>
 
@@ -203,7 +203,7 @@
             <div class="container">
                 <div class="row">
                     <h2 class="header-specials">
-                        <span>Đồng Hồ Nữ</span>
+                        <span style="color: red">Đồng Hồ Nữ</span>
                     </h2>
                 </div>
 
@@ -296,7 +296,7 @@
             <div class="container">
                 <div class="row">
                     <h2 class="header-specials">
-                        <span>Đồng Hồ Cặp Đôi</span>
+                        <span style="color: red">Đồng Hồ Cặp Đôi</span>
                     </h2>
                 </div>
 

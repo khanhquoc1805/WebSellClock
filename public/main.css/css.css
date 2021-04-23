@@ -395,3 +395,23 @@ th {
     margin-top: 33px;
     padding: 16px;
 }
+h2 span::after , h2::before {
+    content: "";
+    display: inline-block;;
+    width: 8em;
+    height: 0.005em;
+    background-color: black;
+    position: relative;
+    top: -0.30em;
+   
+}
+.header-specials {
+    font-family: 'Times New Roman', Times, serif!important;
+   
+}
+.header-myaccount {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    
+}

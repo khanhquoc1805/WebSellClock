@@ -424,4 +424,13 @@ html {
     border: 2px solid #fff;
     font-size: 1em !important;
     font-variant: small-caps;
+    
+}
+.linkloaidongho1:hover {
+    background-color: transparent !important;
+    border: 2px solid #ca2929bf;
+    font-size: 1em !important;
+    font-variant: small-caps;
+    color: #ca2929bf !important;
+    
 }

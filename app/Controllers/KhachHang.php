@@ -338,6 +338,7 @@ class KhachHang extends BaseController
             $json_array = [
                 "status" => "success",
                 "idkhachhang" => $taikhoan,
+                "phai" =>$_POST['gioitinh']
             ];
             echo json_encode($json_array);
 

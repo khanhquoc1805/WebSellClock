@@ -130,7 +130,7 @@
             <div class="container">
                 <div class="row">
                     <h2 class="header-specials">
-                        <span style="color: red" >Đồng Hồ Nam</span>
+                        <span style="color: red" id="donghonam">Đồng Hồ Nam</span>
                     </h2>
                 </div>
 
@@ -395,22 +395,24 @@
     >
         <div class="" id="block_id_132">
             <div class="block-body-colllection">
-                <div class="collection-1 cls">
-                    <div class="item-special item-cl">
+                <div class="collection-1 cls" style="display:flex; position: relative">
+                    <div class="item-special item-cl" style="position: absolution; top: 0">
                         <a
-                            href="https://xwatch.vn/dong-ho-danh-cho-nam-ccl10.html"
+                            href="#donghonam"
                             ><img
                                 class="lazy"
                                 alt="Đồng hồ dành cho nam"
-                                src="https://xwatch.vn/images/collection/category/large/bst-dong-ho-cho-nam_1562154973.jpg"
+                                src="./images/banner/bst-dong-ho-cho-nam_1562154973.jpg"
                                 style="display: inline-block"
-                        /></a>
-                        <div class="name-collection">
-                            <a
-                                href="https://xwatch.vn/dong-ho-danh-cho-nam-ccl10.html"
-                                >Đồng hồ dành cho nam</a
-                            >
-                        </div>
+                        />
+                    </a>
+                    <div class="name-collection" style="position: absolute; top: 0; display: flex; justify-content: center; height: 100%; align-items: center; width: 67%;">
+                        <a style="padding: 1em 2em; background-color: #ca2929bf; color: #fff; text-decoration:none"
+                            href="#donghonam"
+                            class="linkloaidongho"
+                            >ĐỒNG HỒ DÀNH CHO NAM</a
+                        >
+                    </div>
                     </div>
                     <div class="item-normal item-cl">
                         <div class="item-normal-ct">
@@ -419,14 +421,14 @@
                                 ><img
                                     class="lazy"
                                     alt="Đồng hồ dành cho nữ"
-                                    src="https://xwatch.vn/images/collection/category/resized/bst-danh-cho-nu_1562151982.jpg"
+                                    src="/images/banner/bst-danh-cho-nu_1562151982.jpg"
                                     style="display: inline-block"
                             /></a>
                             <div class="name-collection">
-                                <a
+                                <!-- <a
                                     href="https://xwatch.vn/dong-ho-danh-cho-nu-ccl9.html"
                                     >Đồng hồ dành cho nữ</a
-                                >
+                                > -->
                             </div>
                         </div>
 
@@ -436,14 +438,14 @@
                                 ><img
                                     class="lazy"
                                     alt="Đồng hồ cặp đôi"
-                                    src="https://xwatch.vn/images/collection/category/resized/dong-ho-cap-doi_1593660350.jpg"
+                                    src="./images/banner/dong-ho-cap-doi_1593660350.jpg"
                                     style="display: inline-block"
                             /></a>
                             <div class="name-collection">
-                                <a
+                                <!-- <a
                                     href="https://xwatch.vn/dong-ho-cap-doi-ccl11.html"
                                     >Đồng hồ cặp đôi</a
-                                >
+                                > -->
                             </div>
                         </div>
                     </div>

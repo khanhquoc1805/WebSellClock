@@ -42,6 +42,18 @@ class KhachHangModel extends Model
                     ->first();
     }
 
+    public function capnhatthongtin($idkhachhang, $hokh,$tenkh,$gioitinh,$sdt,$diachi){
+        $data = [
+            'hokh' => $hokh,
+            'tenkh'    => $tenkh,
+            'gioitinh' => $gioitinh,
+            'sdt' => $sdt,
+            'diachi' => $diachi
+        ];
+        
+        $this->update($idkhachhang, $data);
+    }
+
 }
 
     

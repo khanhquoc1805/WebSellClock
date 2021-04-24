@@ -410,8 +410,18 @@ h2 span::after , h2::before {
    
 }
 .header-myaccount {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);    
     
+}
+
+html {
+    scroll-behavior: smooth !important;
+}
+
+.linkloaidongho:hover {
+    background-color: transparent !important;
+    border: 2px solid #fff;
+    font-size: 1em !important;
+    font-variant: small-caps;
 }

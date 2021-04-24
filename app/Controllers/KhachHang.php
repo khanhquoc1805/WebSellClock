@@ -114,7 +114,8 @@ class KhachHang extends BaseController
 
         echo view('UserPage/dangnhap');
     }
-    public function myaccount(){
+    public function myaccount()
+    {
         $this->redirectDangNhap();
         echo view("UserPage/myaccount");
     }
@@ -308,7 +309,39 @@ class KhachHang extends BaseController
             "status" => "success",
             "iddonhang" => $iddonhang,
         ];
-        
+
         echo json_encode($json_array);
+    }
+
+    public function laythongtinkhachhang()
+    {
+        $this->redirectDangNhap();
+        $taikhoan = $this->getTaiKhoanCookie();
+        $khachhangmodel = new KhachHangModel();
+        $kh = $khachhangmodel->getKhachHang($taikhoan);
+        $json_array = [
+            "status" => "success",
+            "khachhang" => $kh,
+        ];
+
+        echo json_encode($json_array);
+    }
+
+    public function capnhatthongtin()
+    {
+        $this->redirectDangNhap();
+        $taikhoan = $this->getTaiKhoanCookie();
+
+        if (isset($_POST['ho']) && isset($_POST['ten']) && isset($_POST['gioitinh']) && isset($_POST['sdt']) && isset($_POST['diachi'])) {
+            $khachhangmodel = new KhachHangModel();
+            $kh = $khachhangmodel->capnhatthongtin($taikhoan, $_POST['ho'], $_POST['ten'], $_POST['gioitinh'], $_POST['sdt'], $_POST['diachi']);
+            $json_array = [
+                "status" => "success",
+                "idkhachhang" => $taikhoan,
+            ];
+            echo json_encode($json_array);
+
+        }
+
     }
 }

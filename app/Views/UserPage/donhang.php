@@ -43,6 +43,7 @@
                 <input
                     class="numbers-pro"
                     type="text"
+                    disabled
                     value="<?php echo $dschitiet[$i]['soluong'] ?>"
                     name="quantity_956694"
                     size="8px"
@@ -53,7 +54,7 @@
             </td>
 
             <td class="total-price" align="center">
-                <?php echo $dschitiet[$i]['thanhtien'] ?>
+                <?= number_format($dschitiet[$i]['thanhtien'], 0, "", ".") ?>
             </td>
 
             <td class="center-column" align="center">

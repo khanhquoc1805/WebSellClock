@@ -107,8 +107,8 @@ drop trigger capNhatTongGiaTriDonHang;
 drop trigger themNgayDatHang;
 
 
-select * from chitietdonhang;
-select * from donhang;
+select * from thuonghieu;
+select * from hanghoa;
 
 delete from chitietdonhang where iddonhang!=1;
 delete from donhang where id!=1;

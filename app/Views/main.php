@@ -235,7 +235,7 @@
                     style="height: 319px">
                     <div class="img">
                         <a href="#">
-                            <img src="<?php echo $dsdongho[$i]['image'] ?>" alt="Wireless Headphones"
+                            <img src="<?php echo $dsdongho[$i]['image'] ?>" alt=""
                                 class="img-responsive" />
                         </a>
                         <button class="quickview" data-toggle="modal">

@@ -38,7 +38,7 @@ class KhachHang extends BaseController
             return;
         }
 
-        return explode(",", $_COOKIE['dsidhanghoa']);
+        return $_COOKIE['dsidhanghoa'];
     }
 
     public function dangki()
@@ -198,8 +198,7 @@ class KhachHang extends BaseController
             return;
         }
         // GET
-        $dsidhanghoa = $this->getdsidhanghoaCookie();
-
+        $dshanghoa = $this->getdsidhanghoaCookie();
         $decoded = JWT::decode($_COOKIE['dadangnhap'], $this->key, array('HS256'));
         $decoded_array = (array) $decoded;
         $taikhoan = $decoded_array['usr'];
@@ -211,12 +210,26 @@ class KhachHang extends BaseController
         $hanghoaModel = new HangHoaModel;
 
         $data["dschitiet"] = [];
+        $dshanghoa = explode("|", $dshanghoa);
+
+        $dsidhanghoa = [];
+        foreach ($dshanghoa as &$row) {
+            $dsidhanghoa[] = json_decode($row)->idhanghoa;
+        }
 
         $tongtien = 0;
         foreach ($dschitiet as &$row) {
             if (!in_array($row['idhanghoa'], $dsidhanghoa)) {
                 continue;
             }
+
+            $soluong = 0;
+            foreach($dshanghoa as &$h) {
+                if (json_decode($h)->idhanghoa === $row["idhanghoa"]) {
+                    $soluong = json_decode($h)->soluong;
+                }
+            }
+
             $hanghoa = $hanghoaModel->getHangHoaTheoMa($row['idhanghoa']);
             $array_chitiet = [
                 "idgiohang" => $row['idgiohang'],
@@ -224,8 +237,8 @@ class KhachHang extends BaseController
                 "tenhanghoa" => $hanghoa['tenhanghoa'],
                 "image" => $hanghoa['image'],
                 "gia" => $hanghoa['gia'],
-                "soluong" => $row['soluong'],
-                "thanhtien" => $row['soluong'] * $hanghoa['gia'],
+                "soluong" => $soluong,
+                "thanhtien" => $soluong * $hanghoa['gia'],
             ];
             $tongtien += $row['soluong'] * $hanghoa['gia'];
             $data["dschitiet"][] = $array_chitiet;
@@ -268,7 +281,7 @@ class KhachHang extends BaseController
         $this->redirectDangNhap();
 
         $taikhoan = $this->getTaiKhoanCookie();
-        $dsidhanghoa = $this->getdsidhanghoaCookie();
+        $dshanghoa = $this->getdsidhanghoaCookie();
 
         if (!isset($_POST["chuthich"]) && !isset($_POST["dsgiasanpham"]) && !isset($_POST["dssoluong"])) {
             $json_array = [
@@ -278,9 +291,16 @@ class KhachHang extends BaseController
             return;
         }
 
+        $dshanghoa = explode("|", $dshanghoa);
         $chuthichdonhang = $_POST['chuthich'];
         $dsgiasanpham = explode(",", $_POST['dsgiasanpham']);
         $dssoluong = explode(",", $_POST['dssoluong']);
+
+        // tao dsidhanghoa
+        $dsidhanghoa = [];
+        foreach($dshanghoa as &$row) {
+            $dsidhanghoa[] = json_decode($row)->idhanghoa;
+        }
 
         // tao don hang
         $donhangmodel = new DonHangModel();

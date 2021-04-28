@@ -190,12 +190,18 @@
 const btnThanhToan = document.getElementById('sub-pro-liquidate');
     btnThanhToan.onclick = function() {
     const chonMuaCheckBoxs = document.getElementsByClassName("chonmua");
-    let dsidhanghoa = [];
+    const dsInputSoLuong = document.querySelectorAll('.numbers-pro');
+    let dsidhanghoa = "";
     for (let i = 0; i < chonMuaCheckBoxs.length; ++i) {
         if (chonMuaCheckBoxs[i].checked) {
-            dsidhanghoa.push(chonMuaCheckBoxs[i].value);
+            dsidhanghoa += JSON.stringify({
+                idhanghoa: chonMuaCheckBoxs[i].value,
+                soluong: dsInputSoLuong[i].value
+            }) + "|";
         }
     }
+
+    dsidhanghoa = dsidhanghoa.substring(0, dsidhanghoa.length - 1);
     const formData = new FormData();
     formData.append("dsidhanghoa", dsidhanghoa);
     fetch("/khachhang/donhang", {

@@ -26,6 +26,10 @@ class DonHangModel extends Model
         return $this->findAll();
     }
 
+    public function getdsdonhangtheotaikhoan($taikhoan){
+        return $this->where('taikhoan',$taikhoan)->findAll();
+    }
+
     public function updateTrangThai($iddonhang,$trangthai){
         $data = [
             'trangthai' => $trangthai,

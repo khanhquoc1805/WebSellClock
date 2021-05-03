@@ -117,7 +117,27 @@ class KhachHang extends BaseController
     public function myaccount()
     {
         $this->redirectDangNhap();
-        echo view("UserPage/myaccount");
+        $taikhoan = $this->getTaiKhoanCookie();
+        $donhangmodel = new DonHangModel();
+        $dsdonhang = $donhangmodel->getdsdonhangtheotaikhoan($taikhoan);
+        $data["dsdonhang"] = $dsdonhang;
+
+        foreach ($dsdonhang as $key => $donhang) {
+            $iddonhang = $donhang['id'];
+            $chitietdonhangModel = new ChiTietDonHangModel();
+            $chitietdonhang = $chitietdonhangModel->getChiTietDonHang($iddonhang);
+            
+            $data["dschitiet"][] = $chitietdonhang;
+            foreach ($chitietdonhang as $key => $chitiet) {
+                $hanghoaModel = new HangHoaModel();
+                $hanghoa = $hanghoaModel->getHangHoaTheoMa($chitiet['idhanghoa']);
+                $data["dshanghoa"][] = $hanghoa;
+            }
+            
+        }
+
+        echo view("UserPage/myaccount", $data);
+
     }
 
     public function dangxuat()
@@ -175,6 +195,7 @@ class KhachHang extends BaseController
                 "image" => $hanghoa['image'],
                 "gia" => $hanghoa['gia'],
                 "soluong" => $row['soluong'],
+                "tongsoluong" => $hanghoa["soluong"],
                 "thanhtien" => $row['soluong'] * $hanghoa['gia'],
             ];
             $tongtien += $row['soluong'] * $hanghoa['gia'];
@@ -224,7 +245,7 @@ class KhachHang extends BaseController
             }
 
             $soluong = 0;
-            foreach($dshanghoa as &$h) {
+            foreach ($dshanghoa as &$h) {
                 if (json_decode($h)->idhanghoa === $row["idhanghoa"]) {
                     $soluong = json_decode($h)->soluong;
                 }
@@ -298,7 +319,7 @@ class KhachHang extends BaseController
 
         // tao dsidhanghoa
         $dsidhanghoa = [];
-        foreach($dshanghoa as &$row) {
+        foreach ($dshanghoa as &$row) {
             $dsidhanghoa[] = json_decode($row)->idhanghoa;
         }
 
@@ -358,7 +379,7 @@ class KhachHang extends BaseController
             $json_array = [
                 "status" => "success",
                 "idkhachhang" => $taikhoan,
-                "phai" =>$_POST['gioitinh']
+                "phai" => $_POST['gioitinh'],
             ];
             echo json_encode($json_array);
 

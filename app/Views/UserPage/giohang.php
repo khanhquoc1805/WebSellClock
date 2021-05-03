@@ -95,6 +95,7 @@
                                                 <input
                                                     class="numbers-pro"
                                                     type="text"
+                                                    max="<?= $dschitiet[$i]['tongsoluong'] ?>"
                                                     value="<?php echo $dschitiet[$i]['soluong'] ?>"
                                                     name="quantity_956694"
                                                     size="8px"
@@ -194,10 +195,14 @@ const btnThanhToan = document.getElementById('sub-pro-liquidate');
     let dsidhanghoa = "";
     for (let i = 0; i < chonMuaCheckBoxs.length; ++i) {
         if (chonMuaCheckBoxs[i].checked) {
-            dsidhanghoa += JSON.stringify({
+            if (parseInt(dsInputSoLuong[i].value) <= parseInt(dsInputSoLuong[i].max)) {
+                dsidhanghoa += JSON.stringify({
                 idhanghoa: chonMuaCheckBoxs[i].value,
                 soluong: dsInputSoLuong[i].value
-            }) + "|";
+                }) + "|";
+            } else {
+                return;
+            }
         }
     }
 

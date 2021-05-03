@@ -211,7 +211,7 @@
             method: "POST"
         }).then(r => r.json()).then(j => {
             if(j.status==='success'){
-                document.location.href='/KhachHang/giohang'
+                document.location.href='/KhachHang/myaccount?donhangcuaban'
             }
         })
     }

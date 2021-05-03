@@ -1,159 +1,301 @@
 <?php echo view("header.php") ?>
 
 <div class="header-myaccount">
-    <div style="display: flex; flex-direction: column; align-items: center">
-        <button
-            type="button"
-            class="btn btn-default btn-lg"
-            data-toggle="modal"
-            data-target="#resetPW"
-            style="pointer-events: none"
-        >
-            <i
-                class="icon-cw"
-                role="presentation"
-                aria-label="reset password"
-            ></i
-            >Thông Tin Cá Nhân
-        </button>
-        <div class="content" style ="padding: 2em">
-            <img src="https://cdn-img.thethao247.vn/upload/kienlv/2020/09/11/tuyen-thu-dt-viet-nam-cong-khai-ban-gai-xinh-nhu-mong1599795990.png" alt=""
-            style="width: 20em; height: 20em; border-radius:50%; display: block">
-            <label class="hidden" id="nhanhoten">Họ Tên: </label><br>
-            <input type="text" disabled  size="30" tabindex="1" class="form-control txtBoxStyle" value="" id="hoten" >
-            <label class="hidden" id="nhanho">Họ: </label><br>
-            <input type="text" size="30" tabindex="1" class="form-control txtBoxStyle hidden" value="" id="ho" >
-            <label class="hidden" id="nhanten">Tên: </label><br>
-            <input type="text" size="30" tabindex="1" class="form-control txtBoxStyle  hidden" value="" id="ten" >
-            <label>Giới Tính: </label><br>
-            <input type="text" disabled  size="30" tabindex="1" class="form-control txtBoxStyle" value="" id="gioitinh" >
-            <select class="form-select form-control hidden" id="select_gioi_tinh">
-                    <option value="Nam">Nam</option>
-                    <option value="Nữ">Nữ</option>
-            </select>
-            <label>Số Điện Thoại: </label><br>
-            <input type="text" disabled  size="30" tabindex="1" class="form-control txtBoxStyle" value="" id="sodienthoai">
-            <label>Địa chỉ: </label><br>
-            <input type="text" disabled  size="30" tabindex="1" class="form-control txtBoxStyle" value="" id="diachi">
-        </div>
-        <button  id="capnhatthongtin" type="button" class="btn btn-primary"><i class="icon-pencil" aria-label="pencil icon"></i> Cập Nhật Thông Tin</button>
-        <button  id="luucapnhatthongtin" type="button" class="btn btn-primary hidden"><i class="icon-pencil" aria-label="pencil icon"></i> Lưu</button>
-    </div>
+    <button
+        type="button"
+        class="btn btn-default btn-lg"
+        data-toggle="modal"
+        data-target="#resetPW"
+        id="btn_thong_tin_ca_nhan"
+    >
+        <i class="icon-cw" role="presentation" aria-label="reset password"></i
+        >Thông Tin Cá Nhân
+    </button>
+    <button
+        type="button"
+        class="btn btn-default btn-lg"
+        data-toggle="modal"
+        data-target="#resetPW"
+        style="margin: 0 2em"
+        id="btn_don_hang_cua_ban"
+    >
+        <i class="icon-cw" role="presentation" aria-label="reset password"></i
+        >Đơn Hàng Của Bạn
+    </button>
 
-    <div style="display: flex; flex-direction: column; align-items: center">
-        <button
-            type="button"
-            class="btn btn-default btn-lg"
-            data-toggle="modal"
-            data-target="#resetPW"
-            style="pointer-events: none; margin: 0 2em"
-        >
-            <i
-                class="icon-cw"
-                role="presentation"
-                aria-label="reset password"
-            ></i
-            >Đơn Hàng Của Bạn
-        </button>
-    </div>
+    <button
+        type="button"
+        class="btn btn-default btn-lg"
+        data-toggle="modal"
+        data-target="#resetPW"
+        id="btn_lich_su_mua_hangs"
+    >
+        <i class="icon-cw" role="presentation" aria-label="reset password"></i
+        >Lịch Sử Mua Hàng
+    </button>
+</div>
 
-    <div style="display: flex; flex-direction: column; align-items: center">
+<div style="width: 60%; margin: 0 auto" class="<?= isset($_GET['donhangcuaban']) ? 'hidden' : '' ?>" id="thongtincanhan_container">
+    <div class="content" style="padding: 2em">
+        <img
+            src="https://cdn-img.thethao247.vn/upload/kienlv/2020/09/11/tuyen-thu-dt-viet-nam-cong-khai-ban-gai-xinh-nhu-mong1599795990.png"
+            alt=""
+            style="
+                width: 20em;
+                height: 20em;
+                border-radius: 50%;
+                display: block;
+                margin: 0 auto;
+            "
+        />
+        <label class="hidden" id="nhanhoten">Họ Tên: </label><br />
+        <input
+            type="text"
+            disabled
+            size="30"
+            tabindex="1"
+            class="form-control txtBoxStyle"
+            value=""
+            id="hoten"
+        />
+        <label class="hidden" id="nhanho">Họ: </label><br />
+        <input
+            type="text"
+            size="30"
+            tabindex="1"
+            class="form-control txtBoxStyle hidden"
+            value=""
+            id="ho"
+        />
+        <label class="hidden" id="nhanten">Tên: </label><br />
+        <input
+            type="text"
+            size="30"
+            tabindex="1"
+            class="form-control txtBoxStyle hidden"
+            value=""
+            id="ten"
+        />
+        <label>Giới Tính: </label><br />
+        <input
+            type="text"
+            disabled
+            size="30"
+            tabindex="1"
+            class="form-control txtBoxStyle"
+            value=""
+            id="gioitinh"
+        />
+        <select class="form-select form-control hidden" id="select_gioi_tinh">
+            <option value="Nam">Nam</option>
+            <option value="Nữ">Nữ</option>
+        </select>
+        <label>Số Điện Thoại: </label><br />
+        <input
+            type="text"
+            disabled
+            size="30"
+            tabindex="1"
+            class="form-control txtBoxStyle"
+            value=""
+            id="sodienthoai"
+        />
+        <label>Địa chỉ: </label><br />
+        <input
+            type="text"
+            disabled
+            size="30"
+            tabindex="1"
+            class="form-control txtBoxStyle"
+            value=""
+            id="diachi"
+        /><br />
+
+        <button id="capnhatthongtin" type="button" class="btn btn-primary">
+            <i class="icon-pencil" aria-label="pencil icon"></i> Cập Nhật Thông
+            Tin
+        </button>
         <button
+            id="luucapnhatthongtin"
             type="button"
-            class="btn btn-default btn-lg"
-            data-toggle="modal"
-            data-target="#resetPW"
-            style="pointer-events: none"
+            class="btn btn-primary hidden"
         >
-            <i
-                class="icon-cw"
-                role="presentation"
-                aria-label="reset password"
-            ></i
-            >Lịch Sử Mua Hàng
+            <i class="icon-pencil" aria-label="pencil icon"></i> Lưu
         </button>
     </div>
 </div>
 
+<div style="width: 60%; margin: 0 auto; margin-top: 1em" id="donhangcuaban_container" class="<?= isset($_GET['donhangcuaban']) ? '' : 'hidden' ?>">
+    <?php $hanghoa_counter = 0; ?>
+    <?php for($i=0; $i < count($dsdonhang); $i++): ?>
+    <div
+        class="content"
+        style="padding: 2em; border: 1px solid blue; margin: 1em"
+    >
+        <h3>
+            Mã đơn hàng:
+            <?= $dsdonhang[$i]['id'] ?>
+        </h3>
+        <h3>
+            Trạng Thái:
+            <?= $dsdonhang[$i]['trangthai'] ?>
+        </h3>
+        <table
+            width="100%"
+            border="1"
+            class="table-product-pack mt20"
+            bordercolor="#DCDCDC"
+            cellpadding="6"
+        >
+            <thead>
+                <tr class="head-tr">
+                    <th class="th-column" width="6%">STT</th>
+                    <th class="th-column" width="">Tên</th>
+                    <th class="th-column" width="12%">Số lượng</th>
+                    <th class="th-column don_gia_hide" width="18%">
+                        Đơn giá(VNĐ)
+                    </th>
+                    <th class="th-column" width="18%">Tổng</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--  Product list -->
+                <?php for ($j = 0 ; $j < count($dschitiet[$i]); $j++) :?>
+                <tr>
+                    <td class="center-column" align="center">
+                        <?= $j+1 ?>
+                    </td>
+                    <td class="name-product" align="center">
+                        <a href=""
+                            ><?= $dshanghoa[$hanghoa_counter]['tenhanghoa'] ?>
+                        </a>
+                        <br />
+                        <a href="">
+                            <img
+                                width="80"
+                                height="100"
+                                src="../<?= $dshanghoa[$hanghoa_counter]['image'] ?>"
+                                alt=""
+                            />
+                        </a>
+                    </td>
+                    <td align="center">
+                        <input
+                            class="numbers-pro"
+                            type="text"
+                            max=""
+                            value="<?= $dschitiet[$i][$j]['soluong'] ?>"
+                            name="quantity_956694"
+                            size="8px"
+                        />
+                    </td>
+                    <td class="price-product don_gia_hide" align="center">
+                        <?= number_format($dshanghoa[$hanghoa_counter]['gia'],0,"",".") ?>
+                    </td>
+
+                    <td class="total-price" align="center">
+                        <?= number_format($dschitiet[$i][$j]['soluong'] * $dshanghoa[$hanghoa_counter]['gia'],0,"",".") ?>
+                    </td>
+                </tr>
+                <?php $hanghoa_counter++; ?>
+                <?php endfor; ?>
+            </tbody>
+        </table>
+    </div>
+    <?php endfor; ?>
+</div>
 
 <script>
-    const hoten = document.querySelector("#hoten")
-    const nhanhoten = document.querySelector("#nhanhoten")
-    const nhanho = document.querySelector("#nhanho")
-    const nhanten = document.querySelector("#nhanten")
-    const ho = document.querySelector("#ho")
-    const ten = document.querySelector("#ten")
-    const gioitinh = document.querySelector("#gioitinh")
-    const sdt = document.querySelector("#sodienthoai")
-    const diachi = document.querySelector("#diachi")
-    const capnhathongtin = document.querySelector("#capnhatthongtin")
+    const hoten = document.querySelector("#hoten");
+    const nhanhoten = document.querySelector("#nhanhoten");
+    const nhanho = document.querySelector("#nhanho");
+    const nhanten = document.querySelector("#nhanten");
+    const ho = document.querySelector("#ho");
+    const ten = document.querySelector("#ten");
+    const gioitinh = document.querySelector("#gioitinh");
+    const sdt = document.querySelector("#sodienthoai");
+    const diachi = document.querySelector("#diachi");
+    const capnhathongtin = document.querySelector("#capnhatthongtin");
     const selectgioitinh = document.querySelector("#select_gioi_tinh");
-    const btnluu = document.querySelector("#luucapnhatthongtin")
-    const btncapnhat = document.querySelector("#capnhatthongtin")
-    nhanhoten.classList.remove("hidden")
-    document.addEventListener('DOMContentLoaded', () => {
-        fetch("/KhachHang/laythongtinkhachhang").then(r => r.json()).then(j => {
-            hoten.value = `${j.khachhang.hokh} ${j.khachhang.tenkh}` 
-            gioitinh.value = j.khachhang.gioitinh
-            sdt.value = j.khachhang.sdt
-            diachi.value = j.khachhang.diachi
-            ho.value = j.khachhang.hokh
-            ten.value = j.khachhang.tenkh
-        });
-        
-    })
+    const btnluu = document.querySelector("#luucapnhatthongtin");
+    const btncapnhat = document.querySelector("#capnhatthongtin");
+    const btnThongTinCaNhan = document.querySelector("#btn_thong_tin_ca_nhan");
+    const btnDonHangCuaBan = document.querySelector("#btn_don_hang_cua_ban");
+    const thongTinCaNhanContainer = document.querySelector("#thongtincanhan_container");
+    const donHangCuaBanContainer = document.querySelector("#donhangcuaban_container");
+    nhanhoten.classList.remove("hidden");
+    document.addEventListener("DOMContentLoaded", () => {
+        fetch("/KhachHang/laythongtinkhachhang")
+            .then((r) => r.json())
+            .then((j) => {
+                hoten.value = `${j.khachhang.hokh} ${j.khachhang.tenkh}`;
+                gioitinh.value = j.khachhang.gioitinh;
+                sdt.value = j.khachhang.sdt;
+                diachi.value = j.khachhang.diachi;
+                ho.value = j.khachhang.hokh;
+                ten.value = j.khachhang.tenkh;
+            });
+    });
 
-    capnhatthongtin.onclick = function(){
-        hoten.disabled = false
-        gioitinh.disabled = false
-        sdt.disabled = false
-        diachi.disabled = false
+    capnhatthongtin.onclick = function () {
+        hoten.disabled = false;
+        gioitinh.disabled = false;
+        sdt.disabled = false;
+        diachi.disabled = false;
         selectgioitinh.classList.remove("hidden");
         gioitinh.classList.add("hidden");
         btnluu.classList.remove("hidden");
         btncapnhat.classList.add("hidden");
-        hoten.classList.add("hidden")
-        nhanhoten.classList.add("hidden")
-        ho.classList.remove("hidden")
-        ten.classList.remove("hidden")
-        nhanho.classList.remove("hidden")
-        nhanten.classList.remove("hidden")
-        
-    }
+        hoten.classList.add("hidden");
+        nhanhoten.classList.add("hidden");
+        ho.classList.remove("hidden");
+        ten.classList.remove("hidden");
+        nhanho.classList.remove("hidden");
+        nhanten.classList.remove("hidden");
+    };
 
-    btnluu.onclick = function() {
+    btnluu.onclick = function () {
         const formData = new FormData();
         formData.append("ho", ho.value);
         formData.append("ten", ten.value);
-        formData.append("gioitinh",selectgioitinh.value);
+        formData.append("gioitinh", selectgioitinh.value);
         formData.append("sdt", sdt.value);
         formData.append("diachi", diachi.value);
-        fetch('/KhachHang/capnhatthongtin',{
-            method: 'POST',
-            body: formData
-        }).then(r => r.json()).then(j => {
-            console.log(j)
+        fetch("/KhachHang/capnhatthongtin", {
+            method: "POST",
+            body: formData,
         })
+            .then((r) => r.json())
+            .then((j) => {
+                console.log(j);
+            });
 
         btnluu.classList.add("hidden");
         btncapnhat.classList.remove("hidden");
-        hoten.disabled = true
-        gioitinh.disabled = true
-        sdt.disabled = true
-        diachi.disabled = true
+        hoten.disabled = true;
+        gioitinh.disabled = true;
+        sdt.disabled = true;
+        diachi.disabled = true;
         gioitinh.classList.remove("hidden");
         selectgioitinh.classList.add("hidden");
-        nhanho.classList.add("hidden")
-        nhanten.classList.add("hidden")
-        ho.classList.add("hidden")
-        ten.classList.add("hidden")
-        hoten.classList.remove("hidden")
-        nhanhoten.classList.remove("hidden")
+        nhanho.classList.add("hidden");
+        nhanten.classList.add("hidden");
+        ho.classList.add("hidden");
+        ten.classList.add("hidden");
+        hoten.classList.remove("hidden");
+        nhanhoten.classList.remove("hidden");
 
-        document.location.href="/KhachHang/myaccount"
-        
+        document.location.href = "/KhachHang/myaccount";
+    };
 
-        
+    btnThongTinCaNhan.onclick = function() {
+        thongTinCaNhanContainer.classList.remove("hidden");
+        donHangCuaBanContainer.classList.add("hidden");
+    }
+
+    btnDonHangCuaBan.onclick = function() {
+        thongTinCaNhanContainer.classList.add("hidden");
+        donHangCuaBanContainer.classList.remove("hidden");
     }
 
 </script>

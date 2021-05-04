@@ -35,7 +35,11 @@
     </button>
 </div>
 
-<div style="width: 60%; margin: 0 auto" class="<?= isset($_GET['donhangcuaban']) ? 'hidden' : '' ?>" id="thongtincanhan_container">
+<div
+    style="width: 60%; margin: 0 auto"
+    class="<?= isset($_GET['donhangcuaban']) ? 'hidden' : '' ?>"
+    id="thongtincanhan_container"
+>
     <div class="content" style="padding: 2em">
         <img
             src="https://cdn-img.thethao247.vn/upload/kienlv/2020/09/11/tuyen-thu-dt-viet-nam-cong-khai-ban-gai-xinh-nhu-mong1599795990.png"
@@ -125,12 +129,16 @@
     </div>
 </div>
 
-<div style="width: 60%; margin: 0 auto; margin-top: 1em" id="donhangcuaban_container" class="<?= isset($_GET['donhangcuaban']) ? '' : 'hidden' ?>">
+<div
+    style="width: 60%; margin: 0 auto; margin-top: 1em"
+    id="donhangcuaban_container"
+    class="<?= isset($_GET['donhangcuaban']) ? '' : 'hidden' ?>"
+>
     <?php $hanghoa_counter = 0; ?>
     <?php for($i=0; $i < count($dsdonhang); $i++): ?>
     <div
         class="content"
-        style="padding: 2em; border: 1px solid blue; margin: 1em"
+        style="padding: 2em; border: 1px solid blue; margin: 2em"
     >
         <h3>
             Mã đơn hàng:
@@ -139,7 +147,12 @@
         <h3>
             Trạng Thái:
             <?= $dsdonhang[$i]['trangthai'] ?>
+            <span style="float: right; font-weight: normal; font-size: 0.75em"
+                >Tổng Tiền:
+                <?= number_format($dsdonhang[$i]['tonggiatri'],0,"",".") ?></span
+            >
         </h3>
+
         <table
             width="100%"
             border="1"
@@ -155,7 +168,7 @@
                     <th class="th-column don_gia_hide" width="18%">
                         Đơn giá(VNĐ)
                     </th>
-                    <th class="th-column" width="18%">Tổng</th>
+                    <th class="th-column" width="18%">Thành Tiền</th>
                 </tr>
             </thead>
             <tbody>
@@ -184,6 +197,7 @@
                             class="numbers-pro"
                             type="text"
                             max=""
+                            <?= $dsdonhang[$i]['trangthai'] !== 'Chờ Duyệt' ? 'disabled' : '' ?>
                             value="<?= $dschitiet[$i][$j]['soluong'] ?>"
                             name="quantity_956694"
                             size="8px"
@@ -201,6 +215,43 @@
                 <?php endfor; ?>
             </tbody>
         </table>
+        <div style="float: right; margin-top:10px">
+            <?php if ($dsdonhang[$i]['trangthai'] === 'Chờ Duyệt') { ?>
+            <button
+                type="button"
+                class="btn btn-default btn-lg"
+                data-toggle="modal"
+                data-target="#resetPW"
+                class="btn_thay_doi_don_hang"
+            >
+                <i
+                    class="icon-cw"
+                    role="presentation"
+                    aria-label="reset password"
+                ></i
+                >Thay Đổi Đơn Hàng
+            </button>
+            <?php } ?> <!-- endif -->
+
+            <?php if (($dsdonhang[$i]['trangthai'] === 'Chờ Duyệt') || ($dsdonhang[$i]['trangthai'] === 'Đã Duyệt')) { ?>    
+            <button
+                type="button"
+                class="btn btn-default btn-lg btn-huy-don-hang"
+                data-toggle="modal"
+                data-target="#resetPW"
+                data-iddonhang="<?= $dsdonhang[$i]['id'] ?>"
+            >
+                <i
+                    class="icon-cw"
+                    role="presentation"
+                    aria-label="reset password"
+                ></i
+                >Hủy Đơn Hàng
+            </button>
+            <?php }else { ?>
+                <span style="position: relative; top:-0.5em;;">Đơn hàng đang giao bạn không thể thay đổi hoặc hủy!</span><br>  
+            <?php }?>
+        </div>
     </div>
     <?php endfor; ?>
 </div>
@@ -221,9 +272,16 @@
     const btncapnhat = document.querySelector("#capnhatthongtin");
     const btnThongTinCaNhan = document.querySelector("#btn_thong_tin_ca_nhan");
     const btnDonHangCuaBan = document.querySelector("#btn_don_hang_cua_ban");
-    const thongTinCaNhanContainer = document.querySelector("#thongtincanhan_container");
-    const donHangCuaBanContainer = document.querySelector("#donhangcuaban_container");
+    const thongTinCaNhanContainer = document.querySelector(
+        "#thongtincanhan_container"
+    );
+    const donHangCuaBanContainer = document.querySelector(
+        "#donhangcuaban_container"
+    );
     nhanhoten.classList.remove("hidden");
+    const DsBtnThayDoiDonHang = document.querySelectorAll('.btn_thay_doi_don_hang');
+    const DsBtnHuyDonHang = document.querySelectorAll('.btn-huy-don-hang');
+
     document.addEventListener("DOMContentLoaded", () => {
         fetch("/KhachHang/laythongtinkhachhang")
             .then((r) => r.json())
@@ -288,14 +346,32 @@
         document.location.href = "/KhachHang/myaccount";
     };
 
-    btnThongTinCaNhan.onclick = function() {
+    btnThongTinCaNhan.onclick = function () {
         thongTinCaNhanContainer.classList.remove("hidden");
         donHangCuaBanContainer.classList.add("hidden");
-    }
+    };
 
-    btnDonHangCuaBan.onclick = function() {
+    btnDonHangCuaBan.onclick = function () {
         thongTinCaNhanContainer.classList.add("hidden");
         donHangCuaBanContainer.classList.remove("hidden");
-    }
+    };
 
+    for (let i = 0 ; i < DsBtnHuyDonHang.length; i++){
+        DsBtnHuyDonHang[i].onclick = function (){
+            const formdata = new FormData();
+            formdata.append("iddonhang",this.getAttribute('data-iddonhang'));
+            if (!confirm("Bạn có chắc chắn muốn xóa đơn hàng?")) {
+                return;
+            }
+            fetch("/KhachHang/huydonhang",{
+                method : 'POST',
+                body: formdata,
+            }).then(response => response.json()).then(j => {
+                if (j.status === "success") {
+                    document.location.href = "/KhachHang/myaccount?donhangcuaban"
+                }
+            })
+
+        }
+    }
 </script>

@@ -26,6 +26,8 @@ class ChiTietDonHangModel extends Model
         return $this->where('iddonhang', $iddonhang)->findAll();
     }
 
+    
+
 
 
 

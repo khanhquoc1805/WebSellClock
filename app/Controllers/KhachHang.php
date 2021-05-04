@@ -386,4 +386,15 @@ class KhachHang extends BaseController
         }
 
     }
+
+    public function huydonhang(){
+        $this->redirectDangNhap();
+        if(isset($_POST['iddonhang'])){
+            $donhangmodel = new DonHangModel();
+            $donhangmodel->deleteDonhang($_POST['iddonhang']);
+            echo json_encode([
+                "status" => "success"
+            ]);
+        }
+    }
 }

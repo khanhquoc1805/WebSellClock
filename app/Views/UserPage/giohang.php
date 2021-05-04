@@ -97,6 +97,7 @@
                                                     type="text"
                                                     max="<?= $dschitiet[$i]['tongsoluong'] ?>"
                                                     value="<?php echo $dschitiet[$i]['soluong'] ?>"
+                                                    data-tenhanghoa="<?= $dschitiet[$i]['tenhanghoa'] ?>"
                                                     name="quantity_956694"
                                                     size="8px"
                                                 />
@@ -201,10 +202,13 @@ const btnThanhToan = document.getElementById('sub-pro-liquidate');
                 soluong: dsInputSoLuong[i].value
                 }) + "|";
             } else {
+                alert(`Sản phẩm ${dsInputSoLuong[i].getAttribute('data-tenhanghoa')} chỉ còn tối đa: ${dsInputSoLuong[i].max}`)
                 return;
             }
         }
     }
+    
+    
 
     dsidhanghoa = dsidhanghoa.substring(0, dsidhanghoa.length - 1);
     const formData = new FormData();

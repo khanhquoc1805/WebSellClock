@@ -70,6 +70,7 @@ create table chitietdonhang(
     primary key (iddonhang, idhanghoa)
 );
 
+
 drop table giohang;
 create table giohang(
 	id int auto_increment primary key,
@@ -91,8 +92,8 @@ create table chitietgiohang(
 
 select * from giohang; 
 select * from chitietgiohang;
-select * from chitietdonhang;
-select * from donhang;
+
+
 
 select * from chitietdonhang;
 
@@ -106,9 +107,37 @@ delimiter ;
 drop trigger capNhatTongGiaTriDonHang;
 drop trigger themNgayDatHang;
 
-
+select * from donhang;
 select * from thuonghieu;
 select * from hanghoa;
 
-delete from chitietdonhang where iddonhang!=1;
-delete from donhang where id!=1;
+delete from chitietdonhang where iddonhang!=55;
+delete from donhang where id!=9;
+
+select * from chitietdonhang;
+
+delimiter //
+create trigger capNhatSoLuongHangHoa after insert on chitietdonhang for each row
+begin
+	UPDATE hanghoa SET soluong = soluong - new.soluong where idhanghoa = new.idhanghoa;
+end//
+delimiter ;
+
+drop trigger xoaChitietdonhang;
+delimiter //
+create trigger xoaChitietdonhang after delete on donhang for each row
+begin
+	DELETE FROM chitietdonhang WHERE iddonhang = old.id;
+end//
+delimiter ;
+
+delimiter //
+create trigger capNhatSoluonghangHoaXoaChiTietDonHang before delete on chitietdonhang for each row
+begin
+	UPDATE hanghoa SET soluong = soluong + old.soluong WHERE idhanghoa = old.idhanghoa;
+end//
+delimiter ;
+
+
+
+

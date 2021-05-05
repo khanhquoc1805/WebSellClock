@@ -434,3 +434,7 @@ html {
     color: #ca2929bf !important;
     
 }
+
+.unvisible {
+    display: none !important;
+}

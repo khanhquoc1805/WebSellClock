@@ -39,6 +39,10 @@ create table hanghoa(
     foreign key (idthuonghieu) references thuonghieu(idthuonghieu)
 );
 
+alter table hanghoa drop check hanghoa_chk_2;
+
+alter table hanghoa modify soluong int;
+
 
 insert into hanghoa values('01','ct01','ĐỒNG HỒ CITIZEN NH8390-71L','Nam',8177000,10);
 insert into hanghoa values('01','ct02','ĐỒNG HỒ CITIZEN NH8390-20H','Nam',7577000,5,'images/hanghoa/dong-ho-citizen-nh8390-20h_1604907824.jpg');
@@ -102,7 +106,6 @@ delimiter ;
 
 drop trigger capNhatTongGiaTriDonHang;
 drop trigger themNgayDatHang;
-
 select * from donhang;
 select * from thuonghieu;
 select * from hanghoa;
@@ -113,6 +116,7 @@ delete from donhang where id!=9;
 
 delete from donhang where id=71;
 
+drop trigger capNhatSoLuongHangHoa;
 delimiter //
 create trigger capNhatSoLuongHangHoa after insert on chitietdonhang for each row
 begin
@@ -135,7 +139,5 @@ begin
 	UPDATE hanghoa SET soluong = soluong + old.soluong WHERE idhanghoa = old.idhanghoa;
 end//
 delimiter ;
-
-
-
+insert into chitietdonhang values(81,'blcd001',2,690000*2);
 

@@ -169,6 +169,7 @@
                         Đơn giá(VNĐ)
                     </th>
                     <th class="th-column" width="18%">Thành Tiền</th>
+                    <th class="th-column unvisible title-xoa" width="18%" >Xóa</th>
                 </tr>
             </thead>
             <tbody>
@@ -197,7 +198,7 @@
                             class="numbers-pro"
                             type="text"
                             max=""
-                            <?= $dsdonhang[$i]['trangthai'] !== 'Chờ Duyệt' ? 'disabled' : '' ?>
+                            disabled
                             value="<?= $dschitiet[$i][$j]['soluong'] ?>"
                             name="quantity_956694"
                             size="8px"
@@ -210,19 +211,25 @@
                     <td class="total-price" align="center">
                         <?= number_format($dschitiet[$i][$j]['soluong'] * $dshanghoa[$hanghoa_counter]['gia'],0,"",".") ?>
                     </td>
+                    <td class="center-column  unvisible" align="center">
+                        <button
+                            class="btn btn-danger btn-xoa"
+                        >
+                            X
+                        </button>
+                    </td>
                 </tr>
                 <?php $hanghoa_counter++; ?>
                 <?php endfor; ?>
             </tbody>
         </table>
-        <div style="float: right; margin-top:10px">
+        <div style="float: right; margin-top: 10px">
             <?php if ($dsdonhang[$i]['trangthai'] === 'Chờ Duyệt') { ?>
             <button
                 type="button"
-                class="btn btn-default btn-lg"
+                class="btn btn-default btn-lg btn-thay-doi-don-hang"
                 data-toggle="modal"
                 data-target="#resetPW"
-                class="btn_thay_doi_don_hang"
             >
                 <i
                     class="icon-cw"
@@ -231,9 +238,24 @@
                 ></i
                 >Thay Đổi Đơn Hàng
             </button>
-            <?php } ?> <!-- endif -->
+            <?php } ?>
+            <!-- endif -->
 
-            <?php if (($dsdonhang[$i]['trangthai'] === 'Chờ Duyệt') || ($dsdonhang[$i]['trangthai'] === 'Đã Duyệt')) { ?>    
+            <button
+                type="button"
+                class="btn btn-default btn-lg btn-hoan-tat-thay-doi unvisible"
+                data-toggle="modal"
+                data-target="#resetPW"
+            >
+                <i
+                    class="icon-cw"
+                    role="presentation"
+                    aria-label="reset password"
+                ></i
+                >Hoàn Tất Thay Đổi
+            </button>
+
+            <?php if (($dsdonhang[$i]['trangthai'] === 'Chờ Duyệt') || ($dsdonhang[$i]['trangthai'] === 'Đã Duyệt')) { ?>
             <button
                 type="button"
                 class="btn btn-default btn-lg btn-huy-don-hang"
@@ -249,7 +271,9 @@
                 >Hủy Đơn Hàng
             </button>
             <?php }else { ?>
-                <span style="position: relative; top:-0.5em;;">Đơn hàng đang giao bạn không thể thay đổi hoặc hủy!</span><br>  
+            <span style="position: relative; top: -0.5em ;"
+                >Đơn hàng đang giao bạn không thể thay đổi hoặc hủy!</span
+            ><br />
             <?php }?>
         </div>
     </div>
@@ -279,8 +303,10 @@
         "#donhangcuaban_container"
     );
     nhanhoten.classList.remove("hidden");
-    const DsBtnThayDoiDonHang = document.querySelectorAll('.btn_thay_doi_don_hang');
-    const DsBtnHuyDonHang = document.querySelectorAll('.btn-huy-don-hang');
+    const DsBtnThayDoiDonHang = document.querySelectorAll(
+        ".btn-thay-doi-don-hang"
+    );
+    const DsBtnHuyDonHang = document.querySelectorAll(".btn-huy-don-hang");
 
     document.addEventListener("DOMContentLoaded", () => {
         fetch("/KhachHang/laythongtinkhachhang")
@@ -356,24 +382,49 @@
         donHangCuaBanContainer.classList.remove("hidden");
     };
 
-    for (let i = 0 ; i < DsBtnHuyDonHang.length; i++){
-        DsBtnHuyDonHang[i].onclick = function (){
+    for (let i = 0; i < DsBtnHuyDonHang.length; i++) {
+        DsBtnHuyDonHang[i].onclick = function () {
             const formdata = new FormData();
-            formdata.append("iddonhang",this.getAttribute('data-iddonhang'));
-            console.log(this.getAttribute('data-iddonhang'));
+            formdata.append("iddonhang", this.getAttribute("data-iddonhang"));
+            console.log(this.getAttribute("data-iddonhang"));
             if (!confirm("Bạn có chắc chắn muốn xóa đơn hàng?")) {
                 return;
             }
-            fetch("/KhachHang/huydonhang",{
-                method : 'POST',
+            fetch("/KhachHang/huydonhang", {
+                method: "POST",
                 body: formdata,
-            }).then(response => response.json()).then(j => {
-                if (j.status === "success") {
-                    document.location.href = "/KhachHang/myaccount?donhangcuaban"
-                }
-                console.log(j.status);
             })
+                .then((response) => response.json())
+                .then((j) => {
+                    if (j.status === "success") {
+                        document.location.href =
+                            "/KhachHang/myaccount?donhangcuaban";
+                    }
+                    console.log(j.status);
+                });
+        };
+    }
 
+    const dstitlexoa = document.querySelectorAll('.title-xoa');
+    const dsbtnxoa = document.querySelectorAll('.btn-xoa');
+    const thaydoisoluong = document.querySelectorAll('.numbers-pro')
+    const dsbtnhoantatthaydoi= document.querySelectorAll('.btn-hoan-tat-thay-doi')
+    const dsthanhtien = document.querySelectorAll('.total-price');
+    const dsdongia = document.querySelectorAll('.price-product');
+    for (let i = 0; i < DsBtnThayDoiDonHang.length; i++){
+        DsBtnThayDoiDonHang[i].onclick = function(){
+            dstitlexoa[i].classList.remove('unvisible');
+            dsbtnxoa[i].parentNode.classList.remove('unvisible');
+            thaydoisoluong[i].disabled = false;
+            DsBtnThayDoiDonHang[i].classList.add('unvisible');
+            dsbtnhoantatthaydoi[i].classList.remove('unvisible');
+        }
+
+        thaydoisoluong[i].oninput = function() {
+            const formatedNum = new Intl.NumberFormat('vn-VN').format(1000000 * parseFloat(dsdongia[i].innerText) * thaydoisoluong[i].value);
+            dsthanhtien[i].innerText = formatedNum
         }
     }
+
+
 </script>

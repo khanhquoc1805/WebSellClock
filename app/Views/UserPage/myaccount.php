@@ -360,6 +360,7 @@
         DsBtnHuyDonHang[i].onclick = function (){
             const formdata = new FormData();
             formdata.append("iddonhang",this.getAttribute('data-iddonhang'));
+            console.log(this.getAttribute('data-iddonhang'));
             if (!confirm("Bạn có chắc chắn muốn xóa đơn hàng?")) {
                 return;
             }
@@ -370,6 +371,7 @@
                 if (j.status === "success") {
                     document.location.href = "/KhachHang/myaccount?donhangcuaban"
                 }
+                console.log(j.status);
             })
 
         }

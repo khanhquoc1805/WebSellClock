@@ -39,7 +39,6 @@ create table hanghoa(
     foreign key (idthuonghieu) references thuonghieu(idthuonghieu)
 );
 
-select * from hanghoa;
 
 insert into hanghoa values('01','ct01','ĐỒNG HỒ CITIZEN NH8390-71L','Nam',8177000,10);
 insert into hanghoa values('01','ct02','ĐỒNG HỒ CITIZEN NH8390-20H','Nam',7577000,5,'images/hanghoa/dong-ho-citizen-nh8390-20h_1604907824.jpg');
@@ -70,7 +69,6 @@ create table chitietdonhang(
     primary key (iddonhang, idhanghoa)
 );
 
-
 drop table giohang;
 create table giohang(
 	id int auto_increment primary key,
@@ -90,11 +88,9 @@ create table chitietgiohang(
     primary key (idgiohang,idhanghoa)
 );
 
+select * from hanghoa;
 select * from giohang; 
 select * from chitietgiohang;
-
-
-
 select * from chitietdonhang;
 
 delimiter //
@@ -110,11 +106,12 @@ drop trigger themNgayDatHang;
 select * from donhang;
 select * from thuonghieu;
 select * from hanghoa;
+select * from chitietdonhang;
 
 delete from chitietdonhang where iddonhang!=55;
 delete from donhang where id!=9;
 
-select * from chitietdonhang;
+delete from donhang where id=71;
 
 delimiter //
 create trigger capNhatSoLuongHangHoa after insert on chitietdonhang for each row
@@ -131,6 +128,7 @@ begin
 end//
 delimiter ;
 
+drop trigger capNhatSoluonghangHoaXoaChiTietDonHang;
 delimiter //
 create trigger capNhatSoluonghangHoaXoaChiTietDonHang before delete on chitietdonhang for each row
 begin

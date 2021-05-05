@@ -26,10 +26,9 @@ class ChiTietDonHangModel extends Model
         return $this->where('iddonhang', $iddonhang)->findAll();
     }
 
-    
-
-
-
+    public function deleteChiTiet($iddonhang) {
+        return $this->where('iddonhang', $iddonhang)->delete();
+    }
 
 }
 

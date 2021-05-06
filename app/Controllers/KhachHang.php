@@ -126,14 +126,14 @@ class KhachHang extends BaseController
             $iddonhang = $donhang['id'];
             $chitietdonhangModel = new ChiTietDonHangModel();
             $chitietdonhang = $chitietdonhangModel->getChiTietDonHang($iddonhang);
-            
+
             $data["dschitiet"][] = $chitietdonhang;
             foreach ($chitietdonhang as $key => $chitiet) {
                 $hanghoaModel = new HangHoaModel();
                 $hanghoa = $hanghoaModel->getHangHoaTheoMa($chitiet['idhanghoa']);
                 $data["dshanghoa"][] = $hanghoa;
             }
-            
+
         }
 
         echo view("UserPage/myaccount", $data);
@@ -387,15 +387,28 @@ class KhachHang extends BaseController
 
     }
 
-    public function huydonhang(){
+    public function huydonhang()
+    {
         $this->redirectDangNhap();
-        if(isset($_POST['iddonhang'])){
+        if (isset($_POST['iddonhang'])) {
             $donhangmodel = new DonHangModel();
             $chitietdonhangModel = new ChiTietDonHangModel();
-            $chitietdonhangModel->deleteChiTiet($_POST['iddonhang']);
+            // $chitietdonhangModel->deleteChiTiet($_POST['iddonhang']);
             $donhangmodel->deleteDonhang($_POST['iddonhang']);
             echo json_encode([
-                "status" => "success"
+                "status" => "success",
+            ]);
+        }
+    }
+
+    public function xoamotchitietdonhang()
+    {
+        $this->redirectDangNhap();
+        if (isset($_POST['iddonhang']) && isset($_POST['idhanghoa'])) {
+            $chitietdonhangmodel = new ChiTietDonHangModel();
+            $chitietdonhangmodel->delete_single_ChiTiet($_POST['iddonhang'], $_POST['idhanghoa']);
+            echo json_encode([
+                "status" => "success",
             ]);
         }
     }

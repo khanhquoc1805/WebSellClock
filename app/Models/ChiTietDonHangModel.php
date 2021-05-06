@@ -8,11 +8,12 @@ class ChiTietDonHangModel extends Model
     protected $table = 'chitietdonhang';
     protected $primaryKey = ['iddonhang', 'idhanghoa'];
     protected $allowedFields = [
-        'iddonhang', 'idhanghoa', 'soluong', 'thanhtien'
-    ];// nhung truong cho phep
+        'iddonhang', 'idhanghoa', 'soluong', 'thanhtien',
+    ]; // nhung truong cho phep
     protected $useSoftDeletes = false;
 
-    public function createChiTietDonHang($iddonhang,$idhanghoa,$soluong,$thanhtien){
+    public function createChiTietDonHang($iddonhang, $idhanghoa, $soluong, $thanhtien)
+    {
         $data = [
             'iddonhang' => $iddonhang,
             'idhanghoa' => $idhanghoa,
@@ -22,14 +23,22 @@ class ChiTietDonHangModel extends Model
         $this->insert($data);
     }
 
-    public function getChiTietDonHang($iddonhang){
+    public function getChiTietDonHang($iddonhang)
+    {
         return $this->where('iddonhang', $iddonhang)->findAll();
     }
 
-    public function deleteChiTiet($iddonhang) {
+    public function deleteChiTiet($iddonhang)
+    {
         return $this->where('iddonhang', $iddonhang)->delete();
     }
 
-}
+    public function delete_single_ChiTiet($iddonhang, $idhanghoa)
+    {
+        $this->where('iddonhang', $iddonhang);
+        $this->where('idhanghoa', $idhanghoa);
+        $this->set(['trangthai' => "Đã Xóa"]);
+        $this->update();
+    }
 
-?>
+}

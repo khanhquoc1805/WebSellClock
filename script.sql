@@ -38,6 +38,7 @@ create table hanghoa(
     image varchar(100),
     foreign key (idthuonghieu) references thuonghieu(idthuonghieu)
 );
+select * from khachhang;
 
 alter table hanghoa drop check hanghoa_chk_2;
 
@@ -72,6 +73,9 @@ create table chitietdonhang(
     foreign key (iddonhang) references donhang(id),
     primary key (iddonhang, idhanghoa)
 );
+
+describe chitietdonhang;
+alter table chitietdonhang drop trangthai varchar(64) default('');
 
 drop table giohang;
 create table giohang(
@@ -137,7 +141,12 @@ delimiter //
 create trigger capNhatSoluonghangHoaXoaChiTietDonHang before delete on chitietdonhang for each row
 begin
 	UPDATE hanghoa SET soluong = soluong + old.soluong WHERE idhanghoa = old.idhanghoa;
+    -- cap nhat tonggiatri don hang
+    UPDATE donhang SET tonggiatri = tonggiatri - old.thanhtien WHERE id = old.iddonhang;
 end//
 delimiter ;
-insert into chitietdonhang values(81,'blcd001',2,690000*2);
+insert into chitietdonhang values(82,'blcd001',2,690000*2);
 
+select * from chitietdonhang;
+select * from chitietdonhang;
+delete from chitietdonhang WHERE iddonhang=89 AND idhanghoa='bt02';

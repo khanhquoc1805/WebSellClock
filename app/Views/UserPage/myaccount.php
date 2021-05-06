@@ -37,7 +37,7 @@
 
 <div
     style="width: 60%; margin: 0 auto"
-    class="<?= isset($_GET['donhangcuaban']) ? 'hidden' : '' ?>"
+    class="<?=isset($_GET['donhangcuaban']) ? 'hidden' : ''?>"
     id="thongtincanhan_container"
 >
     <div class="content" style="padding: 2em">
@@ -132,24 +132,24 @@
 <div
     style="width: 60%; margin: 0 auto; margin-top: 1em"
     id="donhangcuaban_container"
-    class="<?= isset($_GET['donhangcuaban']) ? '' : 'hidden' ?>"
+    class="<?=isset($_GET['donhangcuaban']) ? '' : 'hidden'?>"
 >
-    <?php $hanghoa_counter = 0; ?>
-    <?php for($i=0; $i < count($dsdonhang); $i++): ?>
+    <?php $hanghoa_counter = 0;?>
+    <?php for ($i = 0; $i < count($dsdonhang); $i++): ?>
     <div
         class="content"
         style="padding: 2em; border: 1px solid blue; margin: 2em"
     >
         <h3>
             Mã đơn hàng:
-            <?= $dsdonhang[$i]['id'] ?>
+            <?=$dsdonhang[$i]['id']?>
         </h3>
         <h3>
             Trạng Thái:
-            <?= $dsdonhang[$i]['trangthai'] ?>
+            <?=$dsdonhang[$i]['trangthai']?>
             <span style="float: right; font-weight: normal; font-size: 0.75em"
                 >Tổng Tiền:
-                <?= number_format($dsdonhang[$i]['tonggiatri'],0,"",".") ?></span
+                <?=number_format($dsdonhang[$i]['tonggiatri'], 0, "", ".")?></span
             >
         </h3>
 
@@ -174,21 +174,21 @@
             </thead>
             <tbody>
                 <!--  Product list -->
-                <?php for ($j = 0 ; $j < count($dschitiet[$i]); $j++) :?>
+                <?php for ($j = 0; $j < count($dschitiet[$i]); $j++): ?>
                 <tr>
                     <td class="center-column" align="center">
-                        <?= $j+1 ?>
+                        <?=$j + 1?>
                     </td>
                     <td class="name-product" align="center">
                         <a href=""
-                            ><?= $dshanghoa[$hanghoa_counter]['tenhanghoa'] ?>
+                            ><?=$dshanghoa[$hanghoa_counter]['tenhanghoa']?>
                         </a>
                         <br />
                         <a href="">
                             <img
                                 width="80"
                                 height="100"
-                                src="../<?= $dshanghoa[$hanghoa_counter]['image'] ?>"
+                                src="../<?=$dshanghoa[$hanghoa_counter]['image']?>"
                                 alt=""
                             />
                         </a>
@@ -199,19 +199,19 @@
                             type="text"
                             max=""
                             disabled
-                            value="<?= $dschitiet[$i][$j]['soluong'] ?>"
+                            value="<?=$dschitiet[$i][$j]['soluong']?>"
                             name="quantity_956694"
                             size="8px"
                         />
                     </td>
                     <td class="price-product don_gia_hide" align="center">
-                        <?= number_format($dshanghoa[$hanghoa_counter]['gia'],0,"",".") ?>
+                        <?=number_format($dshanghoa[$hanghoa_counter]['gia'], 0, "", ".")?>
                     </td>
 
                     <td class="total-price" align="center">
-                        <?= number_format($dschitiet[$i][$j]['soluong'] * $dshanghoa[$hanghoa_counter]['gia'],0,"",".") ?>
+                        <?=number_format($dschitiet[$i][$j]['soluong'] * $dshanghoa[$hanghoa_counter]['gia'], 0, "", ".")?>
                     </td>
-                    <td class="center-column hidden btn-xoa" align="center">
+                    <td class="center-column hidden btn-xoa" align="center" data-iddonhang="<?=$dsdonhang[$i]['id']?>" data-idhanghoa="<?=$dshanghoa[$hanghoa_counter]['idhanghoa']?>">
                         <button
                             class="btn btn-danger"
                         >
@@ -219,23 +219,23 @@
                         </button>
                     </td>
                 </tr>
-                <?php $hanghoa_counter++; ?>
-                <?php endfor; ?>
+                <?php $hanghoa_counter++;?>
+                <?php endfor;?>
             </tbody>
         </table>
         <div style="float: right; margin-top: 10px">
-            <?php if ($dsdonhang[$i]['trangthai'] === 'Chờ Duyệt') { ?>
+            <?php if ($dsdonhang[$i]['trangthai'] === 'Chờ Duyệt') {?>
             <button
                 type="button"
                 class="btn btn-default btn-lg btn-thay-doi-don-hang"
-                
+
             >
                 <i
                     class="icon-cw"
                 ></i
                 >Thay Đổi Đơn Hàng
             </button>
-            <?php } ?>
+            <?php }?>
             <!-- endif -->
 
             <button
@@ -248,25 +248,25 @@
                 >Hoàn Tất Thay Đổi
             </button>
 
-            <?php if (($dsdonhang[$i]['trangthai'] === 'Chờ Duyệt') || ($dsdonhang[$i]['trangthai'] === 'Đã Duyệt')) { ?>
+            <?php if (($dsdonhang[$i]['trangthai'] === 'Chờ Duyệt') || ($dsdonhang[$i]['trangthai'] === 'Đã Duyệt')) {?>
             <button
                 type="button"
                 class="btn btn-default btn-lg btn-huy-don-hang"
-                data-iddonhang="<?= $dsdonhang[$i]['id'] ?>"
+                data-iddonhang="<?=$dsdonhang[$i]['id']?>"
             >
                 <i
                     class="icon-cw"
                 ></i
                 >Hủy Đơn Hàng
             </button>
-            <?php }else { ?>
+            <?php } else {?>
             <span style="position: relative; top: -0.5em ;"
                 >Đơn hàng đang giao bạn không thể thay đổi hoặc hủy!</span
             ><br />
             <?php }?>
         </div>
     </div>
-    <?php endfor; ?>
+    <?php endfor;?>
 </div>
 
 <script>
@@ -395,7 +395,6 @@
     }
 
     const dstitlexoa = document.querySelectorAll('.title-xoa');
-    // const dsbtnxoa = document.querySelectorAll('.btn-xoa');
     const thaydoisoluong = document.querySelectorAll('.numbers-pro')
     const dsbtnhoantatthaydoi= document.querySelectorAll('.btn-hoan-tat-thay-doi')
     const dsthanhtien = document.querySelectorAll('.total-price');
@@ -412,6 +411,45 @@
             // display delete button
             for(let j = 0; j < dsbtnxoa.length; ++j) {
                 dsbtnxoa[j].classList.remove("hidden");
+                dsbtnxoa[j].onclick = function(){
+                    if(!confirm("Bạn có chắc chắn muốn xóa?")){
+                        return
+                    }
+
+                    // nếu còn 1 chi tiết đơn hàng, hủy luôn đơn
+                    const newdsbtnxoa = donHangDiv.querySelectorAll('.btn-xoa');
+                    if (newdsbtnxoa.length === 1) {
+                        const formData = new FormData();
+                        formData.append("iddonhang", this.getAttribute('data-iddonhang'));
+                        fetch("/KhachHang/huydonhang", {
+                            method: "POST",
+                            body: formData,
+                        })
+                        .then((response) => response.json())
+                        .then((j) => {
+                            if (j.status === "success") {
+                                document.location.href =
+                                    "/KhachHang/myaccount?donhangcuaban";
+                            }
+                        });     
+                    }
+                    
+                    const iddonhang = this.getAttribute('data-iddonhang');
+                    const idhanghoa = this.getAttribute('data-idhanghoa');
+                    const formdata = new FormData();
+                    formdata.append('iddonhang',iddonhang);
+                    formdata.append('idhanghoa',idhanghoa);
+                    fetch('/KhachHang/xoamotchitietdonhang',{
+                        method: 'POST',
+                        body : formdata
+                    }).then(r => r.json()).then(j => {
+                        if(j.status === 'success'){
+                            document.location.href="/KhachHang/myaccount?donhangcuaban"
+                        }
+                    });
+
+                    
+                }
             }
         }
 

@@ -175,6 +175,7 @@
             <tbody>
                 <!--  Product list -->
                 <?php for ($j = 0; $j < count($dschitiet[$i]); $j++): ?>
+                <?php if($dschitiet[$i][$j]['trangthai'] !=='Đã Xóa') { ?>
                 <tr>
                     <td class="center-column" align="center">
                         <?=$j + 1?>
@@ -219,6 +220,7 @@
                         </button>
                     </td>
                 </tr>
+                <?php } ?>
                 <?php $hanghoa_counter++;?>
                 <?php endfor;?>
             </tbody>
@@ -266,6 +268,7 @@
             <?php }?>
         </div>
     </div>
+    
     <?php endfor;?>
 </div>
 
@@ -453,10 +456,10 @@
             }
         }
 
-        thaydoisoluong[i].oninput = function() {
-            const formatedNum = new Intl.NumberFormat('vn-VN').format(1000000 * parseFloat(dsdongia[i].innerText) * thaydoisoluong[i].value);
-            dsthanhtien[i].innerText = formatedNum
-        }
+        // thaydoisoluong[i].oninput = function() {
+        //     const formatedNum = new Intl.NumberFormat('vn-VN').format(1000000 * parseFloat(dsdongia[i].innerText) * thaydoisoluong[i].value);
+        //     dsthanhtien[i].innerText = formatedNum
+        // }
     }
 
 

@@ -8,7 +8,7 @@ class ChiTietDonHangModel extends Model
     protected $table = 'chitietdonhang';
     protected $primaryKey = ['iddonhang', 'idhanghoa'];
     protected $allowedFields = [
-        'iddonhang', 'idhanghoa', 'soluong', 'thanhtien',
+        'iddonhang', 'idhanghoa', 'soluong', 'thanhtien', 'trangthai'
     ]; // nhung truong cho phep
     protected $useSoftDeletes = false;
 

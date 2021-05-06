@@ -75,7 +75,7 @@ create table chitietdonhang(
 );
 
 describe chitietdonhang;
-alter table chitietdonhang drop trangthai varchar(64) default('');
+alter table chitietdonhang add column trangthai varchar(64) default '';
 
 drop table giohang;
 create table giohang(
@@ -96,8 +96,10 @@ create table chitietgiohang(
     primary key (idgiohang,idhanghoa)
 );
 
+select * from khachhang;
 select * from hanghoa;
 select * from giohang; 
+select * from donhang;
 select * from chitietgiohang;
 select * from chitietdonhang;
 
@@ -145,7 +147,7 @@ begin
     UPDATE donhang SET tonggiatri = tonggiatri - old.thanhtien WHERE id = old.iddonhang;
 end//
 delimiter ;
-insert into chitietdonhang values(82,'blcd001',2,690000*2);
+insert into chitietdonhang values(92,'blcd001',2,690000*2);
 
 select * from chitietdonhang;
 select * from chitietdonhang;

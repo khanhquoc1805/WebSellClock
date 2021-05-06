@@ -393,7 +393,7 @@ class KhachHang extends BaseController
         if (isset($_POST['iddonhang'])) {
             $donhangmodel = new DonHangModel();
             $chitietdonhangModel = new ChiTietDonHangModel();
-            // $chitietdonhangModel->deleteChiTiet($_POST['iddonhang']);
+            $chitietdonhangModel->deleteChiTiet($_POST['iddonhang']);
             $donhangmodel->deleteDonhang($_POST['iddonhang']);
             echo json_encode([
                 "status" => "success",

@@ -116,8 +116,9 @@ select * from donhang;
 select * from thuonghieu;
 select * from hanghoa;
 select * from chitietdonhang;
+delete from donhang where id=106;
 
-delete from chitietdonhang where iddonhang!=55;
+delete from chitietdonhang where iddonhang=106;
 delete from donhang where id!=9;
 
 delete from donhang where id=71;
@@ -152,3 +153,14 @@ insert into chitietdonhang values(92,'blcd001',2,690000*2);
 select * from chitietdonhang;
 select * from chitietdonhang;
 delete from chitietdonhang WHERE iddonhang=89 AND idhanghoa='bt02';
+
+drop trigger capNhatSoLuongHangHoaKhiCapNhatChiTietDonHang;
+delimiter //
+create trigger capNhatSoLuongHangHoaKhiCapNhatChiTietDonHang after update on chitietdonhang for each row 
+begin
+	IF new.trangthai = 'Đã Xóa' THEN
+		UPDATE hanghoa SET soluong = soluong + old.soluong WHERE idhanghoa = old.idhanghoa;
+        UPDATE donhang SET tonggiatri = tonggiatri - old.thanhtien WHERE id = old.iddonhang;
+    END IF;
+end//
+delimiter ;

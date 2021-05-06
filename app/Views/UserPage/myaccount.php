@@ -136,6 +136,7 @@
 >
     <?php $hanghoa_counter = 0;?>
     <?php for ($i = 0; $i < count($dsdonhang); $i++): ?>
+        <?php if($dsdonhang[$i]['trangthai'] == "Đã Xóa") { continue; } ?>
     <div
         class="content"
         style="padding: 2em; border: 1px solid blue; margin: 2em"

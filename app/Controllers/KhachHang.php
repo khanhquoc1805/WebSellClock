@@ -393,8 +393,15 @@ class KhachHang extends BaseController
         if (isset($_POST['iddonhang'])) {
             $donhangmodel = new DonHangModel();
             $chitietdonhangModel = new ChiTietDonHangModel();
-            $chitietdonhangModel->deleteChiTiet($_POST['iddonhang']);
-            $donhangmodel->deleteDonhang($_POST['iddonhang']);
+            $dschitiet = $chitietdonhangModel->getChiTietDonHang($_POST['iddonhang']);
+
+            foreach ($dschitiet as $row) {
+                if ($row['trangthai'] != 'Đã Xóa') {
+                    $chitietdonhangModel->delete_single_ChiTiet($row['iddonhang'], $row['idhanghoa']);
+                }
+            }
+
+            $donhangmodel->updateTrangThai($_POST['iddonhang'], 'Đã Xóa');
             echo json_encode([
                 "status" => "success",
             ]);

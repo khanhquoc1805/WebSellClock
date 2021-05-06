@@ -28,4 +28,6 @@ class Home extends BaseController
 
 		echo view('main', $data);
 	}
+
+	
 }

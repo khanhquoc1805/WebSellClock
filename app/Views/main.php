@@ -3,6 +3,7 @@
 <html class="no-js">
 <?php echo view("header.php") ?>
 
+
 <section id="home" class="home-page-content page-content">
     <section class="homepage-slider">
         <div class="container-fluid">
@@ -46,52 +47,9 @@
             </div>
         </div>
     </section>
-    <section id="Promos" class="promo-banners hidden">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <a href="">
-                        <div class="promo-img">
-                            <img src="" class="img-responsive img" alt="Women&#39;s Orthopedic Footwear" />
-                            <div class="btn btn-default">
-                                Women's Collection
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-sm-6">
-                    <a href="">
-                        <div class="promo-img">
-                            <img src="" class="img-responsive img" alt="Men&#39;s Orthotic Shoes" />
-                            <div class="btn btn-default">
-                                Men's Collection
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-sm-6">
-                    <a href="l">
-                        <div class="promo-img">
-                            <img src="" class="img-responsive img" alt="Laceless Shoes for Men and Women" />
-                            <div class="btn btn-default">
-                                Laceless Footwear
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-sm-6">
-                    <a href="">
-                        <div class="promo-img">
-                            <img src="" class="img-responsive img" alt="Orthopedic Shoe Inserts" />
-                            <div class="btn btn-default">Shoe Inserts</div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+    
 
-    <section class="products-section">
+    <section class="products-section" id="dhnam">
         <div class="container">
             <div class="row">
                 <h2 class="header-specials">
@@ -99,19 +57,17 @@
                 </h2>
             </div>
 
-            <div class="product-items product-items-4" data-itemsheight="319">
+            <div class="product-items product-items-4" data-itemsheight="400">
                 <div id="carousel-sellers" class="carousel slide">
                     <?php $temp1=0; ?>
                     <?php for ($i = 0; $i < count($dsdongho); $i++): ?>
                     <?php if (($dsdongho[$i]['phai'] === 'Nam') && $temp1 < 8): ?>
                     <?php $temp1 = $temp1 + 1; ?>
                     <div class="product-item" data-catalogid="18" data-ajaxcart="1"
-                        data-addcart-callback="addcart_callback" style="height: 319px">
-                        <div class="img">
-                            <a href="#">
-                                <img src="<?php echo $dsdongho[$i]['image'] ?>" alt="Wireless Headphones"
-                                    class="img-responsive" />
-                            </a>
+                        data-addcart-callback="addcart_callback" style="height: 400px">
+                        <div class="img" style="height:277px !important">
+                            <img src="<?php echo $dsdongho[$i]['image'] ?>" alt="Wireless Headphones"
+                                    class="img-responsive" style="width: 100% !important; height: 100% !important"/>
                             <button class="quickview" data-toggle="modal">
                                 Quick View
                             </button>
@@ -143,10 +99,69 @@
                     <?php endfor; ?>
                 </div>
             </div>
+            <div class="xemthem"><button type="button" class="btn btn-default btn-lg" id="btnxemthemdhnam" style="width:35%; border-color: black; background-color: #fff; color: black;"><i></i>Xem Tất Cả</button></div>
         </div>
     </section>
 
-    <section class="products-section">
+
+
+    <section class="products-section hidden" id="dhnamdaydu">
+        <div class="container">
+            <div class="row">
+                <h2 class="header-specials">
+                    <span style="color: red" id="donghonam">Đồng Hồ Nam</span>
+                </h2>
+            </div>
+
+            <div class="product-items product-items-4">
+                <div id="carousel-sellers" class="carousel slide">
+                    
+                    <?php for ($i = 0; $i < count($dsdongho); $i++): ?>
+                    <?php if (($dsdongho[$i]['phai'] === 'Nam')): ?>
+                    
+                    <div class="product-item"
+                        style="height: 400px !important">
+                        <div class="img" style="height: 277px !important">
+                            
+                                <img src="<?php echo $dsdongho[$i]['image'] ?>" alt="Wireless Headphones"
+                                    class="img-responsive" style="width: 100% !important; height: 100% !important"/>
+                            
+                            <button class="quickview" data-toggle="modal">
+                                Quick View
+                            </button>
+                        </div>
+                        <div class="name">
+                            <a href="">
+                                <?php  echo $dsdongho[$i]['tenhanghoa'] ?>
+                            </a>
+                        </div>
+                        <div class="price">
+                            <span class="sale-price">
+                                <?php  echo $dsdongho[$i]['gia'] ?>đ
+                            </span>
+                            <span class="on-sale-badge">Sale</span>
+                        </div>
+                        <div class="status">
+                            <span class="availability">In Stock.</span>
+                        </div>
+                        <div class="action">
+                            <a href="" class="add-to-cart btn btn-default"
+                                data-idhanghoa="<?php echo $dsdongho[$i]['idhanghoa'] ?>">
+                                <span class="buyitlink-text">Add To Cart</span>
+                                <span class="ajaxcart-loader icon-spin2 animate-spin"></span>
+                                <span class="ajaxcart-added icon-ok"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <?php endif;?>
+                    <?php endfor; ?>
+                </div>
+            </div>
+            <div class="xemthem" id="dhnamthugon"><button type="button" class="btn btn-default btn-lg" style="width:35%; border-color: black; background-color: #fff; color: black;"><i></i>Thu Gọn</button></div>
+        </div>
+    </section>
+
+    <section class="products-section" id="dhnu">
         <div class="container">
             <div class="row">
                 <h2 class="header-specials">
@@ -154,19 +169,19 @@
                 </h2>
             </div>
 
-            <div class="product-items product-items-4" data-itemsheight="319">
+            <div class="product-items product-items-4" data-itemsheight="400">
                 <div id="carousel-sellers" class="carousel slide">
                     <?php $temp=0; ?>
                     <?php for ($i = 0; $i < count($dsdongho); $i++): ?>
                     <?php if (($dsdongho[$i]['phai'] === 'Nữ') && $temp < 8): ?>
                     <?php $temp = $temp + 1; ?>
-                    <div class="product-item" data-catalogid="18" data-ajaxcart="1"
-                        data-addcart-callback="addcart_callback" style="height: 319px">
-                        <div class="img">
-                            <a href="#">
+                    <div class="product-item"
+                        style="height: 400px">
+                        <div class="img" style="height: 277px">
+                            
                                 <img src="<?php echo $dsdongho[$i]['image'] ?>" alt="Wireless Headphones"
-                                    class="img-responsive" />
-                            </a>
+                                    class="img-responsive" style="width: 100% !important; height: 100% !important" />
+                            
                             <button class="quickview" data-toggle="modal">
                                 Quick View
                             </button>
@@ -198,92 +213,194 @@
                     <?php endfor; ?>
                 </div>
             </div>
+            <div class="xemthem" id="dhnuxemthem"><button type="button" class="btn btn-default btn-lg" style="width:35%; border-color: black; background-color: #fff; color: black;"><i></i>Xem Tất Cả</button></div>
         </div>
     </section>
 
-    <section class="promo-banners hidden">
-        <div class="container-fluid">
+
+
+
+
+    <section class="products-section hidden" id="dhnudaydu">
+        <div class="container">
             <div class="row">
-                <a href="">
-                    <div class="promo-img">
-                        <img src="" class="img-responsive img" alt="Oasis Shoes - Serenity for Feet" />
-                    </div>
-                </a>
+                <h2 class="header-specials">
+                    <span style="color: red" id="donghonu">Đồng Hồ Nữ</span>
+                </h2>
             </div>
+
+            <div class="product-items product-items-4">
+                <div id="carousel-sellers" class="carousel slide">
+                    
+                    <?php for ($i = 0; $i < count($dsdongho); $i++): ?>
+                    <?php if (($dsdongho[$i]['phai'] === 'Nữ')): ?>
+                    <div class="product-item" 
+                        style="height: 400px">
+                        <div class="img" style="height: 277px ">
+                        
+                                <img src="<?php echo $dsdongho[$i]['image'] ?>" alt="Wireless Headphones"
+                                    class="img-responsive" class="img-responsive" style="width: 100% !important; height: 100% !important"/>
+                            
+                            <button class="quickview" data-toggle="modal">
+                                Quick View
+                            </button>
+                        </div>
+                        <div class="name">
+                            <a href="">
+                                <?php  echo $dsdongho[$i]['tenhanghoa'] ?>
+                            </a>
+                        </div>
+                        <div class="price">
+                            <span class="sale-price">
+                                <?php  echo $dsdongho[$i]['gia'] ?>đ
+                            </span>
+                            <span class="on-sale-badge">Sale</span>
+                        </div>
+                        <div class="status">
+                            <span class="availability">In Stock.</span>
+                        </div>
+                        <div class="action">
+                            <a href="" class="add-to-cart btn btn-default"
+                                data-idhanghoa="<?php echo $dsdongho[$i]['idhanghoa'] ?>">
+                                <span class="buyitlink-text">Add To Cart</span>
+                                <span class="ajaxcart-loader icon-spin2 animate-spin"></span>
+                                <span class="ajaxcart-added icon-ok"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <?php endif;?>
+                    <?php endfor; ?>
+                </div>
+            </div>
+            <div class="xemthem" id="dhnuthugon"><button type="button" class="btn btn-default btn-lg" style="width:35%; border-color: black; background-color: #fff; color: black;"><i></i>Thu Gọn</button></div>
         </div>
     </section>
-</section>
 
-
-
-
-<section class="products-section">
-    <div class="container">
-        <div class="row">
-            <h2 class="header-specials">
-                <span style="color: red" id="donghocapdoi">Đồng Hồ Cặp Đôi</span>
-            </h2>
-        </div>
-
-        <div class="product-items product-items-4" data-itemsheight="319">
-            <div id="carousel-sellers" class="carousel slide">
-                <?php $temp2=0; ?>
-                <?php for ($i = 0; $i < count($dsdongho); $i++): ?>
-                <?php if (($dsdongho[$i]['phai'] === 'cd') && $temp2 < 8): ?>
-                <?php $temp2 = $temp2 + 1; ?>
-                <div class="product-item" data-catalogid="18" data-ajaxcart="1" data-addcart-callback="addcart_callback"
-                    style="height: 319px">
-                    <div class="img">
-                        <a href="#">
-                            <img src="<?php echo $dsdongho[$i]['image'] ?>" alt=""
-                                class="img-responsive" />
-                        </a>
-                        <button class="quickview" data-toggle="modal">
-                            Quick View
-                        </button>
-                    </div>
-                    <div class="name">
-                        <a href="">
-                            <?php  echo $dsdongho[$i]['tenhanghoa'] ?>
-                        </a>
-                    </div>
-                    <div class="price">
-                        <span class="sale-price">
-                            <?php  echo $dsdongho[$i]['gia'] ?>đ
-                        </span>
-                        <span class="on-sale-badge">Sale</span>
-                    </div>
-                    <div class="status">
-                        <span class="availability">In Stock.</span>
-                    </div>
-                    <div class="action">
-                        <a href="" class="add-to-cart btn btn-default"
-                            data-idhanghoa="<?php echo $dsdongho[$i]['idhanghoa'] ?>">
-                            <span class="buyitlink-text">Add To Cart</span>
-                            <span class="ajaxcart-loader icon-spin2 animate-spin"></span>
-                            <span class="ajaxcart-added icon-ok"></span>
-                        </a>
-                    </div>
-                </div>
-                <?php endif;?>
-                <?php endfor; ?>
+    <section class="products-section" id="dhcd">
+        <div class="container">
+            <div class="row">
+                <h2 class="header-specials">
+                    <span style="color: red" id="donghocapdoi">Đồng Hồ Cặp Đôi</span>
+                </h2>
             </div>
+
+            <div class="product-items product-items-4">
+                <div id="carousel-sellers" class="carousel slide">
+                    <?php $temp2=0; ?>
+                    <?php for ($i = 0; $i < count($dsdongho); $i++): ?>
+                    <?php if (($dsdongho[$i]['phai'] === 'cd') && $temp2 < 8): ?>
+                    <?php $temp2 = $temp2 + 1; ?>
+                    <div class="product-item"
+                        style="height: 400px">
+                        <div class="img" style="height: 277px">
+                            
+                                <img src="<?php echo $dsdongho[$i]['image'] ?>" alt=""
+                                    class="img-responsive" style="width: 100% !important; height: 100% !important"/>
+                           
+                            <button class="quickview" data-toggle="modal">
+                                Quick View
+                            </button>
+                        </div>
+                        <div class="name">
+                            <a href="">
+                                <?php  echo $dsdongho[$i]['tenhanghoa'] ?>
+                            </a>
+                        </div>
+                        <div class="price">
+                            <span class="sale-price">
+                                <?php  echo $dsdongho[$i]['gia'] ?>đ
+                            </span>
+                            <span class="on-sale-badge">Sale</span>
+                        </div>
+                        <div class="status">
+                            <span class="availability">In Stock.</span>
+                        </div>
+                        <div class="action">
+                            <a href="" class="add-to-cart btn btn-default"
+                                data-idhanghoa="<?php echo $dsdongho[$i]['idhanghoa'] ?>">
+                                <span class="buyitlink-text">Add To Cart</span>
+                                <span class="ajaxcart-loader icon-spin2 animate-spin"></span>
+                                <span class="ajaxcart-added icon-ok"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <?php endif;?>
+                    <?php endfor; ?>
+                </div>
+            </div>
+            <div class="xemthem" id="dhcdxemthem"><button type="button" class="btn btn-default btn-lg" style="width:35%; border-color: black; background-color: #fff; color: black;"><i></i>Xem Tất Cả</button></div>
         </div>
-    </div>
+    </section>
+
+
+
+
+
+    <section class="products-section hidden" id="dhcddaydu">
+        <div class="container">
+            <div class="row">
+                <h2 class="header-specials">
+                    <span style="color: red" id="donghocapdoi">Đồng Hồ Cặp Đôi</span>
+                </h2>
+            </div>
+
+            <div class="product-items product-items-4">
+                <div id="carousel-sellers" class="carousel slide">
+                    
+                    <?php for ($i = 0; $i < count($dsdongho); $i++): ?>
+                    <?php if (($dsdongho[$i]['phai'] === 'cd')): ?>
+                   
+                    <div class="product-item"
+                        style="height: 400px">
+                        <div class="img" style="height: 277px">
+                            
+                                <img src="<?php echo $dsdongho[$i]['image'] ?>" alt=""
+                                    class="img-responsive" style="width: 100% !important; height: 100% !important"/>
+                            
+                            <button class="quickview" data-toggle="modal">
+                                Quick View
+                            </button>
+                        </div>
+                        <div class="name">
+                            <a href="">
+                                <?php  echo $dsdongho[$i]['tenhanghoa'] ?>
+                            </a>
+                        </div>
+                        <div class="price">
+                            <span class="sale-price">
+                                <?php  echo $dsdongho[$i]['gia'] ?>đ
+                            </span>
+                            <span class="on-sale-badge">Sale</span>
+                        </div>
+                        <div class="status">
+                            <span class="availability">In Stock.</span>
+                        </div>
+                        <div class="action">
+                            <a href="" class="add-to-cart btn btn-default"
+                                data-idhanghoa="<?php echo $dsdongho[$i]['idhanghoa'] ?>">
+                                <span class="buyitlink-text">Add To Cart</span>
+                                <span class="ajaxcart-loader icon-spin2 animate-spin"></span>
+                                <span class="ajaxcart-added icon-ok"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <?php endif;?>
+                    <?php endfor; ?>
+                </div>
+            </div>
+            <div class="xemthem" id="dhcdthugon"><button type="button" class="btn btn-default btn-lg" style="width:35%; border-color: black; background-color: #fff; color: black;"><i></i>Thu Gọn</button></div>
+        </div>
+    </section>
+
+
+
+
+    
+
+    
 </section>
 
-<section class="promo-banners hidden">
-    <div class="container-fluid">
-        <div class="row">
-            <a href="">
-                <div class="promo-img">
-                    <img src="" class="img-responsive img" alt="Oasis Shoes - Serenity for Feet" />
-                </div>
-            </a>
-        </div>
-    </div>
-</section>
-</section>
+
 
 <div class="container" style="
             padding-left: 10px;
@@ -335,15 +452,11 @@
                 </div>
             </div>
         </div>
-        <div class="clear"></div>
+        
     </div>
 </div>
 
-
-
-
-
-
+<?php echo view("footer.php") ?>
 
 
 <div class="newsletter">thêm hình ở đây</div>
@@ -406,6 +519,52 @@
             document.location.href = "/UserPage/chitiethanghoa.php";
         }
     }
+
+    const btnxemthemdhn = document.querySelector('#btnxemthemdhnam');
+    const dhnam = document.querySelector('#dhnam');
+    const dhnamdaydu = document.querySelector('#dhnamdaydu');
+    const btnthugondhn = document.querySelector('#dhnamthugon');
+
+    btnxemthemdhn.onclick = function(){
+        dhnam.classList.add("hidden");
+        dhnamdaydu.classList.remove("hidden");
+    }
+    btnthugondhn.onclick = function(){
+        dhnam.classList.remove("hidden");
+        dhnamdaydu.classList.add("hidden");
+    }
+
+
+    const btndhnuxemthem = document.querySelector('#dhnuxemthem');
+    const dhnu = document.querySelector('#dhnu');
+    const btndhnuthugon = document.querySelector('#dhnuthugon');
+    const dhnudaydu = document.querySelector('#dhnudaydu');
+    btndhnuxemthem.onclick = function(){
+        dhnu.classList.add("hidden");
+        dhnudaydu.classList.remove("hidden");
+    }
+    btndhnuthugon.onclick = function(){
+        dhnu.classList.remove("hidden");
+        dhnudaydu.classList.add("hidden");
+    }
+
+    const btndhcdxemthem = document.querySelector('#dhcdxemthem');
+    const dhcd = document.querySelector('#dhcd');
+    const btndhcdthugon = document.querySelector('#dhcdthugon');
+    const dhcddaydu = document.querySelector('#dhcddaydu');
+
+    btndhcdxemthem.onclick = function(){
+        dhcd.classList.add("hidden");
+        dhcddaydu.classList.remove("hidden");
+    }
+    btndhcdthugon.onclick = function(){
+        dhcd.classList.remove("hidden");
+        dhcddaydu.classList.add("hidden");
+    }
+
+
+
+
 
 </script>
 

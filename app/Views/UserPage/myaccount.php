@@ -211,9 +211,9 @@
                     <td class="total-price" align="center">
                         <?= number_format($dschitiet[$i][$j]['soluong'] * $dshanghoa[$hanghoa_counter]['gia'],0,"",".") ?>
                     </td>
-                    <td class="center-column  unvisible" align="center">
+                    <td class="center-column hidden btn-xoa" align="center">
                         <button
-                            class="btn btn-danger btn-xoa"
+                            class="btn btn-danger"
                         >
                             X
                         </button>
@@ -228,13 +228,10 @@
             <button
                 type="button"
                 class="btn btn-default btn-lg btn-thay-doi-don-hang"
-                data-toggle="modal"
-                data-target="#resetPW"
+                
             >
                 <i
                     class="icon-cw"
-                    role="presentation"
-                    aria-label="reset password"
                 ></i
                 >Thay Đổi Đơn Hàng
             </button>
@@ -244,13 +241,9 @@
             <button
                 type="button"
                 class="btn btn-default btn-lg btn-hoan-tat-thay-doi unvisible"
-                data-toggle="modal"
-                data-target="#resetPW"
             >
                 <i
                     class="icon-cw"
-                    role="presentation"
-                    aria-label="reset password"
                 ></i
                 >Hoàn Tất Thay Đổi
             </button>
@@ -259,14 +252,10 @@
             <button
                 type="button"
                 class="btn btn-default btn-lg btn-huy-don-hang"
-                data-toggle="modal"
-                data-target="#resetPW"
                 data-iddonhang="<?= $dsdonhang[$i]['id'] ?>"
             >
                 <i
                     class="icon-cw"
-                    role="presentation"
-                    aria-label="reset password"
                 ></i
                 >Hủy Đơn Hàng
             </button>
@@ -406,18 +395,24 @@
     }
 
     const dstitlexoa = document.querySelectorAll('.title-xoa');
-    const dsbtnxoa = document.querySelectorAll('.btn-xoa');
+    // const dsbtnxoa = document.querySelectorAll('.btn-xoa');
     const thaydoisoluong = document.querySelectorAll('.numbers-pro')
     const dsbtnhoantatthaydoi= document.querySelectorAll('.btn-hoan-tat-thay-doi')
     const dsthanhtien = document.querySelectorAll('.total-price');
     const dsdongia = document.querySelectorAll('.price-product');
     for (let i = 0; i < DsBtnThayDoiDonHang.length; i++){
-        DsBtnThayDoiDonHang[i].onclick = function(){
+        const donHangDiv = DsBtnThayDoiDonHang[i].parentNode.parentNode;
+        const dsbtnxoa = donHangDiv.querySelectorAll(".btn-xoa");
+
+        DsBtnThayDoiDonHang[i].onclick = function() {
             dstitlexoa[i].classList.remove('unvisible');
-            dsbtnxoa[i].parentNode.classList.remove('unvisible');
             thaydoisoluong[i].disabled = false;
             DsBtnThayDoiDonHang[i].classList.add('unvisible');
             dsbtnhoantatthaydoi[i].classList.remove('unvisible');
+            // display delete button
+            for(let j = 0; j < dsbtnxoa.length; ++j) {
+                dsbtnxoa[j].classList.remove("hidden");
+            }
         }
 
         thaydoisoluong[i].oninput = function() {

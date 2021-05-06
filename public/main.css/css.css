@@ -438,3 +438,22 @@ html {
 .unvisible {
     display: none !important;
 }
+
+.xemthem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.product-item .action .btn {
+    min-width: 245px !important;
+}
+
+.info-mua-hang{
+    padding-top:2em;
+    padding-left: 10%;
+}
+
+#sender_comments {
+    width: 410px !important;
+    height: 120px !important;
+}

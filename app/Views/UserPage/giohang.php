@@ -127,7 +127,7 @@
                                         
                                     </tbody>
                                 </table>
-                                <div class="all-button-cart pull-left">
+                                <div class="all-button-cart pull-left" style="margin-top: 2em;">
                                     <input
                                         class="button-cart"
                                         type="button"
@@ -137,16 +137,10 @@
                                     />
                                     <input
                                         class="button-cart"
-                                        type="submit"
-                                        name="re_calculate"
-                                        id="sub-re-cal"
-                                        value="Tính lại"
-                                    />
-                                    <input
-                                        class="button-cart"
                                         type="button"
                                         name="remove"
                                         value="Xóa hết"
+                                        id="xoahet"
                                     />
                                     <input
                                         class="button-cart"
@@ -239,6 +233,9 @@ for(let i = 0; i < dsBtnXoa.length; ++i) {
         });
     }
 }
+
+const btnxoahet = document.querySelector('#xoahet');
+
 
 
 </script>

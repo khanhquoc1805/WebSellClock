@@ -43,29 +43,40 @@
                                     </li>
                                     <li>
                                         <a href="" class="menu" target="_self"
-                                            >đòng hồ nam</a
+                                            >Citizen</a
                                         >
                                     </li>
                                     <li>
                                         <a href="" class="menu" target="_self"
-                                            >Gift Registry</a
+                                            >Bently</a
                                         >
                                     </li>
                                     <li>
                                         <a href="" class="menu" target="_self"
-                                            >Contact Us</a
+                                            >Casio</a
                                         >
                                     </li>
                                     <li>
                                         <a href="" class="menu" target="_self"
-                                            >Blog</a
+                                            >Orient</a
                                         >
                                     </li>
                                     <li>
                                         <a href="" class="menu" target="_self"
-                                            >Blog</a
+                                            >Festina</a
                                         >
                                     </li>
+                                    <li>
+                                        <a href="" class="menu" target="_self"
+                                            >Ogival</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a href="" class="menu" target="_self"
+                                            >Michael-Kors</a
+                                        >
+                                    </li>
+                                    
                                 </ul>
                             </nav>
                         </div>
@@ -249,16 +260,13 @@
                                 <a href="/">Home</a>
                             </li>
                             <li class="">
-                                <a href="">Đồng hồ nam</a>
+                                <a href="#donghonam">Đồng hồ nam</a>
                             </li>
                             <li class="">
-                                <a href="">đồng hồ nữ</a>
+                                <a href="#donghonu">đồng hồ nữ</a>
                             </li>
                             <li class="">
-                                <a href="">cặp đôi</a>
-                            </li>
-                            <li class="">
-                                <a href="">Software</a>
+                                <a href="#donghocapdoi">cặp đôi</a>
                             </li>
                         </ul>
                     </nav>

@@ -298,4 +298,26 @@ class Admin extends BaseController
         }
     }
 
+    public function xoadonhangdahuy(){
+        if (isset($_COOKIE['dadangnhap'])) {
+            $key = $this->key;
+            $jwt = $_COOKIE['dadangnhap'];
+            $decoded = JWT::decode($jwt, $key, array('HS256'));
+            $decoded_array = (array) $decoded;
+            $data['username'] = $decoded_array['usr'];
+            if ($decoded_array['role'] === 'admin') {
+                if(isset($_POST['iddonhang'])){
+                    $chitietdonhang = new ChiTietDonHangModel();
+                    $chitietdonhang->deleteChiTiet($_POST['iddonhang']);
+                    $donhangmodel = new DonHangModel();
+                    $donhangmodel->deleteDonHang($_POST['iddonhang']);
+                    echo json_encode([
+                        "status" => "success",
+                    ]);
+                }
+
+            }
+        } 
+    }
+
 }

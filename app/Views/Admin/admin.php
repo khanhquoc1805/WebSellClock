@@ -91,6 +91,7 @@
                         <a class="collapse-item" href="?status=daduyet">Đã Duyệt</a>
                         <a class="collapse-item" href="?status=danggiao">Đang Giao</a>
                         <a class="collapse-item" href="?status=hoanthanh">Hoàn Thành</a>
+                        <a class="collapse-item" href="?status=dahuy">Đã Hủy</a>
                     </div>
                 </div>
             </li>
@@ -383,6 +384,7 @@
                                     case "hoanthanh": echo view("Admin/quanlidonhang/hoanthanh.php", $data); break;
                                     case "thuonghieu": echo view("Admin/quanlithuonghieu/thuonghieu.php", $data); break;
                                     case "sanpham": echo view("Admin/quanlisanpham/sanpham.php", $data); break;
+                                    case "dahuy": echo view("Admin/quanlidonhang/dahuy.php", $data); break;
                                     
                                 }
                             } else {

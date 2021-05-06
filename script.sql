@@ -129,25 +129,7 @@ create trigger capNhatSoLuongHangHoa after insert on chitietdonhang for each row
 begin
 	UPDATE hanghoa SET soluong = soluong - new.soluong where idhanghoa = new.idhanghoa;
 end//
-delimiter ;
 
-drop trigger xoaChitietdonhang;
-delimiter //
-create trigger xoaChitietdonhang after delete on donhang for each row
-begin
-	DELETE FROM chitietdonhang WHERE iddonhang = old.id;
-end//
-delimiter ;
-
-drop trigger capNhatSoluonghangHoaXoaChiTietDonHang;
-delimiter //
-create trigger capNhatSoluonghangHoaXoaChiTietDonHang before delete on chitietdonhang for each row
-begin
-	UPDATE hanghoa SET soluong = soluong + old.soluong WHERE idhanghoa = old.idhanghoa;
-    -- cap nhat tonggiatri don hang
-    UPDATE donhang SET tonggiatri = tonggiatri - old.thanhtien WHERE id = old.iddonhang;
-end//
-delimiter ;
 insert into chitietdonhang values(92,'blcd001',2,690000*2);
 
 select * from chitietdonhang;

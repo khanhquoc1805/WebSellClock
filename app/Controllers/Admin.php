@@ -31,7 +31,8 @@ class Admin extends BaseController
                 $hanghoaModel = new HangHoaModel();
                 $data['dshanghoa'] = $hanghoaModel->getHangHoa();
                 $chitietdonhangModel = new ChiTietDonHangModel();
-
+                
+                
                 for ($i = 0; $i < count($data['dsdonhang']); $i++) {
                     $donhang = $data['dsdonhang'][$i];
                     $data['dschitietdonhang'][] = $chitietdonhangModel->getChiTietDonHang($donhang['id']);

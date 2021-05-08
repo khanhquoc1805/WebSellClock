@@ -41,4 +41,12 @@ class ChiTietDonHangModel extends Model
         $this->update();
     }
 
+    public function updateSoLuongChiTiet($iddonhang,$idhanghoa,$soluong, $thanhtien){
+        $this->where('iddonhang', $iddonhang);
+        $this->where('idhanghoa', $idhanghoa);
+        $this->set(['soluong' => $soluong]);
+        $this->set(['thanhtien' => $thanhtien]);
+        return $this->update();
+    } 
+
 }

@@ -419,4 +419,17 @@ class KhachHang extends BaseController
             ]);
         }
     }
+
+    public function capnhatdonhang()
+    {
+        $this->redirectDangNhap();
+        if (isset($_POST['iddonhang']) && isset($_POST['idhanghoa']) && isset($_POST['soluong']) && isset($_POST['thanhtien'])) {
+            $chitietdonhangmodel = new ChiTietDonHangModel();
+            $kq = $chitietdonhangmodel->updateSoLuongChiTiet($_POST['iddonhang'], $_POST['idhanghoa'], $_POST['soluong'], $_POST['thanhtien']);
+
+            echo json_encode([
+                "status" => $kq,
+            ]);
+        }
+    }
 }

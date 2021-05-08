@@ -85,7 +85,7 @@
                                 href="/khachhang/giohang"
                                 class="top_links pull-right hidden-sm"
                             >
-                                Cart <span class="icon-basket"></span>
+                                Cart <span class=""></span>
                                 <span class="sr-only">Shopping Cart</span>
                             </a>
 
@@ -94,7 +94,7 @@
                                 href="/KhachHang/dangnhap"
                                 class="top_links pull-right hidden-sm"
                             >
-                                <span class="icon-user"></span> Log In
+                                <span class=""></span> Log In
                                 <span class="sr-only">My Account</span>
                             </a>
                             <?php else: ?>
@@ -102,7 +102,7 @@
                                 href="/KhachHang/dangxuat"
                                 class="top_links pull-right hidden-sm"
                             >
-                                <span class="icon-user"></span> Log Out
+                                <span class=""></span> Log Out
                             </a>
                             <a href="/KhachHang/myaccount">
                                 <span class="sr-only">My Account</span>
@@ -112,7 +112,7 @@
                                 href="/KhachHang/myaccount"
                                 class="top_links pull-right hidden-sm"
                             >
-                                <span class="icon-user"></span> My Account
+                                <span class=""></span> My Account
                             </a>
                         </div>
                     </div>

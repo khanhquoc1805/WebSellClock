@@ -118,10 +118,13 @@ select * from hanghoa;
 select * from chitietdonhang;
 delete from donhang where id=106;
 
-delete from chitietdonhang where iddonhang=106;
+delete from chitietdonhang where iddonhang!=106;
 delete from donhang where id!=9;
+update chitietdonhang set soluong = 10,thanhtien=60000000 where iddonhang=119 and idhanghoa="bt02";
 
-delete from donhang where id=71;
+delete from donhang where id!=71;
+
+
 
 drop trigger capNhatSoLuongHangHoa;
 delimiter //
@@ -138,11 +141,30 @@ delete from chitietdonhang WHERE iddonhang=89 AND idhanghoa='bt02';
 
 drop trigger capNhatSoLuongHangHoaKhiCapNhatChiTietDonHang;
 delimiter //
-create trigger capNhatSoLuongHangHoaKhiCapNhatChiTietDonHang after update on chitietdonhang for each row 
+create trigger capNhatSoLuongHangHoaKhiCapNhatChiTietDonHang before update on chitietdonhang for each row 
 begin
 	IF new.trangthai = 'Đã Xóa' THEN
 		UPDATE hanghoa SET soluong = soluong + old.soluong WHERE idhanghoa = old.idhanghoa;
         UPDATE donhang SET tonggiatri = tonggiatri - old.thanhtien WHERE id = old.iddonhang;
+    END IF;
+     
+    IF new.soluong > old.soluong THEN
+		SELECT soluong INTO @tongsohang FROM hanghoa WHERE idhanghoa = old.idhanghoa;
+        IF (new.soluong - old.soluong) > @tongsohang THEN
+			SIGNAL SQLSTATE '45000'
+			SET MESSAGE_TEXT = 'So hang dat vuot qua so hang con lai';
+        END IF;
+        IF (new.soluong - old.soluong) <= @tongsohang THEN
+			UPDATE hanghoa SET soluong = soluong - (new.soluong - old.soluong) WHERE idhanghoa = old.idhanghoa;
+            UPDATE donhang SET tonggiatri = tonggiatri - old.thanhtien WHERE id = old.iddonhang;
+            UPDATE donhang SET tonggiatri = tonggiatri + new.thanhtien WHERE id = old.iddonhang;
+        END IF;
+    END IF;
+    
+    IF new.soluong < old.soluong THEN
+			UPDATE hanghoa SET soluong = soluong + (old.soluong - new.soluong) WHERE idhanghoa = old.idhanghoa;
+            UPDATE donhang SET tonggiatri = tonggiatri - old.thanhtien WHERE id = old.iddonhang;
+            UPDATE donhang SET tonggiatri = tonggiatri + new.thanhtien WHERE id = old.iddonhang;
     END IF;
 end//
 delimiter ;

@@ -21,6 +21,8 @@
         <link href="../main.css/css.css " rel="stylesheet" type="text/css" />
         <link href="../main.css/css1.css" rel="stylesheet" />
         <link rel="StyleSheet" href="../main.css/default.css" type="text/css" />
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
         
     </head>
@@ -169,7 +171,7 @@
                                                 >
                                                     <span
                                                         class="icon-search"
-                                                    ></span>
+                                                    ><i class="material-icons"></i></span>
                                                 </button>
                                             </div>
                                             <div

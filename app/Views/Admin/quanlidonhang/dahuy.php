@@ -41,6 +41,30 @@
                         data-iddonhang="<?php echo $dsdonhang[$i]['id'] ?>">Xóa</button>
                     </td>
                 </tr>
+                <tr class="hidden chitiet">
+                    <td>STT</td>
+                    <td>Tên</td>
+                    <td>Số Lượng</td>
+                    <td>Đơn Giá(VNĐ)</td>
+                    <td>Thành Tiền</td>
+                </tr>
+                <?php for($k = 0; $k < count($dschitietdonhang); $k++): ?>
+                    <?php for($h = 0; $h < count($dschitietdonhang[$k]); $h++): ?>
+                        <?php if ($dschitietdonhang[$k][$h]['iddonhang'] === $dsdonhang[$i]['id']) { ?>
+                            <tr>
+                                <td><?= $h + 1 ?></td>
+                                <?php for($l = 0; $l < count($dshanghoa); $l++): ?>
+                                    <?php if ($dshanghoa[$l]['idhanghoa'] === $dschitietdonhang[$k][$h]['idhanghoa']) { ?>
+                                        <td><?= $dshanghoa[$l]['tenhanghoa'] ?></td>
+                                        <td><?= $dschitietdonhang[$k][$h]['soluong'] ?></td>
+                                        <td><?= $dshanghoa[$l]['gia'] ?></td>
+                                        <td><?= $dschitietdonhang[$k][$h]['thanhtien'] ?></td>
+                                    <?php } ?>
+                                <?php endfor; ?>
+                            </tr>                            
+                        <?php } ?>
+                    <?php endfor; ?>
+                <?php endfor; ?>
             </thead>
             <?php }?>
             <?php endfor;?>

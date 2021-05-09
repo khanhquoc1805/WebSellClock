@@ -103,19 +103,22 @@
 >
     <?php for ($i=0; $i<count($dshanghoa); $i++): ?>
     <div class="card" style="width: 18rem">
-        <img
+        <img  style="width:286px; height: 346px"
             src="../<?php echo $dshanghoa[$i]['image'] ?>"
             class="card-img-top"
             alt="..."
         />
         <div class="card-body">
-            <h5 class="card-title">
+            <h5 class="card-title" style="width:246px; height: 72px">
                 <?php echo $dshanghoa[$i]['tenhanghoa'] ?>
             </h5>
-            <button class="btn btn-primary">Xem Chi Tiết</button>
-            <button 
-            data-idsanpham = "<?php echo $dshanghoa[$i]['idhanghoa'] ?>"
-            class="btn btn-danger btn-sanpham" style="width: 100px">Xóa</button>
+            <div>
+                <button class="btn btn-primary">Xem Chi Tiết</button>
+                <button 
+                data-idsanpham = "<?php echo $dshanghoa[$i]['idhanghoa'] ?>"
+                class="btn btn-danger btn-sanpham" style="width: 100px">Xóa</button>
+            </div>
+            
         </div>
     </div>
     <?php endfor; ?>

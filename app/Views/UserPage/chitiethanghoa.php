@@ -4,7 +4,7 @@
     <div style="position:relative; left:0px;text-align: center;margin-bottom:20px;">
         <img class="img-responsive" style="cursor: pointer;"
             src="/<?= $hanghoa['image'] ?>"
-            onclick="gotoGallery(1,0,0);" alt="Đồng hồ Ogival OG358.88AGR-GL" itemprop="image">
+            >
     </div>
 
     <div class="frame_center">

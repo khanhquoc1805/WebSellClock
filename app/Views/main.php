@@ -459,7 +459,7 @@
 <?php echo view("footer.php") ?>
 
 
-<div class="newsletter">thêm hình ở đây</div>
+
 <div class="alert alert-primary hidden" id="thongbao"></div>
 
 <link rel="stylesheet" href="../main.css/font.css" type="text/css" />

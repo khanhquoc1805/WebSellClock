@@ -41,6 +41,16 @@ class KhachHang extends BaseController
         return $_COOKIE['dsidhanghoa'];
     }
 
+    public function chitiethanghoa() {
+        if (isset($_GET['idhanghoa'])) {
+            $idhanghoa = $_GET['idhanghoa'];
+            $hanghoamodel = new HangHoaModel();
+            $hanghoa = $hanghoamodel->getHangHoaTheoMa($_GET['idhanghoa']);
+            $data['hanghoa'] = $hanghoa;
+            echo view('UserPage/chitiethanghoa.php', $data);
+        }
+    }
+
     public function dangki()
     {
         if (isset($_POST['taikhoan']) && isset($_POST['matkhau']) && isset($_POST['hokh']) && isset($_POST['tenkh'])

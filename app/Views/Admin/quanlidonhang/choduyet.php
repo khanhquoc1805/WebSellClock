@@ -28,15 +28,15 @@
             </thead>
             <?php for ($i = 0; $i < count($dsdonhang); $i++): ?>
             <?php if ($dsdonhang[$i]['trangthai'] === 'Chờ Duyệt') {?>
-            <tbody>
+            <tbody id='tbody_<?= $dsdonhang[$i]['id'] ?>'>
                 <tr>
                     <td><?php echo $dsdonhang[$i]['id'] ?></td>
                     <td><?php echo $dsdonhang[$i]['ngaydathang'] ?></td>
                     <td><?php echo $dsdonhang[$i]['taikhoan'] ?></td>
                     <td class=><?php echo $dsdonhang[$i]['thanhtoan'] ?></td>
                     <td><?php echo number_format($dsdonhang[$i]['tonggiatri'],0,"",".") ?> (VNĐ) </td>
-                    <td class="xemchitiet"><button data-iddonhang="echo $dsdonhang[$i]['id']" class='btn btn-success'>Xem Chi Tiết</button></td>
-                    <td class="hidden dongchitiet"><button data-iddonhang="echo $dsdonhang[$i]['id']" class='btn btn-danger'>Đóng</button></td>
+                    <td class="xemchitiet"><button data-iddonhang="<?= $dsdonhang[$i]['id'] ?>" class='btn btn-success'>Xem Chi Tiết</button></td>
+                    <td class="hidden dongchitiet"><button data-iddonhang="<?= $dsdonhang[$i]['id'] ?>" class='btn btn-danger'>Đóng</button></td>
                     <td>
                         <select data-iddonhang="<?php echo $dsdonhang[$i]['id'] ?>" class="form-select" aria-label="Default select example">
                             <option selected value="Chờ Duyệt"><?php echo $dsdonhang[$i]['trangthai'] ?></option>
@@ -56,7 +56,7 @@
                 <?php for($k = 0; $k < count($dschitietdonhang); $k++): ?>
                     <?php for($h = 0; $h < count($dschitietdonhang[$k]); $h++): ?>
                         <?php if ($dschitietdonhang[$k][$h]['iddonhang'] === $dsdonhang[$i]['id']) { ?>
-                            <tr class="chitiet hidden">
+                            <tr class="hidden" id="chitiet_<?= $dsdonhang[$i]['id'] ?>">
                                 <td><?= $h + 1 ?></td>
                                 <?php for($l = 0; $l < count($dshanghoa); $l++): ?>
                                     <?php if ($dshanghoa[$l]['idhanghoa'] === $dschitietdonhang[$k][$h]['idhanghoa']) { ?>
@@ -67,7 +67,7 @@
                                         <td><?= number_format($dschitietdonhang[$k][$h]['thanhtien'],0,"" ,".")?></td>
                                     <?php } ?>
                                 <?php endfor; ?>
-                            </tr>                            
+                            </tr>
                         <?php } ?>
                     <?php endfor; ?>
                 <?php endfor; ?>
@@ -107,22 +107,35 @@
 
 
     for (let i=0 ; i<dsbtnxemchitiet.length; i++){
-        dsbtnxemchitiet[i].onclick = function(){
-            ttchitiet[i].classList.remove('hidden');
-            dsbtnxemchitiet[i].classList.add('hidden');
-            chitiet[i].classList.remove("hidden")
-            dsbtndongchitiet[i].classList.remove("hidden");
+        dsbtnxemchitiet[i].onclick = function() {
+            const child = this.firstElementChild;
+            const tbody = document.querySelector('#tbody_' + child.getAttribute('data-iddonhang'));
+            
+            
+            for(let j = 0; j < tbody.children.length; ++j) {
+                if (tbody.children[j].id === ('chitiet_' + child.getAttribute('data-iddonhang'))) {
+                    tbody.children[j].classList.remove("hidden");
+                }
+            }
 
+            dsbtnxemchitiet[i].classList.add('hidden');
+            dsbtndongchitiet[i].classList.remove("hidden");
         }
     }
 
-    for (let i=0 ; i<dsbtndongchitiet.length; i++){
+    for (let i=0 ; i < dsbtndongchitiet.length; i++){
         dsbtndongchitiet[i].onclick = function(){
-            ttchitiet[i].classList.add('hidden');
-            dsbtnxemchitiet[i].classList.remove('hidden');
-            chitiet[i].classList.add("hidden")
-            dsbtndongchitiet[i].classList.add("hidden");
+            const child = this.firstElementChild;
+            const tbody = document.querySelector('#tbody_' + child.getAttribute('data-iddonhang'));
+            
+            for(let j = 0; j < tbody.children.length; ++j) {
+                if (tbody.children[j].id === ('chitiet_' + child.getAttribute('data-iddonhang'))) {
+                    tbody.children[j].classList.add("hidden");
+                }
+            }
 
+            dsbtnxemchitiet[i].classList.remove('hidden');
+            dsbtndongchitiet[i].classList.add("hidden");
         }
     }
 </script>

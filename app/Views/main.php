@@ -68,7 +68,7 @@
                         <div class="img" style="height:277px !important">
                             <img src="<?php echo $dsdongho[$i]['image'] ?>" alt="Wireless Headphones"
                                     class="img-responsive" style="width: 100% !important; height: 100% !important"/>
-                            <button class="quickview" data-toggle="modal">
+                            <button class="quickview" data-toggle="modal" data-idhanghoa=<?= $dsdongho[$i]['idhanghoa'] ?>>
                                 Quick View
                             </button>
                         </div>
@@ -79,7 +79,7 @@
                         </div>
                         <div class="price">
                             <span class="sale-price">
-                                <?php  echo $dsdongho[$i]['gia'] ?>đ
+                                <?php  echo number_format($dsdongho[$i]['gia'],0,"",".") ?> VND 
                             </span>
                             <span class="on-sale-badge">Sale</span>
                         </div>
@@ -126,7 +126,7 @@
                                 <img src="<?php echo $dsdongho[$i]['image'] ?>" alt="Wireless Headphones"
                                     class="img-responsive" style="width: 100% !important; height: 100% !important"/>
                             
-                            <button class="quickview" data-toggle="modal">
+                            <button class="quickview" data-toggle="modal" data-idhanghoa=<?= $dsdongho[$i]['idhanghoa'] ?>>
                                 Quick View
                             </button>
                         </div>
@@ -137,7 +137,7 @@
                         </div>
                         <div class="price">
                             <span class="sale-price">
-                                <?php  echo $dsdongho[$i]['gia'] ?>đ
+                                <?php  echo number_format($dsdongho[$i]['gia'],0,"",".") ?> VND 
                             </span>
                             <span class="on-sale-badge">Sale</span>
                         </div>
@@ -182,7 +182,7 @@
                                 <img src="<?php echo $dsdongho[$i]['image'] ?>" alt="Wireless Headphones"
                                     class="img-responsive" style="width: 100% !important; height: 100% !important" />
                             
-                            <button class="quickview" data-toggle="modal">
+                            <button class="quickview" data-toggle="modal" data-idhanghoa=<?= $dsdongho[$i]['idhanghoa'] ?>>
                                 Quick View
                             </button>
                         </div>
@@ -193,7 +193,7 @@
                         </div>
                         <div class="price">
                             <span class="sale-price">
-                                <?php  echo $dsdongho[$i]['gia'] ?>đ
+                                <?php  echo number_format($dsdongho[$i]['gia'],0,"",".") ?> VND 
                             </span>
                             <span class="on-sale-badge">Sale</span>
                         </div>
@@ -241,7 +241,7 @@
                                 <img src="<?php echo $dsdongho[$i]['image'] ?>" alt="Wireless Headphones"
                                     class="img-responsive" class="img-responsive" style="width: 100% !important; height: 100% !important"/>
                             
-                            <button class="quickview" data-toggle="modal">
+                            <button class="quickview" data-toggle="modal" data-idhanghoa=<?= $dsdongho[$i]['idhanghoa'] ?>>
                                 Quick View
                             </button>
                         </div>
@@ -252,7 +252,7 @@
                         </div>
                         <div class="price">
                             <span class="sale-price">
-                                <?php  echo $dsdongho[$i]['gia'] ?>đ
+                                <?php  echo number_format($dsdongho[$i]['gia'],0,"",".") ?> VND 
                             </span>
                             <span class="on-sale-badge">Sale</span>
                         </div>
@@ -297,7 +297,7 @@
                                 <img src="<?php echo $dsdongho[$i]['image'] ?>" alt=""
                                     class="img-responsive" style="width: 100% !important; height: 100% !important"/>
                            
-                            <button class="quickview" data-toggle="modal">
+                            <button class="quickview" data-toggle="modal" data-idhanghoa=<?= $dsdongho[$i]['idhanghoa'] ?>>
                                 Quick View
                             </button>
                         </div>
@@ -308,7 +308,7 @@
                         </div>
                         <div class="price">
                             <span class="sale-price">
-                                <?php  echo $dsdongho[$i]['gia'] ?>đ
+                                <?php  echo number_format($dsdongho[$i]['gia'],0,"",".") ?> VND 
                             </span>
                             <span class="on-sale-badge">Sale</span>
                         </div>
@@ -357,7 +357,7 @@
                                 <img src="<?php echo $dsdongho[$i]['image'] ?>" alt=""
                                     class="img-responsive" style="width: 100% !important; height: 100% !important"/>
                             
-                            <button class="quickview" data-toggle="modal">
+                            <button class="quickview" data-toggle="modal" data-idhanghoa=<?= $dsdongho[$i]['idhanghoa'] ?>>
                                 Quick View
                             </button>
                         </div>
@@ -368,7 +368,7 @@
                         </div>
                         <div class="price">
                             <span class="sale-price">
-                                <?php  echo $dsdongho[$i]['gia'] ?>đ
+                                <?php  echo number_format($dsdongho[$i]['gia'],0,"",".") ?> VND 
                             </span>
                             <span class="on-sale-badge">Sale</span>
                         </div>
@@ -501,12 +501,7 @@
                 .then((r) => r.json())
                 .then((j) => {
                     if (j.status === "success") {
-                        notify(
-                            "Thêm vào giỏ hàng thành công",
-                            SUCCESS,
-                            3000,
-                            divThongBao
-                        );
+                        alert("Thêm Vào Giỏ Hàng Thành Công");
                     }
                 });
         };
@@ -514,9 +509,9 @@
 
 
     const quickview = document.getElementsByClassName("quickview");
-    for (let i = 0; i < addToCarts.length; ++i) {
+    for (let i = 0; i < quickview.length; ++i) {
         quickview[i].onclick = function (e) {
-            document.location.href = "/UserPage/chitiethanghoa.php";
+            document.location.href = "/KhachHang/chitiethanghoa?idhanghoa=" + this.getAttribute('data-idhanghoa');
         }
     }
 

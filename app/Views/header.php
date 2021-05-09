@@ -21,8 +21,7 @@
         <link href="../main.css/css.css " rel="stylesheet" type="text/css" />
         <link href="../main.css/css1.css" rel="stylesheet" />
         <link rel="StyleSheet" href="../main.css/default.css" type="text/css" />
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 
         
     </head>
@@ -86,34 +85,35 @@
                             <a
                                 href="/khachhang/giohang"
                                 class="top_links pull-right hidden-sm"
-                            >
+                            ><img src="../cart.png" style="width: 20px; height: 20px" alt="">
                                 Cart <span class=""></span>
-                                <span class="sr-only">Shopping Cart</span>
+                                
                             </a>
 
                             <?php if (!isset($_COOKIE['dadangnhap'])): ?>
                             <a
                                 href="/KhachHang/dangnhap"
                                 class="top_links pull-right hidden-sm"
-                            >
+                            ><img src="./login.png" style="width: 20px; height: 20px" alt="">
                                 <span class=""></span> Log In
-                                <span class="sr-only">My Account</span>
+                                
                             </a>
                             <?php else: ?>
                             <a
                                 href="/KhachHang/dangxuat"
                                 class="top_links pull-right hidden-sm"
-                            >
+                            ><img src="../logout.png" style="width: 20px; height: 20px" alt="">
                                 <span class=""></span> Log Out
                             </a>
                             <a href="/KhachHang/myaccount">
+                            
                                 <span class="sr-only">My Account</span>
                             </a>
                             <?php endif;?>
                             <a
                                 href="/KhachHang/myaccount"
                                 class="top_links pull-right hidden-sm"
-                            >
+                            ><img src="../myaccount.png" style="width: 20px; height: 20px" alt="">
                                 <span class=""></span> My Account
                             </a>
                         </div>
@@ -170,8 +170,7 @@
                                                     class="search-submit btn btn-default"
                                                 >
                                                     <span
-                                                        class="icon-search"
-                                                    ><i class="material-icons"></i></span>
+                                                class="material-icons"><img src="/search1.jpg" style="width: 45px; height: 34px" alt=""></span>
                                                 </button>
                                             </div>
                                             <div
@@ -213,7 +212,7 @@
                                     Questions?
                                     <span class="hidden-md">Call Us</span>
                                     <a href="tel:555.555.5555"
-                                        ><i class="icon-phone"></i>
+                                        ><img src="/call.jpg"  style= "width: 30px; height: 30px "alt="">
                                         079.420.5472</a
                                     >
                                 </div>

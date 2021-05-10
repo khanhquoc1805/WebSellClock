@@ -258,16 +258,16 @@
                     >
                         <ul id="categories" class="nav navbar-nav">
                             <li class="">
-                                <a href="/">Home</a>
+                                <a href="/" style="color:#da1f26 !important; font-size:16px">Home</a>
                             </li>
                             <li class="">
-                                <a href="#donghonam">Đồng hồ nam</a>
+                                <a href="#donghonam" style="color:#da1f26 !important; font-size:16px">Đồng hồ nam</a>
                             </li>
                             <li class="">
-                                <a href="#donghonu">đồng hồ nữ</a>
+                                <a href="#donghonu" style="color:#da1f26 !important; font-size:16px">đồng hồ nữ</a>
                             </li>
                             <li class="">
-                                <a href="#donghocapdoi">cặp đôi</a>
+                                <a href="#donghocapdoi" style="color:#da1f26 !important; font-size:16px"; font-size:16px>cặp đôi</a>
                             </li>
                         </ul>
                     </nav>

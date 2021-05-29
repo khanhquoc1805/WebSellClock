@@ -58,7 +58,6 @@
                                 <td><?= $h + 1 ?></td>
                                 <?php for($l = 0; $l < count($dshanghoa); $l++): ?>
                                     <?php if ($dshanghoa[$l]['idhanghoa'] === $dschitietdonhang[$k][$h]['idhanghoa']) { ?>
-                                        aaaa
                                         <td><?= $dshanghoa[$l]['tenhanghoa'] ?></td>
                                         <td><?= $dschitietdonhang[$k][$h]['soluong'] ?></td>
                                         <td><?= number_format($dshanghoa[$l]['gia'],0,"",",") ?> (VNĐ)</td>

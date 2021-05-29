@@ -33,7 +33,7 @@ class DonHangModel extends Model
     
     public function getDsDonHang()
     {
-        return $this->findAll();
+        return $this->orderBy('id', 'desc')->findAll();
     }
 
     public function getdsdonhangtheotaikhoan($taikhoan)

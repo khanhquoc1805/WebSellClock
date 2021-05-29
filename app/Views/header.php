@@ -94,7 +94,7 @@
                             <a
                                 href="/KhachHang/dangnhap"
                                 class="top_links pull-right hidden-sm"
-                            ><img src="./login.png" style="width: 20px; height: 20px" alt="">
+                            ><img src="/login.png" style="width: 20px; height: 20px" alt="">
                                 <span class=""></span> Log In
                                 
                             </a>

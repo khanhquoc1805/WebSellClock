@@ -38,6 +38,19 @@ create table hanghoa(
     image varchar(100),
     foreign key (idthuonghieu) references thuonghieu(idthuonghieu)
 );
+
+create table thongtinsanpham(
+	idhanghoa varchar(10),
+	nhanhieu varchar(100),
+    kieumay varchar(100),
+    nguongoc varchar(100),
+    chatlieuvo varchar(100),
+    kichco varchar(100),
+    chatlieuday varchar(100),
+    chatlieukinh varchar(100),
+    baohiem varchar(200),
+    foreign key (idhanghoa) references hanghoa(idhanghoa)
+);
 select * from khachhang;
 
 alter table hanghoa drop check hanghoa_chk_2;
@@ -56,7 +69,10 @@ create table donhang(
     tonggiatri double,
     trangthai varchar(30),
     chuthich varchar(200),
-    foreign key (taikhoan) references khachhang(taikhoan)
+    foreign key (taikhoan) references khachhang(taikhoan),
+    id_diachi int,
+    foreign key (id_diachi) references diachi(id_diachi)
+    
 );
 alter table donhang modify ngaydathang datetime default (current_timestamp());
 alter table donhang add column thanhtoan varchar(100) default ("Chưa Thanh Toán");
@@ -96,12 +112,19 @@ create table chitietgiohang(
     primary key (idgiohang,idhanghoa)
 );
 
+create table diachi(
+	id_diachi int auto_increment primary key,
+    tendiachi varchar(200)
+);
+
+
+
 select * from khachhang;
 select * from hanghoa;
 select * from giohang; 
 select * from donhang;
 select * from chitietgiohang;
-select * from chitietdonhang;
+select * from thongtinsanpham;
 
 delimiter //
 create trigger capNhatTongGiaTriDonHang after insert on chitietdonhang for each row

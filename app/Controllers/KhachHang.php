@@ -8,6 +8,7 @@ use App\Models\DonHangModel;
 use App\Models\GioHangModel;
 use App\Models\HangHoaModel;
 use App\Models\KhachHangModel;
+use App\Models\DiaChiModel;
 use \Firebase\JWT\JWT;
 
 class KhachHang extends BaseController
@@ -314,7 +315,7 @@ class KhachHang extends BaseController
         $taikhoan = $this->getTaiKhoanCookie();
         $dshanghoa = $this->getdsidhanghoaCookie();
 
-        if (!isset($_POST["chuthich"]) && !isset($_POST["dsgiasanpham"]) && !isset($_POST["dssoluong"])) {
+        if (!isset($_POST["chuthich"]) && !isset($_POST["dsgiasanpham"]) && !isset($_POST["dssoluong"]) && !isset($_POST["diachi"])) {
             $json_array = [
                 "status" => "fail",
             ];
@@ -326,6 +327,7 @@ class KhachHang extends BaseController
         $chuthichdonhang = $_POST['chuthich'];
         $dsgiasanpham = explode(",", $_POST['dsgiasanpham']);
         $dssoluong = explode(",", $_POST['dssoluong']);
+        $diachi = $_POST['diachi'];
 
         // tao dsidhanghoa
         $dsidhanghoa = [];
@@ -336,6 +338,11 @@ class KhachHang extends BaseController
         // tao don hang
         $donhangmodel = new DonHangModel();
         $iddonhang = $donhangmodel->createDonHang($taikhoan, 0, 'Chờ Duyệt', $chuthichdonhang);
+
+        $diachimodel = new DiaChiModel();
+        $iddiachi = $diachimodel->createDiaChi($diachi);
+
+        $donhangmodel->ganDiaChiDonHang($iddiachi,$iddonhang);
 
         // tao chi tiet don hang
         $chitietdonhangModel = new ChiTietDonHangModel();

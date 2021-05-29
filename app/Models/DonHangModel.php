@@ -8,7 +8,7 @@ class DonHangModel extends Model
     protected $table = 'donhang';
     protected $primaryKey = 'id';
     protected $allowedFields = [
-        'taikhoan', 'tonggiatri', 'trangthai', 'thanhtoan',
+        'taikhoan', 'tonggiatri', 'trangthai', 'thanhtoan','id_diachi'
     ]; // nhung truong cho phep
     protected $useSoftDeletes = false;
 
@@ -22,6 +22,15 @@ class DonHangModel extends Model
         ];
         return $this->insert($data);
     }
+
+    public function ganDiaChiDonHang($iddiachi, $iddonhang) {
+        $data = [
+            'id_diachi' => $iddiachi,
+        ];
+
+        $this->update($iddonhang, $data);
+    }
+    
     public function getDsDonHang()
     {
         return $this->findAll();

@@ -72,7 +72,7 @@
                 <tr>
                     <td class="info-mua-hang">
                         <input placeholder="Địa chỉ (*)" type="text" name="sender_address" id="sender_address"
-                            value="<?php echo $diachi ?>" readonly class="input_text" size="30" />
+                            value="<?php echo $diachi ?>" class="input_text" size="30" />
                     </td>
                 </tr>
                 <tr>
@@ -111,6 +111,7 @@
     const chuthichDonHang = document.getElementById("sender_comments");
     const dsgiasanphamTd = document.getElementsByClassName('price-product');
     const dssoluongTd = document.getElementsByClassName('numbers-pro');
+    const diachi = document.getElementById("sender_address");
 
     const dsgiasanpham = [];
     const dssoluong = [];
@@ -124,7 +125,7 @@
         formData.append("chuthich", chuthichDonHang.value)
         formData.append("dsgiasanpham", dsgiasanpham)
         formData.append("dssoluong", dssoluong)
-
+        formData.append("diachi",diachi.value)
         fetch("/khachhang/taodonhang", {
             body: formData,
             method: "POST"

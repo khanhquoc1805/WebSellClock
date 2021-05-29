@@ -7,6 +7,7 @@ use App\Models\DonHangModel;
 use App\Models\HangHoaModel;
 use App\Models\QuanTriModel;
 use App\Models\ThuongHieuModel;
+use App\Models\DiaChiModel;
 use \Firebase\JWT\JWT;
 
 class Admin extends BaseController
@@ -32,10 +33,12 @@ class Admin extends BaseController
                 $data['dshanghoa'] = $hanghoaModel->getHangHoa();
                 $chitietdonhangModel = new ChiTietDonHangModel();
                 
-                
+                $diachimodel = new DiaChiModel();
                 for ($i = 0; $i < count($data['dsdonhang']); $i++) {
                     $donhang = $data['dsdonhang'][$i];
                     $data['dschitietdonhang'][] = $chitietdonhangModel->getChiTietDonHang($donhang['id']);
+                    $iddiachi = $donhang['id_diachi'];
+                    $data['dsdiachi'][] = $diachimodel->getDiaChi($iddiachi);
                 }
 
                 echo view('Admin/admin', $data);

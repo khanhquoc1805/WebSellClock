@@ -20,5 +20,9 @@ class DiaChiModel extends Model
         return $this->insert($data);
     }
 
+    public function getDiaChi($iddiachi) {
+        return $this->where('id_diachi', $iddiachi)->first();
+    }
+
 
 }

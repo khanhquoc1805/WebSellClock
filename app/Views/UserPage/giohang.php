@@ -106,12 +106,12 @@
                                                 class="price-product don_gia_hide"
                                                 align="center"
                                                 
-                                            ><?php echo $dschitiet[$i]['gia'] ?></td>
+                                            ><?php echo number_format($dschitiet[$i]['gia'],0,"",".") ?></td>
 
                                             <td
                                                 class="total-price"
                                                 align="center"
-                                            ><?php echo $dschitiet[$i]['thanhtien'] ?></td>
+                                            ><?php echo number_format($dschitiet[$i]['thanhtien'],0,"",".") ?></td>
                                             <td
                                                 class="total-price"
                                                 align="center"
@@ -156,7 +156,7 @@
                                     align="right"
                                 >
                                     Tổng:
-                                    <span><?php echo $tongtien ?> VNĐ</span>
+                                    <span><?php echo number_format($tongtien,0,"",".") ?> VNĐ</span>
                                 </div>
                                 <div class="clearfix"></div>
                                 <input type="hidden" name="Itemid" value="11" />

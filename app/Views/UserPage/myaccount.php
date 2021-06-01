@@ -138,6 +138,9 @@
         <h3>
             Mã đơn hàng:
             <?=$dsdonhang[$i]['id']?>
+            <span style="float: right; font-weight: normal; font-size: 0.75em"
+                >Ngày Đặt Hàng: <?=$dsdonhang[$i]['ngaydathang']?></span
+            >
         </h3>
         <h3>
             Trạng Thái:
@@ -147,11 +150,12 @@
                 <?=number_format($dsdonhang[$i]['tonggiatri'], 0, "", ".")?></span
             >
         </h3>
+        
 
         <table
             width="100%"
             border="1"
-            class="table-product-pack mt20"
+            class="table-product-pack mt20 hidden"
             bordercolor="#DCDCDC"
             cellpadding="6"
         >
@@ -226,7 +230,7 @@
             <?php if ($dsdonhang[$i]['trangthai'] === 'Chờ Duyệt') {?>
             <button
                 type="button"
-                class="btn btn-default btn-lg btn-thay-doi-don-hang"
+                class="btn btn-default btn-lg btn-thay-doi-don-hang hidden"
 
             >
                 <i
@@ -236,7 +240,26 @@
             </button>
             <?php }?>
             <!-- endif -->
-
+            <button
+                type="button"
+                class="btn btn-default btn-lg btn-xem-chi-tiet"
+                data-iddonhang=<?= $dsdonhang[$i]['id'] ?>
+            >
+                <i
+                    class="icon-cw"
+                ></i
+                >Xem Chi Tiết
+            </button>
+            <button
+                type="button"
+                class="btn btn-default btn-lg btn-dong-chi-tiet hidden"
+                data-iddonhang=<?= $dsdonhang[$i]['id'] ?>
+            >
+                <i
+                    class="icon-cw"
+                ></i
+                >Đóng
+            </button>
             <button
                 type="button"
                 class="btn btn-default btn-lg btn-hoan-tat-thay-doi unvisible"
@@ -652,6 +675,26 @@
             }
         }
     }
+
+    const dsbtnxemchitiet = document.querySelectorAll('.btn-xem-chi-tiet');
+    const tableproductpack = document.querySelectorAll('.table-product-pack');
+    const dsbtndongchitiet = document.querySelectorAll('.btn-dong-chi-tiet');
+        for (let i = 0; i < dsbtnxemchitiet.length; i++){
+            dsbtnxemchitiet[i].onclick = function(){
+                tableproductpack[i].classList.remove("hidden");
+                dsbtndongchitiet[i].classList.remove("hidden");
+                this.classList.add("hidden");
+                DsBtnThayDoiDonHang[i].classList.remove("hidden");
+            }
+            dsbtndongchitiet[i].onclick = function(){
+                tableproductpack[i].classList.add("hidden");
+                this.classList.add("hidden");
+                dsbtnxemchitiet[i].classList.remove("hidden");
+                DsBtnThayDoiDonHang[i].classList.remove("hidden");
+            }
+
+        }
+
 
 
 </script>

@@ -168,24 +168,26 @@
     <table style="width: 80%; margin: 0 auto; ">
         <tbody style="width: 100%; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr">
             <tr style="display: flex; flex-direction:column;">
-                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold">Nhãn hiệu:<?=  $thuonghieu['tenthuonghieu']?></td>
-                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold">Nguồn gốc:<?= $thongtinhanghoa ? $thongtinhanghoa['nguongoc'] : 'Chưa cập nhật' ?></td>
-                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold">Kiểu máy:<?= $thongtinhanghoa ? $thongtinhanghoa['kieumay'] : 'Chưa cập nhật' ?></td>
+                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold; padding-top: 0.5em">Nhãn hiệu:<?=  $thuonghieu['tenthuonghieu']?></td>
+                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold; padding-top: 0.5em">Nguồn gốc:<?= $thongtinhanghoa ? $thongtinhanghoa['nguongoc'] : 'Chưa cập nhật' ?></td>
+                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold; padding-top: 0.5em">Kiểu máy:<?= $thongtinhanghoa ? $thongtinhanghoa['kieumay'] : 'Chưa cập nhật' ?></td>
             </tr>
             <tr style="display: flex; flex-direction:column;">
-                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold">Kích cỡ: <?= $thongtinhanghoa ? $thongtinhanghoa['kichco'] : 'Chưa cập nhật' ?></td>
-                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold">Chất liệu vỏ: <?= $thongtinhanghoa ? $thongtinhanghoa['chatlieuvo'] : 'Chưa cập nhật' ?></td>
-                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold">Chất liệu dây: <?= $thongtinhanghoa ? $thongtinhanghoa['chatlieuday'] : 'Chưa cập nhật' ?></td>
+                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold; padding-top: 0.5em">Kích cỡ: <?= $thongtinhanghoa ? $thongtinhanghoa['kichco'] : 'Chưa cập nhật' ?></td>
+                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold; padding-top: 0.5em">Chất liệu vỏ: <?= $thongtinhanghoa ? $thongtinhanghoa['chatlieuvo'] : 'Chưa cập nhật' ?></td>
+                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold; padding-top: 0.5em">Chất liệu dây: <?= $thongtinhanghoa ? $thongtinhanghoa['chatlieuday'] : 'Chưa cập nhật' ?></td>
             </tr>
             <tr style="display: flex; flex-direction:column;">
-                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold">Chất liệu kính: <?= $thongtinhanghoa ? $thongtinhanghoa['chatlieukinh'] : 'Chưa cập nhật' ?></td>
-                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold">Bảo hiểm: <?= $thongtinhanghoa ? $thongtinhanghoa['baohiem'] : 'Chưa cập nhật' ?></td>
-                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold">Giới tính:<?= $hanghoa['phai']?></td>
+                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold; padding-top: 0.5em">Chất liệu kính: <?= $thongtinhanghoa ? $thongtinhanghoa['chatlieukinh'] : 'Chưa cập nhật' ?></td>
+                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold; padding-top: 0.5em">Bảo hiểm: <?= $thongtinhanghoa ? $thongtinhanghoa['baohiem'] : 'Chưa cập nhật' ?></td>
+                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold; padding-top: 0.5em">Giới tính:<?= $hanghoa['phai']?></td>
             </tr>
         </tbody>
     </table>
 
 </div>
+
+<?php echo view("footer.php") ?>
 
 <script>
     const btnthemvaogiohang = document.querySelector('#themvaogiohang');

@@ -51,7 +51,7 @@ create table thongtinsanpham(
     foreign key (idhanghoa) references hanghoa(idhanghoa)
 );
 select * from thongtinsanpham;
-insert into thongtinsanpham values('bt01','sada','áddăd','sadawd','ádwadwd','ưadqd','ăewedad','ưdwqđ');
+insert into thongtinsanpham values('ct006','Eco-Drive','Nhật Bản','Thép không gỉ 316L/Mạ PVD','	44 mm','Thép không gỉ 316L / Mạ PVD','Kính cứng','	5 năm cả lỗi người dùng');
 
 alter table thongtinsanpham drop column nhanhieu;
 

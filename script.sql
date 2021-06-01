@@ -41,7 +41,6 @@ create table hanghoa(
 
 create table thongtinsanpham(
 	idhanghoa varchar(10),
-	nhanhieu varchar(100),
     kieumay varchar(100),
     nguongoc varchar(100),
     chatlieuvo varchar(100),
@@ -51,9 +50,11 @@ create table thongtinsanpham(
     baohiem varchar(200),
     foreign key (idhanghoa) references hanghoa(idhanghoa)
 );
-select * from khachhang;
+select * from thongtinsanpham;
+insert into thongtinsanpham values('bt01','sada','áddăd','sadawd','ádwadwd','ưadqd','ăewedad','ưdwqđ');
 
-alter table hanghoa drop check hanghoa_chk_2;
+alter table thongtinsanpham drop column nhanhieu;
+
 
 alter table hanghoa modify soluong int;
 
@@ -74,6 +75,11 @@ create table donhang(
     foreign key (id_diachi) references diachi(id_diachi)
     
 );
+
+alter table donhang add column id_diachi int;
+alter table donhang add foreign key(id_diachi) references diachi(id_diachi);
+
+
 alter table donhang modify ngaydathang datetime default (current_timestamp());
 alter table donhang add column thanhtoan varchar(100) default ("Chưa Thanh Toán");
 
@@ -139,6 +145,7 @@ select * from donhang;
 select * from thuonghieu;
 select * from hanghoa;
 select * from chitietdonhang;
+select * from diachi;
 delete from donhang where id=106;
 
 delete from chitietdonhang where iddonhang!=106;

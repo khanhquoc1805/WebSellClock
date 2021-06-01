@@ -3,11 +3,12 @@
 namespace App\Controllers;
 
 use App\Models\ChiTietDonHangModel;
+use App\Models\DiaChiModel;
 use App\Models\DonHangModel;
 use App\Models\HangHoaModel;
 use App\Models\QuanTriModel;
 use App\Models\ThuongHieuModel;
-use App\Models\DiaChiModel;
+use App\Models\ThongTinHangHoaModel;
 use \Firebase\JWT\JWT;
 
 class Admin extends BaseController
@@ -32,7 +33,7 @@ class Admin extends BaseController
                 $hanghoaModel = new HangHoaModel();
                 $data['dshanghoa'] = $hanghoaModel->getHangHoa();
                 $chitietdonhangModel = new ChiTietDonHangModel();
-                
+
                 $diachimodel = new DiaChiModel();
                 for ($i = 0; $i < count($data['dsdonhang']); $i++) {
                     $donhang = $data['dsdonhang'][$i];
@@ -302,7 +303,8 @@ class Admin extends BaseController
         }
     }
 
-    public function xoadonhangdahuy(){
+    public function xoadonhangdahuy()
+    {
         if (isset($_COOKIE['dadangnhap'])) {
             $key = $this->key;
             $jwt = $_COOKIE['dadangnhap'];
@@ -310,7 +312,7 @@ class Admin extends BaseController
             $decoded_array = (array) $decoded;
             $data['username'] = $decoded_array['usr'];
             if ($decoded_array['role'] === 'admin') {
-                if(isset($_POST['iddonhang'])){
+                if (isset($_POST['iddonhang'])) {
                     $chitietdonhang = new ChiTietDonHangModel();
                     $chitietdonhang->deleteChiTiet($_POST['iddonhang']);
                     $donhangmodel = new DonHangModel();
@@ -321,7 +323,44 @@ class Admin extends BaseController
                 }
 
             }
-        } 
+        }
+    }
+
+    public function capNhatThongTinHangHoa()
+    {
+        if (isset($_COOKIE['dadangnhap'])) {
+            $key = $this->key;
+            $jwt = $_COOKIE['dadangnhap'];
+            $decoded = JWT::decode($jwt, $key, array('HS256'));
+            $decoded_array = (array) $decoded;
+            $data['username'] = $decoded_array['usr'];
+            if ($decoded_array['role'] === 'admin') {
+                if (isset($_POST['idhanghoa']) && isset($_POST['kieumay'])
+                && isset($_POST['nguongoc']) && isset($_POST['chatlieuvo'])
+                && isset($_POST['kichco']) && isset($_POST['chatlieuday'])
+                && isset($_POST['chatlieukinh']) && isset($_POST['baohiem']) && isset($_POST['soluonghang'])) {
+                        $idhanghoa = $_POST['idhanghoa'];
+                        $kieumay = $_POST['kieumay'];
+                        $nguongoc = $_POST['nguongoc'];
+                        $chatlieuvo = $_POST['chatlieuvo'];
+                        $kichco = $_POST['kichco'];
+                        $chatlieuday = $_POST['chatlieuday'];
+                        $chatlieukinh = $_POST['chatlieukinh'];
+                        $baohiem = $_POST['baohiem'];
+                        $soluong = $_POST['soluonghang'];
+
+                    $thongtinhanghoa = new ThongTinHangHoaModel();
+                    $thongtinhanghoa->themthongtin($idhanghoa,$kieumay,$nguongoc,$chatlieuvo,$kichco,$chatlieuday,$chatlieukinh,$baohiem);
+
+                    $hanghoamodel = new HangHoaModel();
+                    $hanghoamodel->capNhatSoLuong($idhanghoa,$soluong);
+
+                    echo json_encode([
+                        "status" => 'success',
+                    ]);
+                }
+            }
+        }
     }
 
 }

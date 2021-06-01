@@ -19,6 +19,7 @@
                                         opacity: 1;
                                         display: block;
                                         z-index: 2;
+                                        height: 150px;
                                     ">
                                 <a href=""><img src="slide2.jpg" alt="" draggable="false" /></a>
                             </li>
@@ -30,8 +31,9 @@
                                         opacity: 0;
                                         display: block;
                                         z-index: 1;
+                                        
                                     ">
-                                <a href=""><img src="./hinhnen.jpg" alt="" draggable="false" /></a>
+                                <a href=""><img src="hinhnen.jpg" alt="" draggable="false" /></a>
                             </li>
                         </ul>
                         <ul class="flex-direction-nav">

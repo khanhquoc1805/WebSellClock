@@ -9,6 +9,8 @@ use App\Models\GioHangModel;
 use App\Models\HangHoaModel;
 use App\Models\KhachHangModel;
 use App\Models\DiaChiModel;
+use App\Models\ThuongHieuModel;
+use App\Models\ThongTinHangHoaModel;
 use \Firebase\JWT\JWT;
 
 class KhachHang extends BaseController
@@ -48,8 +50,15 @@ class KhachHang extends BaseController
             $hanghoamodel = new HangHoaModel();
             $hanghoa = $hanghoamodel->getHangHoaTheoMa($_GET['idhanghoa']);
             $data['hanghoa'] = $hanghoa;
+            $thongtinhanghoa = new ThongTinHangHoaModel();
+            $data['thongtinhanghoa'] = $thongtinhanghoa->getThongTinHangHoa($idhanghoa);
+
+            $thuonghieu = new ThuongHieuModel();
+            $data['thuonghieu'] = $thuonghieu->getThuongHieu($hanghoa['idthuonghieu']);
             echo view('UserPage/chitiethanghoa.php', $data);
         }
+
+
     }
 
     public function dangki()

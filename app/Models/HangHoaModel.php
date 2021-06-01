@@ -45,6 +45,13 @@ class HangHoaModel extends Model
     public function deleteHangHoa($idsanpham) {
         $this->delete($idsanpham);
     }
+
+
+    public function capNhatSoLuong($idhanghoa,$soluong){
+        $this->where('idhanghoa', $idhanghoa);
+        $this->set(['soluong' => $soluong]);
+        $this->update();
+    }
 }
 
 ?>

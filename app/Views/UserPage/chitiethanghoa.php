@@ -168,19 +168,19 @@
     <table style="width: 80%; margin: 0 auto; ">
         <tbody style="width: 100%; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr">
             <tr style="display: flex; flex-direction:column;">
-                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold">Nhãn hiệu:</td>
-                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold">Nguồn gốc:</td>
-                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold">Kiểu máy:</td>
+                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold">Nhãn hiệu:<?=  $thuonghieu['tenthuonghieu']?></td>
+                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold">Nguồn gốc:<?= $thongtinhanghoa ? $thongtinhanghoa['nguongoc'] : 'Chưa cập nhật' ?></td>
+                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold">Kiểu máy:<?= $thongtinhanghoa ? $thongtinhanghoa['kieumay'] : 'Chưa cập nhật' ?></td>
             </tr>
             <tr style="display: flex; flex-direction:column;">
-                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold">Kích cỡ:</td>
-                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold">Chất liệu vỏ:</td>
-                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold">Chất liệu dây</td>
+                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold">Kích cỡ: <?= $thongtinhanghoa ? $thongtinhanghoa['kichco'] : 'Chưa cập nhật' ?></td>
+                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold">Chất liệu vỏ: <?= $thongtinhanghoa ? $thongtinhanghoa['chatlieuvo'] : 'Chưa cập nhật' ?></td>
+                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold">Chất liệu dây: <?= $thongtinhanghoa ? $thongtinhanghoa['chatlieuday'] : 'Chưa cập nhật' ?></td>
             </tr>
             <tr style="display: flex; flex-direction:column;">
-                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold">Chất liệu kính:</td>
-                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold">Bảo hiểm:</td>
-                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold">Giới tính:</td>
+                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold">Chất liệu kính: <?= $thongtinhanghoa ? $thongtinhanghoa['chatlieukinh'] : 'Chưa cập nhật' ?></td>
+                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold">Bảo hiểm: <?= $thongtinhanghoa ? $thongtinhanghoa['baohiem'] : 'Chưa cập nhật' ?></td>
+                <td style="font-size: 1em; border: 1px solid #ebebeb; font-weight: bold">Giới tính:<?= $hanghoa['phai']?></td>
             </tr>
         </tbody>
     </table>
